@@ -1,0 +1,26 @@
+title: Era Stealer External IP Resolution
+id: b7d8c9f4-0e5b-era-ip
+status: experimental
+description: Detects external IP resolution used for victim fingerprinting
+author: No-Stealer Project
+date: 2026-01-12
+confidence: low
+logsource:
+  category: network_connection
+  product: windows
+
+detection:
+  selection:
+    DestinationHostname:
+      - "myexternalip.com"
+      - "ip-api.com"
+
+  condition: selection
+
+falsepositives:
+  - Legitimate IP checking tools
+
+level: low
+tags:
+  - attack.discovery
+  - attack.t1016
