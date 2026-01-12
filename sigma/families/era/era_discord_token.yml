@@ -1,0 +1,28 @@
+title: Era Stealer Discord Token Extraction via LevelDB
+id: 4f8a9c11-3d7e-4cbb-era-token
+status: experimental
+description: Detects scanning of Discord LevelDB files for token patterns
+author: No-Stealer Project
+date: 2026-01-12
+confidence: high
+logsource:
+  category: file_event
+  product: windows
+
+detection:
+  selection:
+    FilePath|contains:
+      - "Local Storage\\leveldb"
+    FileName|endswith:
+      - ".ldb"
+      - ".log"
+
+  condition: selection
+
+falsepositives:
+  - Legitimate Discord client (without recursive scanning behavior)
+
+level: high
+tags:
+  - attack.credential_access
+  - attack.t1539
