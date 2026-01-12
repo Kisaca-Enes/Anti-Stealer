@@ -1,0 +1,29 @@
+title: EvilSoul Stealer - Chrome DevTools WebSocket Abuse
+id: 7b7c0d5e-evil-005
+status: experimental
+description: Detects WebSocket connections to local Chrome DevTools ports used to steal cookies.
+author: No-Stealer Project
+date: 2026-01-12
+tags:
+  - attack.credential_access
+  - attack.t1539
+  - malware.evilsoul
+
+logsource:
+  product: windows
+  category: network_connection
+
+detection:
+  selection:
+    DestinationIp: '127.0.0.1'
+    DestinationPort:
+      - 9222
+      - 9229
+      - 9333
+
+  condition: selection
+
+falsepositives:
+  - Local debugging by developers
+
+level: high
