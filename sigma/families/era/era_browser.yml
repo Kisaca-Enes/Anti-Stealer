@@ -1,0 +1,33 @@
+title: Era Stealer Browser DPAPI Master Key Decryption
+id: 7c1f9a44-91d2-4c45-era-dpapi
+status: experimental
+description: Detects PowerShell-based DPAPI decryption of Chromium Local State keys
+author: No-Stealer Project
+date: 2026-01-12
+confidence: very high
+logsource:
+  category: process_creation
+  product: windows
+
+detection:
+  selection_powershell:
+    Image|endswith: "powershell.exe"
+    CommandLine|contains:
+      - "ProtectedData"
+      - "Unprotect"
+      - "CurrentUser"
+
+  selection_localstate:
+    CommandLine|contains:
+      - "Local State"
+      - "os_crypt"
+
+  condition: selection_powershell and selection_localstate
+
+falsepositives:
+  - Very rare legitimate forensic or security tooling
+
+level: high
+tags:
+  - attack.credential_access
+  - attack.t1555
