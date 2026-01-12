@@ -1,0 +1,39 @@
+title: EvilSoul Persistence via VBS Watchdog and Startup LNK
+id: 6f3c9c6e-7f3a-4b7f-9a3c-evilsoul001
+status: experimental
+description: Detects EvilSoul persistence using VBS watchdog and Startup shortcut recreation
+author: No-Stealer Project
+date: 2026-01-12
+level: critical
+tags:
+  - attack.persistence
+  - attack.t1547.001
+  - malware.evilsoul
+
+logsource:
+  product: windows
+  category: process_creation
+
+detection:
+  startup_path:
+    CommandLine|contains:
+      - "Start Menu\\Programs\\Startup"
+
+  vbs_execution:
+    Image|endswith:
+      - "\\wscript.exe"
+      - "\\cscript.exe"
+    CommandLine|contains:
+      - ".vbs"
+
+  watchdog_behavior:
+    CommandLine|contains:
+      - "WScript.Sleep 5000"
+      - "CreateShortcut"
+
+  condition: startup_path and vbs_execution and watchdog_behavior
+
+falsepositives:
+  - Rare legitimate admin scripts (very uncommon)
+
+confidence: 0.90
