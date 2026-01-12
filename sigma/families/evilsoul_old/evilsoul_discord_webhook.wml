@@ -1,0 +1,29 @@
+title: EvilSoul Stealer - Discord Webhook Exfiltration
+id: 7b7c0d5e-evil-004
+status: experimental
+description: Detects outbound connections to Discord webhook endpoints used for data exfiltration.
+author: No-Stealer Project
+date: 2026-01-12
+tags:
+  - attack.exfiltration
+  - attack.t1567
+  - malware.evilsoul
+
+logsource:
+  product: windows
+  category: network_connection
+
+detection:
+  selection:
+    DestinationHostname|contains:
+      - 'discord.com'
+      - 'discordapp.com'
+    DestinationUrl|contains:
+      - '/api/webhooks/'
+
+  condition: selection
+
+falsepositives:
+  - Legitimate Discord integrations
+
+level: high
