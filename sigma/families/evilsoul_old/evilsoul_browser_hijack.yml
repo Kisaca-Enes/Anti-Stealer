@@ -1,0 +1,39 @@
+title: EvilSoul Stealer - Chromium Remote Debug Abuse
+id: 7b7c0d5e-evil-001
+status: experimental
+description: Detects Chromium-based browsers launched with remote debugging and headless flags commonly abused by EvilSoul stealer.
+author: No-Stealer Project
+date: 2026-01-12
+references:
+  - https://chromedevtools.github.io/devtools-protocol/
+tags:
+  - attack.credential_access
+  - attack.t1555
+  - attack.t1539
+  - malware.evilsoul
+
+logsource:
+  product: windows
+  category: process_creation
+
+detection:
+  selection_browser:
+    Image|endswith:
+      - '\chrome.exe'
+      - '\msedge.exe'
+      - '\brave.exe'
+      - '\opera.exe'
+      - '\opera_gx.exe'
+
+  selection_flags:
+    CommandLine|contains:
+      - '--remote-debugging-port'
+      - '--headless'
+      - '--no-sandbox'
+
+  condition: selection_browser and selection_flags
+
+falsepositives:
+  - Legitimate developer debugging (rare on endpoints)
+
+level: high
