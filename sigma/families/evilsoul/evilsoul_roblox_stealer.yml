@@ -1,0 +1,33 @@
+title: EvilSoul Credential Theft Targeting Roblox and Cookies
+id: 9a2e13d2-8c6a-4aef-b9de-evilsoul003
+status: experimental
+description: Detects EvilSoul stealing Roblox and browser cookies via HTTP headers
+author: No-Stealer Project
+date: 2026-01-12
+level: high
+tags:
+  - attack.credential_access
+  - attack.t1539
+  - malware.evilsoul
+
+logsource:
+  product: windows
+  category: network_connection
+
+detection:
+  roblox_api:
+    DestinationHostname|contains:
+      - "roblox.com"
+    Url|contains:
+      - "/mobileapi/userinfo"
+
+  roblox_cookie:
+    RequestHeaders|contains:
+      - ".ROBLOSECURITY="
+
+  condition: roblox_api and roblox_cookie
+
+falsepositives:
+  - Legit Roblox client (rare outside browser context)
+
+confidence: 0.80
