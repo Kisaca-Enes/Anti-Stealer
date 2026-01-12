@@ -1,0 +1,41 @@
+title: EvilSoul Headless Browser Hijack via Chrome DevTools
+id: 4b91fcb4-1d6b-4f91-9c32-evilsoul002
+status: experimental
+description: Detects browser hijacking using Chrome DevTools remote debugging for cookie extraction
+author: No-Stealer Project
+date: 2026-01-12
+level: high
+tags:
+  - attack.credential_access
+  - attack.t1555
+  - malware.evilsoul
+
+logsource:
+  product: windows
+  category: process_creation
+
+detection:
+  headless_flags:
+    CommandLine|contains:
+      - "--remote-debugging-port"
+      - "--headless"
+      - "--disable-extensions"
+      - "--no-sandbox"
+
+  browser_process:
+    Image|endswith:
+      - "\\chrome.exe"
+      - "\\msedge.exe"
+      - "\\opera.exe"
+      - "\\opera_gx.exe"
+
+  suspicious_target:
+    CommandLine|contains:
+      - "about:blank"
+
+  condition: browser_process and headless_flags and suspicious_target
+
+falsepositives:
+  - Automated testing frameworks (CI environments)
+
+confidence: 0.85
