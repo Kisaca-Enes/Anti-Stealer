@@ -1,0 +1,21 @@
+title: Discord Process Forced Termination
+id: 3b91d41e-0f8f-4b5c-9a14-2bb6bb42a0d3
+status: stable
+description: Detects forced termination of Discord processes, often used by stealers
+author: SOC Team
+date: 2026-01-14
+logsource:
+  product: windows
+  category: process_creation
+detection:
+  selection:
+    Image|endswith: '\taskkill.exe'
+    CommandLine|contains:
+      - "Discord.exe"
+      - "DiscordCanary.exe"
+      - "DiscordPTB.exe"
+  condition: selection
+level: high
+tags:
+  - attack.defense_evasion
+  - attack.t1562
