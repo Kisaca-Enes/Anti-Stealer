@@ -1,0 +1,22 @@
+title: Discord Token Validation via API
+id: 9f4c2c9d-3eaa-4a41-8d8a-8b3b1d9f2e11
+status: stable
+description: Detects suspicious Discord token validation requests commonly used by stealers
+author: SOC Team
+date: 2026-01-14
+references:
+  - https://attack.mitre.org/techniques/T1555/
+logsource:
+  category: proxy
+  product: windows
+detection:
+  selection:
+    cs-host: "discord.com"
+    cs-method: "GET"
+    cs-uri|contains: "/api/v9/users/@me"
+    http_request_headers|contains: "Authorization"
+  condition: selection
+level: high
+tags:
+  - attack.credential_access
+  - attack.t1555
