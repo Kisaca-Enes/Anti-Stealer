@@ -1,0 +1,18 @@
+title: Lina Stealer cookies.txt Creation
+id: lina-04-cookie-file
+status: stable
+description: Detects cookies.txt file creation by Lina Stealer
+author: No-Stealer Project
+date: 2026-01-14
+logsource:
+  product: windows
+  category: file_event
+detection:
+  selection:
+    TargetFilename|endswith: "\cookies.txt"
+  condition: selection
+level: medium
+tags:
+  - attack.collection
+  - attack.t1005
+  - lina.stealer
