@@ -1,0 +1,21 @@
+title: Lina Stealer Chromium Cookie Extension Abuse
+id: lina-03-chromium-cookie-extension
+status: stable
+description: Detects Lina Stealer cookie theft via malicious Chromium extension
+author: No-Stealer Project
+date: 2026-01-14
+logsource:
+  product: windows
+  category: process_creation
+detection:
+  selection:
+    CommandLine|contains:
+      - "--load-extension="
+      - "--disable-extensions-except="
+      - "--window-position=-32000"
+  condition: selection
+level: high
+tags:
+  - attack.collection
+  - attack.t1056
+  - lina.stealer
