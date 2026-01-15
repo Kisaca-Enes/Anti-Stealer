@@ -1,0 +1,20 @@
+title: Genesis Stealer WiFi Credential Dump
+id: d8c71b2f-3c9e-genesis-003
+status: stable
+description: Detects WiFi credential dumping using netsh key=clear
+author: No-Stealer Project
+logsource:
+  product: windows
+  category: process_creation
+detection:
+  selection:
+    CommandLine|contains:
+      - "netsh wlan show profile"
+      - "key=clear"
+  condition: selection
+falsepositives:
+  - Manual administrator troubleshooting
+level: high
+tags:
+  - attack.credential_access
+  - attack.t1552.001
