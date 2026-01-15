@@ -1,0 +1,23 @@
+title: Genesis Stealer Browser Credential Access
+id: a2c4d89b-1e45-4a6c-genesis-002
+status: experimental
+description: Detects NodeJS accessing Chromium credential databases
+author: No-Stealer Project
+logsource:
+  product: windows
+  category: file_access
+detection:
+  selection:
+    TargetFilename|endswith:
+      - "Login Data"
+      - "Cookies"
+      - "Web Data"
+    ProcessName:
+      - "node.exe"
+  condition: selection
+falsepositives:
+  - Browser forensic tools
+level: high
+tags:
+  - attack.credential_access
+  - attack.t1555.003
