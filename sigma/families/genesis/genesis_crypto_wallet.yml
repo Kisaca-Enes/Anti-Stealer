@@ -1,0 +1,21 @@
+title: Genesis Stealer Crypto Wallet Extension Theft
+id: 6f9b8e1c-genesis-004
+status: experimental
+description: Detects access to known crypto wallet browser extensions
+author: No-Stealer Project
+logsource:
+  product: windows
+  category: file_access
+detection:
+  selection:
+    TargetFilename|contains:
+      - "nkbihfbeogaeaoehlefnkodbefgpgknn"   # Metamask
+      - "aholpfdialjgjfhomihkjbmgjidlcdno"   # Exodus
+      - "fhilaheimglignddkjgofkcbgekhenbh"   # Atomic
+  condition: selection
+falsepositives:
+  - User manually browsing extension folders
+level: high
+tags:
+  - attack.credential_access
+  - attack.t1555
