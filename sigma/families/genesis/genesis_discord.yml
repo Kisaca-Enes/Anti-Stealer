@@ -1,0 +1,22 @@
+title: Genesis Stealer Discord Webhook Exfiltration
+id: 9b1f6e1a-7d12-4e5c-b7c2-genesis-001
+status: experimental
+description: Detects NodeJS processes exfiltrating data via Discord webhooks (Genesis Stealer behavior)
+author: No-Stealer Project
+logsource:
+  product: windows
+  category: network_connection
+detection:
+  selection:
+    DestinationHostname|contains:
+      - "discord.com"
+      - "discordapp.com"
+    DestinationUrl|contains:
+      - "/api/webhooks/"
+  condition: selection
+falsepositives:
+  - Legitimate Discord bots
+level: high
+tags:
+  - attack.exfiltration
+  - attack.t1041
