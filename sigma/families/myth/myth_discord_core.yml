@@ -1,0 +1,26 @@
+title: Discord Desktop Core Injection (Stealer)
+status: stable
+confidence: very_high
+
+logsource:
+  category: file_event
+  product: windows
+
+detection:
+  selection_path:
+    TargetFilename|contains:
+      - discord_desktop_core
+      - discord_desktop_core-1
+      - app-
+
+  selection_ext:
+    TargetFilename|endswith:
+      - index.js
+
+  selection_proc:
+    Image|endswith:
+      - node.exe
+      - electron.exe
+      - unknown.exe
+
+  condition: selection_path and selection_ext and selection_proc
