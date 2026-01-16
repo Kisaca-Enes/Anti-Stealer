@@ -1,0 +1,21 @@
+title: Discord Token Validation Stealer
+status: stable
+confidence: very_high
+
+logsource:
+  category: network
+  product: windows
+
+detection:
+  selection_api:
+    DestinationHostname|contains:
+      - discord.com
+    RequestURI|contains:
+      - /users/@me
+
+  selection_proc:
+    Image|endswith:
+      - node.exe
+      - electron.exe
+
+  condition: selection_api and selection_proc
