@@ -1,0 +1,23 @@
+title: Stealer Anti-Analysis Execution Chain
+status: experimental
+confidence: high
+
+logsource:
+  category: process_creation
+  product: windows
+
+detection:
+  selection_env:
+    CommandLine|contains:
+      - hostname
+      - username
+      - network
+
+  selection_exit:
+    CommandLine|contains:
+      - exit
+      - del
+
+  timeframe: 1m
+
+  condition: selection_env and selection_exit
