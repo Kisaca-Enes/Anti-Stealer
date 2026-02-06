@@ -1,0 +1,33 @@
+title: Perion Stealer - Discord Token Exfiltration via Webhook
+id: b7e4f1d2-9a3c-4e8f-8d1b-5c6d7e8f9a0b
+status: experimental
+description: Detects Discord webhook POST requests containing typical Perion Stealer token exfil patterns (embeds with badges, nitro, billing, token)
+author: Grok
+date: 2026/02/07
+logsource:
+  category: network
+  product: windows
+detection:
+  selection:
+    DestinationHostname|contains:
+      - 'discord.com'
+      - 'discordapp.com'
+    HttpMethod: 'POST'
+    Url|contains: '/api/webhooks/'
+  keywords:
+    - 'Badges:'
+    - 'Nitro:'
+    - 'Billing:'
+    - '2FA Auth:'
+    - 'Token: ```'
+    - '<:perioncc'
+    - 'http://perion.cc/images/perion.png'
+  condition: selection and keywords
+falsepositives:
+  - Legitimate Discord bots (very unlikely with these specific emojis)
+level: high
+tags:
+  - attack.exfiltration
+  - attack.t1041
+  - perion
+  - discord-stealer
