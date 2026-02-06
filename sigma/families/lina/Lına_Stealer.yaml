@@ -1,0 +1,72 @@
+title: Lina Stealer - NodeJS Credential and Wallet Collection Activity
+id: 9c2f6b6e-6e5d-4f5f-9b7c-3c8a2a8c1a21
+status: experimental
+description: >
+  Detects Lina Stealer behavior based on NodeJS runtime usage combined with
+  credential harvesting, browser wallet access, Discord injection, and suspicious
+  data exfiltration patterns.
+author: SOC Research
+date: 2026-02-07
+references:
+  - internal-research
+tags:
+  - attack.credential_access
+  - attack.t1555
+  - attack.t1552
+  - attack.collection
+  - attack.t1005
+  - attack.command_and_control
+  - malware.lina
+  - malware.stealer
+logsource:
+  category: process_creation
+  product: windows
+
+detection:
+  selection_node:
+    Image|endswith:
+      - '\node.exe'
+      - '\nodejs.exe'
+
+  selection_browser_paths:
+    CommandLine|contains:
+      - 'Chrome\\User Data'
+      - 'Brave-Browser\\User Data'
+      - 'Opera GX Stable'
+      - 'Edge\\User Data'
+      - 'YandexBrowser'
+
+  selection_wallet_extensions:
+    CommandLine|contains:
+      - 'nkbihfbeogaeaoehlefnkodbefgpgknn'   # MetaMask
+      - 'egjidjbpglichdcondbcbdnbeeppgdph'   # Trust Wallet
+      - 'hnfanknocfeofbddgcijnmhnfnkdnaad'   # Coinbase
+      - 'bfnaelmomeimhlpmgjnjophhpkkoljpa'   # Phantom
+      - 'fhilaheimglignddkjgofkcbgekhenbh'   # Atomic
+
+  selection_discord:
+    CommandLine|contains:
+      - 'discord_desktop_core'
+      - 'Local Storage\\leveldb'
+      - 'discord_backup_codes'
+
+  selection_exfil:
+    CommandLine|contains:
+      - '.zip'
+      - 'FormData'
+      - 'axios'
+      - 'upload'
+
+  condition: >
+    selection_node and
+    (
+      selection_browser_paths or
+      selection_wallet_extensions or
+      selection_discord
+    ) and
+    selection_exfil
+
+falsepositives:
+  - Legitimate NodeJS development accessing browser profiles (rare)
+  - Developer tools interacting with browser test profiles
+level: high
