@@ -1,0 +1,85 @@
+title: ERA Stealer Behavioral Detection
+id: 9f3d2b41-8e8c-4d2f-9f92-era-stealer-001
+status: experimental
+description: >
+  Detects ERA Stealer via correlated behavior including Chromium credential access,
+  DPAPI abuse, Discord token theft / injection, and crypto wallet harvesting.
+author: Blue Team / DFIR
+date: 2026-02-06
+references:
+  - https://attack.mitre.org/techniques/T1555/
+  - https://attack.mitre.org/techniques/T1552/
+tags:
+  - attack.credential_access
+  - attack.t1555
+  - attack.t1552
+  - attack.collection
+  - attack.exfiltration
+  - malware.era_stealer
+logsource:
+  category: process_access
+  product: windows
+
+detection:
+
+  # ---------------------------------
+  # 1. Suspicious Process Context
+  # ---------------------------------
+  selection_process:
+    Image|endswith:
+      - '\node.exe'
+      - '\electron.exe'
+
+  # ---------------------------------
+  # 2. Chromium Credential Harvesting
+  # ---------------------------------
+  selection_chromium_files:
+    TargetFilename|contains:
+      - '\Login Data'
+      - '\Network\Cookies'
+      - '\Local State'
+
+  # ---------------------------------
+  # 3. DPAPI Abuse
+  # ---------------------------------
+  selection_dpapi:
+    CallTrace|contains:
+      - 'CryptUnprotectData'
+
+  # ---------------------------------
+  # 4. Discord Token Theft / Injection
+  # ---------------------------------
+  selection_discord_files:
+    TargetFilename|contains:
+      - '\discord_desktop_core'
+      - '\Local Storage\leveldb'
+
+  # ---------------------------------
+  # 5. Crypto Wallet Extension Harvesting
+  # ---------------------------------
+  selection_wallets:
+    TargetFilename|contains:
+      - '\Local Extension Settings\nkbihfbeogaeaoehlefnkodbefgpgknn'   # MetaMask
+      - '\Local Extension Settings\bfnaelmomeimhlpmgjnjophhpkkoljpa'   # Phantom
+      - '\Local Extension Settings\fhbohimaelbohpjbbldcngcnapndodjp'   # Binance
+      - '\Local Extension Settings\hnfanknocfeofbddgcijnmhnfnkdnaad'   # Coinbase
+
+  # ---------------------------------
+  # 6. Data Exfiltration (Webhook-style)
+  # ---------------------------------
+  selection_network:
+    DestinationPort: 443
+    Initiated: true
+
+  condition: >
+    selection_process and
+    selection_chromium_files and
+    selection_dpapi and
+    (selection_discord_files or selection_wallets)
+
+falsepositives:
+  - Legitimate browser password managers (rare)
+  - Forensic tools accessing browser databases
+  - Developer testing Electron apps (without DPAPI + Discord access)
+
+level: critical
