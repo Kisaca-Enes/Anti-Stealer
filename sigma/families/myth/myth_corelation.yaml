@@ -1,0 +1,20 @@
+title: MythGrabber Stealer Multi-Stage Activity
+id: 71c3b0fa-ff22-4b91-myth-correlation
+status: experimental
+description: Correlates Discord injection with cryptocurrency wallet access indicative of MythGrabber stealer
+author: blue-team
+date: 2026/02/06
+tags:
+  - malware.mythgrabber
+  - attack.t1055
+  - attack.t1554
+logsource:
+  category: correlation
+detection:
+  selection:
+    EventIDs:
+      - d1f7a5b3-9c42-4f2a-9f21-myth-discord-inject
+      - 9a8c2f4e-72c1-4c21-myth-wallet-stealer
+  timeframe: 10m
+  condition: selection
+level: critical
