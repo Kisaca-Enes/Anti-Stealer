@@ -1,0 +1,88 @@
+title: EvilSoul Stealer - Discord Token Theft and Client Injection
+id: 7f9c1b4a-ev1l-50u1-9d1s-c0rdsteal
+status: experimental
+description: >
+  Detects EvilSoul Stealer behavior including Discord token harvesting,
+  DPAPI abuse, Discord client injection, persistence via Startup folder,
+  and forced Discord process termination.
+author: Blue Team / DFIR
+date: 2026-02-06
+references:
+  - https://t.me/EvilSoulStealer
+tags:
+  - attack.credential_access
+  - attack.persistence
+  - attack.defense_evasion
+  - attack.t1056
+  - attack.t1547
+  - attack.t1110
+logsource:
+  product: windows
+  category:
+    - process_creation
+    - file_creation
+    - registry_event
+    - powershell
+detection:
+
+  # --- DPAPI abuse via PowerShell (browser / Discord token decryption)
+  dpapi_unprotect:
+    EventID: 4688
+    ProcessCommandLine|contains:
+      - "ProtectedData]::Unprotect"
+      - "os_crypt.encrypted_key"
+
+  # --- Discord token validation via API
+  discord_api:
+    EventID: 4688
+    ProcessCommandLine|contains:
+      - "discord.com/api/v9/users/@me"
+      - "authorization"
+
+  # --- Discord forced termination (pre-injection)
+  discord_kill:
+    EventID: 4688
+    ProcessCommandLine|contains:
+      - "taskkill /F /T /IM Discord.exe"
+      - "DiscordCanary.exe"
+      - "DiscordPTB.exe"
+
+  # --- Discord client injection
+  discord_injection:
+    EventID: 11
+    TargetFilename|contains:
+      - "discord_desktop_core"
+      - "index.js"
+
+  # --- Persistence via Startup folder
+  startup_persistence:
+    EventID: 11
+    TargetFilename|contains:
+      - "\\Microsoft\\Windows\\Start Menu\\Programs\\Startup"
+
+  # --- Screenshot capability (credential harvesting / recon)
+  screenshot_activity:
+    EventID: 11
+    TargetFilename|endswith:
+      - "screenshot.png"
+
+  condition: >
+    (
+      dpapi_unprotect and
+      discord_api
+    )
+    or
+    (
+      discord_kill and
+      discord_injection
+    )
+    or
+    (
+      startup_persistence and
+      discord_api
+    )
+
+falsepositives:
+  - Legitimate Electron applications using DPAPI (rare)
+  - Developer testing Discord bots locally (low likelihood)
+level: high
