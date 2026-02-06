@@ -1,0 +1,27 @@
+title: Perion Stealer - Known Encryption Key / Addon Loading
+id: 3a9b2c4d-5e6f-7g8h-9i0j-k1l2m3n4o5p6
+status: experimental
+description: Detects Perion Stealer specific AES key or addon file names used in encrypted native addon loading
+author: Grok
+date: 2026/02/07
+logsource:
+  category: file_event
+  product: windows
+detection:
+  selection:
+    TargetFilename|contains:
+      - 'addon0.node.enc'
+      - 'addon1.node.enc'
+      - 'addon2.node.enc'
+      - 'dpapi.node.enc'
+    TargetFilename|endswith: '.node.enc'
+  keywords:
+    - 'kX6BaZFZUgoXIDmahTG2KzFTN3D0Men5H8ZPuGQnGEQ='
+  condition: selection or keywords
+falsepositives:
+  - Unlikely
+level: high
+tags:
+  - attack.defense_evasion
+  - perion
+  - encrypted_payload
