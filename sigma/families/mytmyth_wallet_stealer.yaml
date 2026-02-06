@@ -1,0 +1,38 @@
+title: MythGrabber Cryptocurrency Wallet Collection
+id: 9a8c2f4e-72c1-4c21-myth-wallet-stealer
+status: experimental
+description: Detects access to multiple cryptocurrency wallet storage locations consistent with MythGrabber stealer
+author: blue-team
+date: 2026/02/06
+tags:
+  - attack.credential_access
+  - attack.collection
+  - attack.t1005
+  - malware.mythgrabber
+logsource:
+  category: file_event
+  product: windows
+detection:
+  wallet_paths:
+    TargetFilename|contains:
+      - '\Exodus\exodus.wallet'
+      - '\Electrum\wallets'
+      - '\Coinomi\Coinomi\wallets'
+      - '\Guarda\Local Storage\leveldb'
+      - '\atomic\Local Storage\leveldb'
+  browser_wallets:
+    TargetFilename|contains:
+      - 'Local Extension Settings\nkbihfbeogaeaoehlefnkodbefgpgknn'
+      - 'Local Extension Settings\bfnaelmomeimhlpmgjnjophhpkkoljpa'
+      - 'Local Extension Settings\fnjhmkhhmkbjkkabndcnnogagogbneec'
+      - 'Local Extension Settings\fhbohimaelbohpjbbldcngcnapndodjp'
+      - 'Local Extension Settings\hnfanknocfeofbddgcijnmhnfnkdnaad'
+  suspicious_process:
+    Image|endswith:
+      - '\node.exe'
+      - '\python.exe'
+      - '\wscript.exe'
+  condition: (wallet_paths or browser_wallets) and suspicious_process
+falsepositives:
+  - Manual forensic tools
+level: high
