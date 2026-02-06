@@ -1,0 +1,34 @@
+title: Perion Stealer - Suspicious Temp Directory Creation & Usage
+id: f1e2d3c4-b5a6-7890-abcd-ef1234567890
+status: experimental
+description: Detects Perion Stealer typical temporary folders used for staging stolen data (extensions, wallets, vpns, tokens)
+author: Grok
+date: 2026/02/07
+logsource:
+  category: file_event
+  product: windows
+detection:
+  selection:
+    TargetFilename|contains|all:
+      - '\AppData\Local\Temp\'
+      - 'perion'
+    OR
+    TargetFilename|contains|all:
+      - '\AppData\Local\Temp\'
+      - 'extensions-temp'
+    OR
+    TargetFilename|contains|all:
+      - '\AppData\Local\Temp\'
+      - 'wallets-temp'
+    OR
+    TargetFilename|contains|all:
+      - '\AppData\Local\Temp\'
+      - 'vpns-temp'
+  condition: selection
+falsepositives:
+  - Rare legitimate software using similar naming
+level: medium
+tags:
+  - attack.collection
+  - perion
+  - staging
