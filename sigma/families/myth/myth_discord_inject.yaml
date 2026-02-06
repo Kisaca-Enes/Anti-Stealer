@@ -1,0 +1,36 @@
+title: MythGrabber Discord Desktop Core Injection
+id: d1f7a5b3-9c42-4f2a-9f21-myth-discord-inject
+status: experimental
+description: Detects Discord desktop core JavaScript modification used by MythGrabber stealer
+author: blue-team
+date: 2026/02/06
+references:
+  - internal-research
+tags:
+  - attack.persistence
+  - attack.t1554
+  - attack.credential_access
+  - malware.mythgrabber
+logsource:
+  category: file_event
+  product: windows
+detection:
+  selection_path:
+    TargetFilename|contains:
+      - '\Discord\app-'
+      - '\DiscordCanary\app-'
+      - '\DiscordPTB\app-'
+  selection_core:
+    TargetFilename|contains:
+      - '\modules\discord_desktop_core'
+      - '\discord_desktop_core-1'
+  selection_file:
+    TargetFilename|endswith: '\index.js'
+  selection_process:
+    Image|endswith:
+      - '\node.exe'
+      - '\discord.exe'
+  condition: selection_path and selection_core and selection_file and selection_process
+falsepositives:
+  - Discord updates (rare, usually signed updater)
+level: high
