@@ -1,0 +1,27 @@
+title: Perion Stealer - Crypto Wallet & Extension Folder Access
+id: 9f8e7d6c-5b4a-3210-fedc-ba9876543210
+status: experimental
+description: Detects access to known crypto wallet and browser extension storage paths typical for Perion Stealer
+author: Grok
+date: 2026/02/07
+logsource:
+  category: file_event
+  product: windows
+detection:
+  selection:
+    TargetFilename|contains:
+      - '\Local Extension Settings\nkbihfbeogaeaoehlefnkodbefgpgknn'  # MetaMask
+      - '\Local Extension Settings\bfnaelmomeimhlpmgjnjophhpkkoljpa'  # Phantom
+      - '\Local Extension Settings\fhbohimaelbohpjbbldcngcnapndodjp'  # Binance
+      - '\Roaming\Exodus\exodus.wallet'
+      - '\Roaming\atomic\Local Storage\leveldb'
+      - '\Local Extension Settings\egjidjbpglichdcondbcbdnbeeppgdph'  # Trust Wallet
+  condition: selection
+falsepositives:
+  - Legitimate wallet/extension management software
+level: medium
+tags:
+  - attack.credential_access
+  - attack.t1555.003
+  - perion
+  - wallet-stealer
