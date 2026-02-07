@@ -1,0 +1,46 @@
+title: StealC Infostealer Network & Credential Activity
+id: 9b5d4f1e-6cfa-4a92-b0d7-stealc01
+status: experimental
+description: >
+  Detects StealC infostealer behavior via WinINet API usage,
+  Steam/Browser credential access and PHP-based C2 communication.
+author: Enes
+date: 2026-02-07
+tags:
+  - attack.credential_access
+  - attack.t1552
+  - attack.t1555
+  - attack.command_and_control
+  - malware.stealc
+
+logsource:
+  product: windows
+  category: network_connection
+
+detection:
+  selection_c2:
+    DestinationHostname|contains:
+      - "senseapiport.live"
+    UrlPath|endswith:
+      - ".php"
+    Method:
+      - "POST"
+
+  selection_process:
+    Image|endswith:
+      - "AvastSvc.exe"
+      - ".tmp"
+      - ".exe"
+
+  selection_wininet:
+    CommandLine|contains:
+      - "HttpSendRequest"
+      - "InternetReadFile"
+      - "wininet.dll"
+
+  condition: selection_c2 and selection_process
+
+falsepositives:
+  - Rare legitimate software using custom PHP APIs (low likelihood)
+
+level: high
