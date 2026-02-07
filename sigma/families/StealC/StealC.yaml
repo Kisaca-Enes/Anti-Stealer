@@ -1,0 +1,48 @@
+title: StealC Infostealer Network and Injection Activity
+id: 7c3a9c5a-6f2e-4b5c-bd3a-stealc-001
+status: experimental
+description: >
+  Detects StealC infostealer behavior based on C2 communication,
+  process injection, and browser/Steam data targeting.
+author: you
+date: 2026/02/07
+references:
+  - internal-sandbox
+tags:
+  - attack.credential_access
+  - attack.t1555.003
+  - attack.t1552.001
+  - attack.t1055
+  - attack.t1547.001
+  - malware.stealc
+
+logsource:
+  category: process_access
+  product: windows
+
+detection:
+  selection_injection:
+    CallTrace|contains:
+      - 'WriteProcessMemory'
+      - 'SetThreadContext'
+
+  selection_network:
+    DestinationIp:
+      - '151.240.151.64'
+    HttpMethod: 'POST'
+    UrlPath|endswith: '.php'
+
+  selection_stealer_files:
+    TargetFilename|contains:
+      - 'Steam\\local.vdf'
+      - 'config.vdf'
+      - 'steam_tokens.txt'
+      - 'User Data\\Local State'
+
+  condition: selection_injection and selection_network and selection_stealer_files
+
+falsepositives:
+  - Legitimate software performing code injection (rare)
+  - Custom enterprise updaters (unlikely with PHP POST C2)
+
+level: high
