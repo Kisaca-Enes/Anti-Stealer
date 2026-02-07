@@ -1,0 +1,76 @@
+title: NodeJS Stealer Wallet and Seed Harvesting Activity
+id: 6c1c7e1d-8b5a-4c2f-9f8b-crypto-stealer-nodejs
+status: experimental
+description: >
+  Detects NodeJS-based stealer malware harvesting crypto wallets,
+  seed phrases and session data (Ben10, Lina, Perion-like families).
+
+author: SOC / DFIR
+date: 2026-02-07
+references:
+  - https://attack.mitre.org/techniques/T1555/
+  - https://attack.mitre.org/techniques/T1005/
+
+tags:
+  - attack.credential_access
+  - attack.collection
+  - attack.t1555
+  - attack.t1005
+  - malware.stealer
+  - malware.crypto
+
+logsource:
+  category: process_creation
+  product: windows
+
+detection:
+
+  selection_nodejs:
+    Image|endswith:
+      - '\node.exe'
+      - '\nodejs.exe'
+
+  selection_wallet_files:
+    CommandLine|contains:
+      - 'wallet.dat'
+      - 'loginusers.vdf'
+      - '.ROBLOSECURITY'
+      - 'launcher_profiles.json'
+      - 'seed.seco'
+      - 'Exodus'
+
+  selection_seed_keywords:
+    CommandLine|contains:
+      - 'mnemonic'
+      - 'recovery phrase'
+      - 'private key'
+      - 'wallet backup'
+
+  selection_output_dirs:
+    CommandLine|contains:
+      - 'Desktop_Wallets'
+      - 'Cold_Wallets'
+      - 'WalletDat_Files'
+      - 'Seed_Phrases'
+      - 'wallets_summary.txt'
+
+  selection_discord:
+    CommandLine|contains:
+      - 'discord.com/api/v9'
+      - 'discord.com/api/v10'
+      - 'core.asar'
+      - 'discord_desktop_core'
+
+  condition:
+    selection_nodejs and
+    (
+      (selection_wallet_files and selection_output_dirs) or
+      (selection_seed_keywords and selection_wallet_files) or
+      (selection_wallet_files and selection_discord)
+    )
+
+falsepositives:
+  - Legitimate blockchain wallet backup tools (rare)
+  - Developer forensic scripts (very unlikely with NodeJS + Discord API)
+
+level: high
