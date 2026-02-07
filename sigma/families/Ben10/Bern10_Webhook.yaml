@@ -1,0 +1,32 @@
+title: Ben10 Stealer - Webhook Logging with Ben10 Theme
+id: e5f6g7h8-i9j0-1234-efgh-5678901234ef
+status: experimental
+description: Detects POST requests to Discord webhooks with Ben10-themed embeds (specific colors, icons, usernames)
+author: Grok
+date: 2026/02/07
+logsource:
+  category: network
+  product: windows
+detection:
+  selection:
+    DestinationHostname|contains:
+      - 'discord.com'
+      - 'discordapp.com'
+    HttpMethod: 'POST'
+    Url|contains: '/api/webhooks/'
+  keywords:
+    - 'Ben10'
+    - '@ben10grabber'
+    - 'https://media.discordapp.net/attachments/1450980645344907264/1452918266556317746/images.jpeg'
+    - '0x00FF00'
+    - '[DebugLog]'
+    - 'Python Extraction Debug'
+  condition: selection and 2 of (keywords*)
+falsepositives:
+  - Themed Discord bots (unlikely with exact Ben10 strings)
+level: high
+tags:
+  - attack.exfiltration
+  - attack.t1041
+  - ben10-stealer
+  - webhook-exfil
