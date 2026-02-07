@@ -1,0 +1,31 @@
+title: Ben10 Stealer - Suspicious Python Payload Execution from Temp
+id: a1b2c3d4-e5f6-7890-abcd-1234567890ab
+status: experimental
+description: Detects execution of decrypted Python payload from temp directory, typical for Ben10 Stealer which decrypts and runs embedded Python code
+author: 
+date: 2026/02/07
+logsource:
+  category: process_creation
+  product: windows
+detection:
+  selection_img:
+    Image|endswith:
+      - '\python.exe'
+      - '\python3.exe'
+      - '\py.exe'
+  selection_cmd:
+    CommandLine|contains:
+      - '\AppData\Local\Temp\tmp_'
+      - '.py'
+  keywords:
+    - 'PYTHONUNBUFFERED=1'
+    - 'CRITICAL_PAYLOAD_ERROR'
+  condition: all of selection_* or (selection_img and keywords)
+falsepositives:
+  - Legitimate temporary Python scripts (rare with random tmp_ names)
+level: high
+tags:
+  - attack.execution
+  - attack.t1059.006
+  - ben10-stealer
+  - payload-decrypt
