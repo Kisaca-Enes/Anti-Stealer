@@ -1,0 +1,27 @@
+title: Ben10 Stealer - LevelDB Access for Token Stealing
+id: d4e5f6g7-h8i9-0123-defg-4567890123de
+status: experimental
+description: Detects access to browser Local Storage leveldb files for stealing encrypted Discord tokens
+author: 
+date: 2026/02/07
+logsource:
+  category: file_event
+  product: windows
+detection:
+  selection:
+    TargetFilename|contains:
+      - '\Local Storage\leveldb\'
+      - '.ldb'
+      - '.log'
+  keywords:
+    - 'dQw4w9WgXcQ:'
+    - '[\w-]{24,27}\.[\w-]{6,7}\.[\w-]{25,110}'
+  condition: selection and keywords
+falsepositives:
+  - Legitimate browser cache access
+level: high
+tags:
+  - attack.credential_access
+  - attack.t1555.003
+  - ben10-stealer
+  - leveldb-token
