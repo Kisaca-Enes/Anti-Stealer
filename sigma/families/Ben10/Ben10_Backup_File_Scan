@@ -1,0 +1,33 @@
+title: Ben10 Stealer - Backup Codes File Scan and Extraction
+id: c3d4e5f6-g7h8-9012-cdef-3456789012cd
+status: experimental
+description: Detects file reads/scans in user directories (Desktop, Documents etc.) looking for Discord backup codes in .txt files
+author: 
+date: 2026/02/07
+logsource:
+  category: file_event
+  product: windows
+detection:
+  selection:
+    TargetFilename|endswith: '.txt'
+    TargetFilename|contains:
+      - '\Desktop\'
+      - '\Documents\'
+      - '\Downloads\'
+      - '\Videos\'
+      - '\Pictures\'
+      - '\Music\'
+  keywords:
+    - 'discord'
+    - 'backup'
+    - 'code'
+    - '[a-z0-9]{4}-[a-z0-9]{4}'
+  condition: selection and keywords
+falsepositives:
+  - Legitimate text file access in user folders
+level: medium
+tags:
+  - attack.collection
+  - attack.t1005
+  - ben10-stealer
+  - backup-codes
