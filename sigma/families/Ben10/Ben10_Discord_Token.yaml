@@ -1,0 +1,35 @@
+title: Ben10 Stealer - Discord Token Exfiltration and Validation
+id: b2c3d4e5-f6g7-8901-bcde-2345678901bc
+status: experimental
+description: Detects HTTPS requests to Discord API for token validation, billing check, or relationships (HQ friends with rare badges)
+author: Grok
+date: 2026/02/07
+logsource:
+  category: network
+  product: windows
+detection:
+  selection:
+    DestinationHostname|contains:
+      - 'discord.com'
+      - 'discordapp.com'
+    HttpMethod: 'GET'
+    Url|contains:
+      - '/api/v9/users/@me'
+      - '/api/v9/users/@me/billing/payment-sources'
+      - '/api/v9/users/@me/relationships'
+      - '/api/v9/users/'
+      - '/profile'
+  keywords:
+    - 'Authorization:'
+    - 'dQw4w9WgXcQ:'
+    - 'public_flags'
+    - 'premium_type'
+  condition: selection and keywords
+falsepositives:
+  - Legitimate Discord client traffic (filter by suspicious volume or patterns)
+level: medium
+tags:
+  - attack.credential_access
+  - attack.t1555.003
+  - ben10-stealer
+  - discord-token
