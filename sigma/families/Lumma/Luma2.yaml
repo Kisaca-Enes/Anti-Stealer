@@ -1,0 +1,60 @@
+title: Suspicious mshta.exe or Browser Used as C2 Proxy (Lumma-like)
+id: 9b7c2f1e-4c7a-4c33-b9e2-lumma-mshta-browser-c2
+status: experimental
+description: >
+  Detects suspicious usage of mshta.exe or browser processes
+  acting as a C2 proxy by performing encrypted POST requests
+  without user interaction, commonly observed in Lumma stealer
+  and similar malware families.
+
+author: Enes
+date: 2026/02/10
+references:
+  - https://hybrid-analysis.com
+  - https://opentip.kaspersky.com
+  - https://tria.ge
+tags:
+  - attack.execution
+  - attack.t1059
+  - attack.t1055
+  - attack.t1105
+  - attack.defense_evasion
+  - lumma
+
+logsource:
+  category: process_creation
+  product: windows
+
+detection:
+  selection_mshta:
+    Image|endswith: '\mshta.exe'
+    CommandLine|contains:
+      - 'http'
+      - 'https'
+
+  selection_browser:
+    Image|endswith:
+      - '\chrome.exe'
+      - '\msedge.exe'
+      - '\firefox.exe'
+
+  suspicious_parent:
+    ParentImage|endswith:
+      - '\explorer.exe'
+      - '\cmd.exe'
+      - '\powershell.exe'
+      - '\rundll32.exe'
+      - '\svchost.exe'
+
+  no_user_interaction:
+    CommandLine|contains:
+      - '.js'
+      - '.html'
+
+  condition: (selection_mshta or selection_browser) and suspicious_parent and no_user_interaction
+
+falsepositives:
+  - Legitimate administrative scripts using mshta
+  - Enterprise automation (rare, should be allowlisted)
+
+level: high
