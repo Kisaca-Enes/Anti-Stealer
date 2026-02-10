@@ -1,0 +1,49 @@
+title: Lumma Stealer Using Browser as C2 Proxy
+id: 3f9c8e77-7e0a-4d6e-ae9f-lumma-browser-proxy
+status: experimental
+description: >
+  Detects Lumma stealer behavior where Chrome or Edge is spawned
+  by a non-browser process and performs POST requests to
+  suspicious domains without user interaction.
+
+author: Enes
+date: 2026/02/10
+tags:
+  - attack.command_and_control
+  - attack.t1105
+  - attack.t1059
+  - attack.t1055
+  - lumma
+
+logsource:
+  category: process_creation
+  product: windows
+
+detection:
+  browser_process:
+    Image|endswith:
+      - '\chrome.exe'
+      - '\msedge.exe'
+
+  suspicious_parent:
+    ParentImage|endswith:
+      - '\Closer.exe'
+      - '\cmd.exe'
+      - '\wextract.exe'
+      - '.exe'
+
+  suspicious_cmdline:
+    CommandLine|contains:
+      - 'http'
+      - 'https'
+      - 'api'
+      - 'token='
+      - 'set_agent'
+
+  condition: browser_process and suspicious_parent and suspicious_cmdline
+
+falsepositives:
+  - Rare enterprise automation using browsers
+  - Custom QA testing tools (should be allowlisted)
+
+level: high
