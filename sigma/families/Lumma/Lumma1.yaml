@@ -1,0 +1,40 @@
+title: Lumma Stealer Execution Chain Detection
+id: 4da66ee4-9d6e-4201-8e3b-a91d58c12345
+description: Detects Lumma Stealer infection behavior by correlating process creation (mshta.exe from remote command line), injection-like behavior, and abnormal network POST activity.
+references:
+  - https://tria.ge/260203-vlrc6aat7b/behavioral1
+  - https://www.microsoft.com/en-us/security/blog/2025/05/21/lumma-stealer-breaking-down-the-delivery-techniques-and-capabilities-of-a-prolific-infostealer/
+tags:
+  - attack.execution
+  - attack.persistence
+  - attack.command_and_control
+  - attack.credential_access
+  - attack.exfiltration
+  - lumma
+author: Enes
+logsource:
+  product: windows
+  service: sysmon
+  definition: 'Detect process creation, network connections, and injection-like sequences'
+detection:
+  selection_mshta:
+    Image|endswith: '\\mshta.exe'
+    CommandLine|contains:
+      - 'http://'
+      - 'https://'
+  selection_injection:
+    EventID: 10        # Sysmon WriteProcessMemory (injection hint)
+    TargetImage|endswith: '\\explorer.exe'  # common target for hollowing/injection
+  selection_network:
+    EventID: 3         # Sysmon NetworkConnect
+    DestinationPort:
+      - 80
+      - 443
+    Protocol: tcp
+    ProcessImage|endswith: '\\mshta.exe'
+  condition: |
+    all of ($selection_mshta, $selection_injection, $selection_network)
+falsepositives:
+  - Legitimate usage of mshta.exe from local HTA files or internal scripts
+  - Web traffic with mshta.exe where internal automation use is approved
+level: high
