@@ -51,6 +51,19 @@ rule Stealerium_NET_Full_Core
 
         /* .NET */
         $dotnet = "mscorlib" ascii wide
+        $b1 = "GetCookiesDbPath" ascii wide
+        $b2 = "GetHistoryDbPath" ascii wide
+        $b3 = "GetBookmarksDbPath" ascii wide
+
+        $k1 = "SetWindowsHookEx" ascii wide
+        $k2 = "GetKeyboardState" ascii wide
+
+        $e1 = "MultipartFormDataContent" ascii wide
+        $e2 = "HttpClient" ascii wide
+        $e3 = "PostAsync" ascii wide
+
+        $c1 = "BCryptDecrypt" ascii wide
+        $c2 = "CryptUnprotectData" ascii wide
 
     condition:
         uint16(0) == 0x5A4D
@@ -62,4 +75,8 @@ rule Stealerium_NET_Full_Core
         and 1 of ($wal*)
         and 2 of ($pk*)
         and 1 of ($ld*)
+        and 2 of ($b*)
+        and 1 of ($k*)
+        and 2 of ($e*)
+        and 1 of ($c*)
 }
