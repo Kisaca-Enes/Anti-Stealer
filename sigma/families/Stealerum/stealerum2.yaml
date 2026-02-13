@@ -1,0 +1,52 @@
+title: Suspicious .NET Stealer Loader with VM Evasion and LOLBins
+id: 6c1c0f8d-2c8f-4a6b-bc42-stealer-dotnet-loader
+status: experimental
+description: >
+  Detects suspicious .NET-based malware loaders exhibiting VM evasion,
+  command execution via cmd.exe, registry tracing disablement, and
+  GitHub-hosted VM blacklist checks.
+author: Enes
+date: 2025/02/14
+logsource:
+  category: process_creation
+  product: windows
+
+detection:
+  selection_dotnet:
+    Image|endswith: '.exe'
+    OriginalFileName:
+      - 'Pdf Reader.exe'
+      - 'PDF READER'
+
+  selection_cmd:
+    ParentImage|endswith: '.exe'
+    Image|endswith: '\cmd.exe'
+    CommandLine|contains: '/C'
+
+  selection_lolbins:
+    Image|endswith:
+      - '\timeout.exe'
+      - '\taskkill.exe'
+      - '\chcp.com'
+
+  selection_git_vmcheck:
+    CommandLine|contains:
+      - 'raw.githubusercontent.com'
+      - 'virustotal-vm-blacklist'
+      - 'MachineGuid.txt'
+      - 'processes_list.txt'
+
+  condition: selection_dotnet and selection_cmd and selection_lolbins and selection_git_vmcheck
+
+falsepositives:
+  - Custom enterprise scripts using GitHub raw content
+  - Rare administrative batch workflows
+
+level: high
+tags:
+  - attack.defense_evasion
+  - attack.discovery
+  - attack.execution
+  - attack.t1059
+  - attack.t1497
+  - attack.t1112
