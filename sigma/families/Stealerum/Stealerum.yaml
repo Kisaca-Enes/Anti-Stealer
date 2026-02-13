@@ -1,0 +1,62 @@
+title: Stealerium Loader via CMD BAT Anti-Analysis Chain
+id: 9c3e0f44-7b12-4c2f-9c22-stealerium-loader
+status: experimental
+description: >
+  Detects Stealerium loader behavior using cmd.exe to execute temporary BAT files,
+  applying timeout-based evasion, taskkill self-termination, disabling Windows tracing,
+  and downloading sandbox blacklists from GitHub raw content.
+
+author: Enes
+date: 2026/02/15
+confidence: high
+
+logsource:
+  category: process_creation
+  product: windows
+
+detection:
+  selection_parent:
+    ParentImage|endswith:
+      - '\cmd.exe'
+
+  selection_cmd:
+    Image|endswith:
+      - '\timeout.exe'
+      - '\taskkill.exe'
+      - '\chcp.com'
+
+  selection_bat:
+    CommandLine|contains:
+      - '.bat'
+      - 'AppData\\Local\\Temp'
+
+  selection_tracing:
+    CommandLine|contains:
+      - 'Tracing\\RASAPI32'
+      - 'Tracing\\RASMANCS'
+
+  selection_github:
+    CommandLine|contains:
+      - 'raw.githubusercontent.com'
+      - 'virustotal-vm-blacklist'
+      - 'MachineGuid.txt'
+      - 'processes_list.txt'
+      - 'pc_username_list.txt'
+
+  condition: >
+    selection_parent
+    and selection_cmd
+    and selection_bat
+    and 1 of (selection_tracing, selection_github)
+
+falsepositives:
+  - Rare administrative scripts (very unlikely with all conditions combined)
+
+level: high
+
+tags:
+  - attack.execution
+  - attack.defense_evasion
+  - attack.t1059.003   # Windows Command Shell
+  - attack.t1070       # Indicator Removal
+  - attack.t1497       # Virtualization/Sandbox Evasion
