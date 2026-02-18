@@ -1,0 +1,40 @@
+title: Matrix Stealer Crypto Wallet Access
+id: 12f2a2d1-5a2e-4e19-9d3e-matrix-wallet
+status: experimental
+description: Detects access to common cryptocurrency wallet directories associated with Matrix Stealer
+author: SOC Detection
+date: 2026/02/18
+logsource:
+  product: windows
+  category: file_access
+
+detection:
+
+  selection_wallet_paths:
+    TargetFilename|contains:
+      - "\\Exodus\\"
+      - "\\Electrum\\wallets"
+      - "\\Atomic\\Local Storage"
+      - "wallet.dat"
+
+  selection_suspicious_process:
+    Image|endswith:
+      - ".exe"
+      - ".tmp"
+
+  filter_legit:
+    Image|contains:
+      - "exodus.exe"
+      - "electrum.exe"
+
+  condition: selection_wallet_paths and selection_suspicious_process and not filter_legit
+
+fields:
+  - Image
+  - TargetFilename
+  - User
+
+falsepositives:
+  - Legitimate wallet backup activity
+
+level: high
