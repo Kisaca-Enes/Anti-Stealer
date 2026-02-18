@@ -1,0 +1,39 @@
+title: Matrix Stealer C2 Data Exfiltration
+id: 55e8d1f3-8d2a-4b2f-91b1-matrix-c2
+status: experimental
+description: Detects Matrix Stealer style HTTP POST exfiltration to gate endpoints
+author: SOC Detection
+date: 2026/02/18
+logsource:
+  category: proxy
+  product: any
+
+detection:
+
+  selection_post:
+    cs-method: "POST"
+
+  selection_gate:
+    cs-uri-stem|contains:
+      - "/gate.php"
+      - "/builder/gate.php"
+
+  selection_upload:
+    cs-user-agent|contains:
+      - "Mozilla"
+    cs-uri-query|contains:
+      - "hwid="
+      - "build="
+
+  condition: selection_post and selection_gate and selection_upload
+
+fields:
+  - src_ip
+  - cs-host
+  - cs-uri-stem
+  - cs-user-agent
+
+falsepositives:
+  - Rare custom PHP upload scripts
+
+level: critical
