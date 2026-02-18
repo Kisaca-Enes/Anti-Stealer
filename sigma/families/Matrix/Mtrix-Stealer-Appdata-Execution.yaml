@@ -1,0 +1,40 @@
+title: Suspicious Execution from AppData After Archive Extraction
+id: a9e3c6f4-4b19-4e1b-92f1-matrix-appdata
+status: experimental
+description: Detects suspicious execution of binaries from AppData often seen in Matrix Stealer infections
+author: SOC Detection
+date: 2026/02/18
+logsource:
+  product: windows
+  category: process_creation
+
+detection:
+
+  selection_path:
+    Image|contains:
+      - "\\AppData\\Local\\"
+      - "\\AppData\\Roaming\\"
+
+  selection_parent:
+    ParentImage|endswith:
+      - "7zFM.exe"
+      - "WinRAR.exe"
+      - "explorer.exe"
+
+  selection_extension:
+    Image|endswith:
+      - ".exe"
+      - ".scr"
+
+  condition: selection_path and selection_extension and selection_parent
+
+fields:
+  - Image
+  - ParentImage
+  - CommandLine
+  - User
+
+falsepositives:
+  - Legitimate portable apps
+
+level: medium
