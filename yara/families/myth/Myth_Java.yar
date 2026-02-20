@@ -1,7 +1,7 @@
 rule Myth_Stealer_Turkish_Campaign {
     meta:
         description = "Myth Stealer - Sahte oyun piyasasi uzerinden yayilan Turk yapimi veri calici (stealer)"
-        author = "AI Assistant"
+        author = "Enes"
         family = "Myth Stealer"
         target_os = "Windows"
         source = "Decompiled Java Payload"
