@@ -1,0 +1,75 @@
+Myth Stealer
+MYTH STEALER
+discord_injection
+injection_url
+api/webhooks/
+discord.com/api/webhooks
+canary.discord.com/api/webhooks
+ptb.discord.com/api/webhooks
+LOCALAPPDATA\\Discord
+LOCALAPPDATA\\DiscordCanary
+LOCALAPPDATA\\DiscordPTB
+modules\\discord_desktop_core
+index.js
+process.env.LOCALAPPDATA
+leveldb
+dQw4w9WgXcQ:
+mfa.
+Discord Token
+Authorization
+Content-Type: application/json
+username_value
+password_value
+origin_url
+Login Data
+Web Data
+Cookies
+Network\\Cookies
+Local Storage\\leveldb
+SELECT origin_url, username_value, password_value
+SELECT host_key, name, encrypted_value
+CryptUnprotectData
+dpapi
+win-dpapi
+chrome.exe
+msedge.exe
+brave.exe
+opera.exe
+yandex.exe
+wallet.dat
+Exodus
+Atomic
+Electrum
+AppData\\Roaming
+AppData\\Local
+process.binding
+anti_analysis
+Debugger detected
+VM detected
+virtualbox
+vmware
+vboxservice
+vboxtray
+vmtoolsd
+wireshark
+fiddler
+x64dbg
+ollydbg
+taskmgr
+regedit
+powershell
+wmic csproduct get uuid
+Get-WmiObject Win32_ComputerSystem
+curl -X POST
+axios.post
+fetch(
+multipart/form-data
+boundary=
+Buffer.from(
+atob(
+btoa(
+crypto.createCipheriv
+aes-256-cbc
+base64
+temp\\
+os.tmpdir()
