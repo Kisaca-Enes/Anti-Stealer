@@ -1,0 +1,35 @@
+{
+  "family": "MythStealer",
+  "threadname": "MythStealer/variant3",
+  "commandlines": [
+    "C:\\Users\\Admin\\AppData\\Local\\Temp\\PonyRiseClient.exe",
+    "\"C:\\Users\\Admin\\AppData\\Local\\SetupWizard_enUS\\runtime\\bin\\javaw.exe\" -jar \"C:\\Users\\Admin\\AppData\\Local\\SetupWizard_enUS\\client.jar\"",
+    "\"C:\\Users\\Admin\\AppData\\Local\\SetupWizard_enUS\\runtime\\bin\\javaw.exe\" -jar \"C:\\Users\\Admin\\AppData\\Local\\SetupWizard_enUS\\client.jar\" --startup",
+    "C:\\Users\\Admin\\AppData\\Local\\SetupWizard_enUS\\runtime\\bin\\javaw.exe -jar C:\\Users\\Admin\\AppData\\Local\\SetupWizard_enUS\\client.jar"
+  ],
+  "writtenfiles": [
+    "C:\\Users\\Admin\\AppData\\Local\\Temp\\PonyRiseClient.exe",
+    "C:\\Users\\Admin\\AppData\\Local\\SetupWizard_enUS\\client.jar",
+    "C:\\Users\\Admin\\AppData\\Local\\SetupWizard_enUS\\runtime\\bin\\javaw.exe"
+  ],
+  "registry": [
+    "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run",
+    "HKLM\\SOFTWARE\\Microsoft\\Windows Defender",
+    "HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System",
+    "HKLM\\HARDWARE\\DESCRIPTION\\System",
+    "HKCU\\Control Panel\\International\\Geo"
+  ],
+  "apicalls": [
+    "RegOpenKeyEx",
+    "RegSetValueEx",
+    "WriteProcessMemory",
+    "ShellExecute",
+    "CreateProcess"
+  ],
+  "network": [
+    { "host": "mythic.dad", "port": 443, "packagecontent": "DNS lookup / possible C2 resolution" },
+    { "host": "discord.com", "port": 443, "packagecontent": "DNS lookup / possible webhook or API use" },
+    { "host": "tse1.mm.bing.net", "port": 443, "packagecontent": "GET /th?id=" },
+    { "host": "c.pki.goog", "port": 80, "packagecontent": "GET /r/r1.crl" }
+  ]
+}
