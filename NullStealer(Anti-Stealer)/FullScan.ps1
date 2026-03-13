@@ -71,46 +71,51 @@ foreach ($d in @($AppBase, $TelDir, $LogFolder)) {
 
 # Stealer ailesi → hash listesi URL'leri
 $SignatureSources_Hash = @{
-    "Myth"   = ""   # TODO: gerçek URL ekle
-    "Lina"   = ""
-    "Perion" = ""
-    "StealC" = ""
-    "Vidar"  = ""
+    "Myth"   = "https://raw.githubusercontent.com/Kisaca-Enes/Anti-Stealer/refs/heads/main/Signature/Myth.txt"
+    "Lina"   = "https://raw.githubusercontent.com/Kisaca-Enes/Anti-Stealer/refs/heads/main/Signature/Lina.txt"
+    "Perion" = "https://raw.githubusercontent.com/Kisaca-Enes/Anti-Stealer/refs/heads/main/Signature/Perion.txt"
+    "StealC" = "https://raw.githubusercontent.com/Kisaca-Enes/Anti-Stealer/refs/heads/main/Signature/StealC.txt"
+    "Vidar"  = "https://raw.githubusercontent.com/Kisaca-Enes/Anti-Stealer/refs/heads/main/Signature/Vidar.txt"
+    "Hade" = "https://raw.githubusercontent.com/Kisaca-Enes/Anti-Stealer/refs/heads/main/Signature/Hade-Stealer.txt"
 }
 
 # Stealer ailesi → string/signature URL'leri
 $SignatureSources_Static = @(
-    @{ Name = "Ben10:Stealer";       Url = "" }
-    @{ Name = "Era:Stealer";         Url = "" }
-    @{ Name = "Evil_Soul:Stealer";   Url = "" }
-    @{ Name = "Evil_Soul:OLD";       Url = "" }
-    @{ Name = "Gnesiss:Stealer";     Url = "" }
-    @{ Name = "Myth";                Url = "" }
-    @{ Name = "Myth:Stealer";        Url = "" }
-    @{ Name = "Perion:Stealer";      Url = "" }
+    @{ Name = "Myth-Stealer";        Url = "https://raw.githubusercontent.com/Kisaca-Enes/Anti-Stealer/refs/heads/main/Stealer-Strings/Myth-Stealer.txt" }
+    @{ Name = "Lina-Stealer";        Url = "https://raw.githubusercontent.com/Kisaca-Enes/Anti-Stealer/refs/heads/main/Stealer-Strings/Lina.txt" }
+    @{ Name = "Era-Stealer";         Url = "https://raw.githubusercontent.com/Kisaca-Enes/Anti-Stealer/refs/heads/main/Stealer-Strings/Era-Stealer.txt" }
+    @{ Name = "Ben10-Stealer";       Url = "https://raw.githubusercontent.com/Kisaca-Enes/Anti-Stealer/refs/heads/main/Stealer-Strings/Ben10.txt" }
 )
 
 # Memory signature URL'leri
-$SignatureSources_Memory = @(
-    @{ Name = "Myth";        Url = "" }
-    @{ Name = "Lina";        Url = "" }
-    @{ Name = "Era";         Url = "" }
-    @{ Name = "Stealkerium"; Url = "" }
+$SignatureSources_Static = @(
+    @{ Name = "Myth-Stealer";        Url = "https://raw.githubusercontent.com/Kisaca-Enes/Anti-Stealer/refs/heads/main/Stealer-Strings/Myth-Stealer.txt" }
+    @{ Name = "Lina-Stealer";        Url = "https://raw.githubusercontent.com/Kisaca-Enes/Anti-Stealer/refs/heads/main/Stealer-Strings/Lina.txt" }
+    @{ Name = "Era-Stealer";         Url = "https://raw.githubusercontent.com/Kisaca-Enes/Anti-Stealer/refs/heads/main/Stealer-Strings/Era-Stealer.txt" }
+    @{ Name = "Ben10-Stealer";       Url = "https://raw.githubusercontent.com/Kisaca-Enes/Anti-Stealer/refs/heads/main/Stealer-Strings/Ben10.txt" }
 )
 
 # C2 IP/domain listeleri
 $C2SignatureSources = @{
-    "Myth"   = ""
-    "Lina"   = ""
-    "Perion" = ""
-    "StealC" = ""
-    "Vidar"  = ""
+    "Myth"   = "https://raw.githubusercontent.com/Kisaca-Enes/Anti-Stealer/refs/heads/main/Signature/MythC2.txt"
+    "Lina"   = "https://raw.githubusercontent.com/Kisaca-Enes/Anti-Stealer/refs/heads/main/Signature/LinaC2.txt"
+    "Perion" = "https://raw.githubusercontent.com/Kisaca-Enes/Anti-Stealer/refs/heads/main/Signature/PerionC2.txt"
+    "StealC" = "https://raw.githubusercontent.com/Kisaca-Enes/Anti-Stealer/refs/heads/main/Signature/StealC_C2.txt"
+    "Vidar"  = "https://raw.githubusercontent.com/Kisaca-Enes/Anti-Stealer/refs/heads/main/Signature/VidarC2.txt"
 }
 
 # Behavior kuralı URL'leri
 $BehaviorRuleSources = @{
-    "myth"     = ""
-    "ecilsoul" = ""
+    "Myth"     = "https://raw.githubusercontent.com/Kisaca-Enes/Anti-Stealer/refs/heads/main/Stealer-Rules/Myth-Stealer/1.json"
+    "Myth-Stealer/variant(1)" = "https://raw.githubusercontent.com/Kisaca-Enes/Anti-Stealer/refs/heads/main/Stealer-Rules/Myth-Stealer/2.json"
+    "Myth-Stealer/variant(2)" = "https://raw.githubusercontent.com/Kisaca-Enes/Anti-Stealer/refs/heads/main/Stealer-Rules/Myth-Stealer/3.json"
+    "Hade-Stealer" = "https://raw.githubusercontent.com/Kisaca-Enes/Anti-Stealer/refs/heads/main/Stealer-Rules/HadeStealer/1.json"
+    "Hade-Stealer/variant(1)" = "https://raw.githubusercontent.com/Kisaca-Enes/Anti-Stealer/refs/heads/main/Stealer-Rules/HadeStealer/2.json"
+    "Nexus-Stealer" = "https://raw.githubusercontent.com/Kisaca-Enes/Anti-Stealer/refs/heads/main/Stealer-Rules/Nexsus-Stealer/1.json"
+    "RedLine" = "https://raw.githubusercontent.com/Kisaca-Enes/Anti-Stealer/refs/heads/main/Stealer-Rules/RedLine/1.json"
+    "Vidar" = "https://raw.githubusercontent.com/Kisaca-Enes/Anti-Stealer/refs/heads/main/Stealer-Rules/Vidar/1.json"
+    
+    
 }
 
 # Taranacak dosya uzantıları
