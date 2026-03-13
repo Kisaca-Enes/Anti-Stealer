@@ -1,0 +1,70 @@
+{
+  "family": "lixocore_kittenclient",
+  "threadname": "KittenClientSmp.exe",
+  "commandlines": [
+    "\"C:\\Users\\Admin\\AppData\\Local\\Temp\\KittenClient.exe\"",
+    "\"C:\\Users\\Admin\\AppData\\Local\\Programs\\LixoCore\\KittenClientSmp.exe\"",
+    "\"C:\\Users\\Admin\\AppData\\Local\\Programs\\LixoCore\\KittenClientSmp.exe\" --type=gpu-process --user-data-dir=\"C:\\Users\\Admin\\AppData\\Roaming\\LixoCore\" --gpu-preferences=WAAAAAAAAADgAAAMAAAAAAAAAAAAAAAAAABgAAAAAAA4AAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAGAAAAAAAAAAYAAAAAAAAAAgAAAAAAAAACAAAAAAAAAAIAAAAAAAAAA== --mojo-platform-channel-handle=1720 --field-trial-handle=1724,i,3807075029367513880,4458537874179055227,262144 --disable-features=SpareRendererForSitePerProcess,WinDelaySpellcheckServiceInit,WinRetrieveSuggestionsOnlyOnDemand /prefetch:2",
+    "C:\\Windows\\system32\\cmd.exe /d /s /c \"net session\"",
+    "net  session",
+    "C:\\Windows\\system32\\cmd.exe /d /s /c \"netsh advfirewall show allprofiles state\"",
+    "netsh  advfirewall show allprofiles state",
+    "C:\\Windows\\system32\\cmd.exe /d /s /c \"wmic /namespace:\\\\root\\SecurityCenter2 path AntiVirusProduct get displayName\"",
+    "wmic  /namespace:\\\\root\\SecurityCenter2 path AntiVirusProduct get displayName",
+    "C:\\Windows\\system32\\cmd.exe /d /s /c \"reg query HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System /v EnableLUA\"",
+    "reg  query HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System /v EnableLUA",
+    "C:\\Windows\\system32\\cmd.exe /d /s /c \"ipconfig /all\"",
+    "ipconfig  /all",
+    "C:\\Windows\\system32\\cmd.exe /d /s /c \"systeminfo\"",
+    "systeminfo",
+    "\"C:\\Users\\Admin\\AppData\\Local\\Programs\\LixoCore\\KittenClientSmp.exe\" --type=utility --utility-sub-type=network.mojom.NetworkService --lang=en-US --service-sandbox-type=none --user-data-dir=\"C:\\Users\\Admin\\AppData\\Roaming\\LixoCore\" --mojo-platform-channel-handle=1960 --field-trial-handle=1724,i,3807075029367513880,4458537874179055227,262144 --disable-features=SpareRendererForSitePerProcess,WinDelaySpellcheckServiceInit,WinRetrieveSuggestionsOnlyOnDemand /prefetch:8",
+    "\"C:\\Users\\Admin\\AppData\\Local\\Programs\\LixoCore\\KittenClientSmp.exe\" --type=gpu-process --disable-gpu-sandbox --use-gl=disabled --gpu-vendor-id=5140 --gpu-device-id=140 --gpu-sub-system-id=0 --gpu-revision=0 --gpu-driver-version=10.0.19041.546 --user-data-dir=\"C:\\Users\\Admin\\AppData\\Roaming\\LixoCore\" --gpu-preferences=WAAAAAAAAADoAAAMAAAAAAAAAAAAAAAAAABgAAAAAAA4AAAAAAAAAAAAAABEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAGAAAAAAAAAAYAAAAAAAAAAgAAAAAAAAACAAAAAAAAAAIAAAAAAAAAA== --mojo-platform-channel-handle=1156 --field-trial-handle=1724,i,3807075029367513880,4458537874179055227,262144 --disable-features=SpareRendererForSitePerProcess,WinDelaySpellcheckServiceInit,WinRetrieveSuggestionsOnlyOnDemand /prefetch:2"
+  ],
+  "writtenfiles": [
+    "C:\\Users\\Admin\\AppData\\Local\\Temp\\KittenClient.exe",
+    "C:\\Users\\Admin\\AppData\\Local\\Programs\\LixoCore\\KittenClientSmp.exe",
+    "C:\\Users\\Admin\\AppData\\Roaming\\LixoCore"
+  ],
+  "registry": [
+    "HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System\\EnableLUA"
+  ],
+  "apicalls": [
+    "net.exe",
+    "net1.exe",
+    "netsh.exe",
+    "wmic.exe",
+    "reg.exe",
+    "ipconfig.exe",
+    "systeminfo.exe",
+    "AdjustPrivilegeToken",
+    "WriteProcessMemory",
+    "EnumeratesProcesses"
+  ],
+  "network": [
+    {
+      "host": "185.254.96.82",
+      "port": 3000,
+      "packagecontent": "POST /api/webhook/LIXO-LIFETIME-PANMH"
+    },
+    {
+      "host": "dns.google",
+      "port": 53,
+      "packagecontent": ""
+    },
+    {
+      "host": "g.bing.com",
+      "port": 443,
+      "packagecontent": ""
+    },
+    {
+      "host": "tse1.mm.bing.net",
+      "port": 443,
+      "packagecontent": ""
+    },
+    {
+      "host": "c.pki.goog",
+      "port": 80,
+      "packagecontent": "GET /r/r1.crl"
+    }
+  ]
+}
