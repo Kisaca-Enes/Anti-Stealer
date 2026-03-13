@@ -75,7 +75,7 @@ $SignatureSources_Memory = @(
     @{ Name = "Myth";        Url = "https://raw.githubusercontent.com/Kisaca-Enes/Anti-Stealer/refs/heads/main/Stealer-Strings/Myth-Stealer.txt" }
     @{ Name = "Lina";        Url = "https://raw.githubusercontent.com/Kisaca-Enes/Anti-Stealer/refs/heads/main/Stealer-Strings/Lina.txt" }
     @{ Name = "Era";         Url = "https://raw.githubusercontent.com/Kisaca-Enes/Anti-Stealer/refs/heads/main/Stealer-Strings/Era-Stealer.txt" }
-    @{ Name = "Ben10"; Url = "https://raw.githubusercontent.com/Kisaca-Enes/Anti-Stealer/refs/heads/main/Stealer-Strings/Ben10.txt" }
+    @{ Name = "Ben10";       Url = "https://raw.githubusercontent.com/Kisaca-Enes/Anti-Stealer/refs/heads/main/Stealer-Strings/Ben10.txt" }
 )
 
 $C2SignatureSources = @{
