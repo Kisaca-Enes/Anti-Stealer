@@ -1,0 +1,19 @@
+{
+  "family": "Vidar",
+  "threadname": "Vidar/Kiddions_v2.2",
+  "commandlines": [
+    "C:\\Users\\Admin\\AppData\\Local\\Temp\\Kiddions_v2.2\\Kiddions Mod.exe"
+  ],
+  "writtenfiles": [
+    "C:\\Users\\Admin\\AppData\\Local\\Temp\\Kiddions_v2.2\\Kiddions Mod.exe"
+  ],
+  "registry": [],
+  "apicalls": [],
+  "network": [
+    { "host": "46.225.136.75", "port": 443, "packagecontent": "GET /" },
+    { "host": "46.225.136.75", "port": 443, "packagecontent": "POST /" },
+    { "host": "g.bing.com", "port": 443, "packagecontent": "GET /neg/0?action=impression" },
+    { "host": "tse1.mm.bing.net", "port": 443, "packagecontent": "GET /th?id=" },
+    { "host": "c.pki.goog", "port": 80, "packagecontent": "GET /r/r1.crl" }
+  ]
+}
