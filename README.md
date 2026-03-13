@@ -43,6 +43,8 @@ Anti-Stealer provides tools for detecting and classifying stealer families (e.g.
 
 ---
 
+![Ekran Görüntüsü](https://raw.githubusercontent.com/Kisaca-Enes/Anti-Stealer/main/assets/Ekran%20G%C3%B6r%C3%BCnt%C3%BCs%C3%BC_20260313_062925.png)
+
 # 2. Why Use It? (Benefits)
 
 * **Family-based classification:** Determines stealer family based on behavior and signatures rather than only file hashes, reducing false positives and improving AV rule accuracy.
