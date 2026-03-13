@@ -32,10 +32,8 @@
     "cscript.exe"
   ],
   "network": [
-    { "host": "g.bing.com", "port": 443, "packagecontent": "" },
-    { "host": "tse1.mm.bing.net", "port": 443, "packagecontent": "" },
     { "host": "login.monexic.com", "port": 0, "packagecontent": "" },
     { "host": "discord.com", "port": 443, "packagecontent": "" },
-    { "host": "c.pki.goog", "port": 80, "packagecontent": "GET /r/r1.crl" }
+    
   ]
 }
