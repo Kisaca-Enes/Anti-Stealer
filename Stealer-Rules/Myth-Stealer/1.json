@@ -1,0 +1,41 @@
+{
+  "family": "MythStealer",
+  "threadname": "MythStealer/variant",
+  "commandlines": [
+    "C:\\Windows\\system32\\cmd.exe /d /s /c \"reg query \\\"HKLM\\HARDWARE\\DESCRIPTION\\System\\\"\"",
+    "C:\\Windows\\system32\\cmd.exe /d /s /c \"attrib +H \\\"C:\\Users\\Admin\\AppData\\Local\\Temp\\HeroRunV10.exe\\\"\"",
+    "C:\\Windows\\system32\\cmd.exe /d /s /c \"net session\"",
+    "\"C:\\Users\\Admin\\AppData\\Roaming\\ZQQCCVV-Launcher\\runtime\\bin\\javaw.exe\" -noverify -jar \"C:\\Users\\Admin\\AppData\\Roaming\\ZQQCCVV-Launcher\\bin\\updater.jar\"",
+    "C:\\Windows\\system32\\cmd.exe /d /s /c \"hostname\"",
+    "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe -NoProfile -Command \"Get-CimInstance Win32_Processor | Select-Object -Expand Name\"",
+    "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe -NoProfile -Command \"Get-CimInstance Win32_VideoController | Select-Object -Expand Name\"",
+    "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe -NoProfile -Command \"Get-CimInstance Win32_BIOS | Select-Object -Expand SerialNumber\"",
+    "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe -NoProfile -Command \"Get-CimInstance Win32_ComputerSystemProduct | Select-Object -Expand UUID\"",
+    "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe -NoProfile -Command \"Get-CimInstance Win32_BaseBoard | Select-Object -Expand SerialNumber\"",
+    "C:\\Windows\\system32\\cmd.exe /d /s /c \"cscript //Nologo \\\"C:\\Users\\Admin\\AppData\\Local\\Temp\\ULhAHHgbc1.vbs\\\"\""
+  ],
+  "writtenfiles": [
+    "C:\\Users\\Admin\\AppData\\Local\\Temp\\HeroRunV10.exe",
+    "C:\\Users\\Admin\\AppData\\Local\\Temp\\ULhAHHgbc1.vbs",
+    "C:\\Users\\Admin\\AppData\\Roaming\\ZQQCCVV-Launcher\\bin\\updater.jar",
+    "C:\\Users\\Admin\\AppData\\Roaming\\ZQQCCVV-Launcher\\runtime\\bin\\javaw.exe"
+  ],
+  "registry": [
+    "HKLM\\HARDWARE\\DESCRIPTION\\System"
+  ],
+  "apicalls": [
+    "Get-CimInstance",
+    "wmic",
+    "reg.exe",
+    "attrib.exe",
+    "net.exe",
+    "cscript.exe"
+  ],
+  "network": [
+    { "host": "g.bing.com", "port": 443, "packagecontent": "" },
+    { "host": "tse1.mm.bing.net", "port": 443, "packagecontent": "" },
+    { "host": "login.monexic.com", "port": 0, "packagecontent": "" },
+    { "host": "discord.com", "port": 443, "packagecontent": "" },
+    { "host": "c.pki.goog", "port": 80, "packagecontent": "GET /r/r1.crl" }
+  ]
+}
