@@ -1,0 +1,34 @@
+{
+  "family": "hadestealer_neekoclient_strict",
+  "threadname": "",
+  "commandlines": [
+    "powershell.exe -NoProfile -ExecutionPolicy Bypass -Command \"Add-MpPreference -ExclusionPath 'C:\\Program Files\\NeekoClient' -Force\"",
+    "powershell.exe -NoProfile -ExecutionPolicy Bypass -Command \"Add-MpPreference -ExclusionExtension '.exe' -Force\"",
+    "powershell.exe -NoProfile -ExecutionPolicy Bypass -Command \"Add-MpPreference -ExclusionExtension '.jsc' -Force\"",
+    "powershell.exe -NoProfile -ExecutionPolicy Bypass -Command \"Add-MpPreference -ExclusionProcess 'NeekoClient.exe' -Force\"",
+    "C:\\Windows\\system32\\cmd.exe /d /s /c \"powershell \"Get-DisplayResolution\"\"",
+    "C:\\Windows\\system32\\cmd.exe /d /s /c \"wmic baseboard get serialnumber,manufacturer\"",
+    "C:\\Windows\\system32\\cmd.exe /d /s /c \"wmic logicaldisk get size\"",
+    "C:\\Windows\\system32\\cmd.exe /d /s /c \"wmic path win32_VideoController get name\"",
+    "C:\\Windows\\system32\\cmd.exe /d /s /c \"powershell \"Get-CimInstance -Namespace root/wmi -ClassName MSAcpi_ThermalZoneTemperature\"\"",
+    "C:\\Windows\\system32\\cmd.exe /d /s /c \"powershell \"Get-PhysicalDisk | Select-Object BusType\"\"",
+    "C:\\Windows\\system32\\cmd.exe /d /s /c \"wmic memorychip get devicelocator\"",
+    "C:\\Windows\\system32\\cmd.exe /d /s /c \"powershell \"[System.Windows.Forms.Cursor]::Position\"\""
+  ],
+  "writtenfiles": [
+    "C:\\Program Files\\NeekoClient\\NeekoClient.exe"
+  ],
+  "registry": [],
+  "apicalls": [
+    "WriteProcessMemory",
+    "AdjustPrivilegeToken",
+    "FindShellTrayWindow"
+  ],
+  "network": [
+    {
+      "host": "api.hdstlr.net",
+      "port": 443,
+      "packagecontent": ""
+    }
+  ]
+}
