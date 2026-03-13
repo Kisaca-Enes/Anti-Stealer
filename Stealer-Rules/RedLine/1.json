@@ -1,0 +1,37 @@
+{
+  "family": "xworm_risepro_strict",
+  "threadname": "",
+  "commandlines": [
+    "C:\\Windows\\system32\\cmd.exe /c netsh advfirewall firewall show rule name=\"RisePro External - 50500\" > nul",
+    "C:\\Windows\\system32\\cmd.exe /c netsh advfirewall firewall show rule name=\"RisePro External - 1080\" > nul",
+    "C:\\Windows\\system32\\cmd.exe /c netsh advfirewall firewall add rule name=\"RisePro External - 50500\" dir=in action=allow protocol=TCP localport=50500",
+    "C:\\Windows\\system32\\cmd.exe /c netsh advfirewall firewall add rule name=\"RisePro External - 1080\" dir=in action=allow protocol=TCP localport=1080",
+    "\"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\" -ExecutionPolicy Bypass Add-MpPreference -ExclusionPath 'C:\\Users\\Admin\\AppData\\Roaming\\svchost.exe'",
+    "\"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\" -ExecutionPolicy Bypass Add-MpPreference -ExclusionProcess 'svchost.exe'",
+    "\"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\" -ExecutionPolicy Bypass Add-MpPreference -ExclusionPath 'C:\\ProgramData\\csrss.exe'",
+    "\"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\" -ExecutionPolicy Bypass Add-MpPreference -ExclusionProcess 'csrss.exe'"
+  ],
+  "writtenfiles": [
+    "C:\\Users\\Admin\\AppData\\Roaming\\svchost.exe",
+    "C:\\ProgramData\\csrss.exe"
+  ],
+  "registry": [],
+  "apicalls": [
+    "WriteProcessMemory",
+    "NtSetInformationThread",
+    "AddClipboardFormatListener",
+    "SetWindowsHookEx"
+  ],
+  "network": [
+    {
+      "host": "api.telegram.org",
+      "port": 443,
+      "packagecontent": "/bot7023899363:AAFEzgbfWzhyE32Lf95TKSRYEYXMd4AfMyk/sendMessage?chat_id=6354844663"
+    },
+    {
+      "host": "dsasinject-58214.portmap.io",
+      "port": 3388,
+      "packagecontent": ""
+    }
+  ]
+}
