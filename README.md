@@ -1,7 +1,6 @@
 # Anti-Stealer
 # Anti-Stealer (NO-Stealer)
-![Proje Logo](./logo.png)
-
+![Anti-Stealer Logo](https://raw.githubusercontent.com/Kisaca-Enes/Anti-Stealer/main/assets/logo.png)
 **Anti-Stealer (NO-Stealer)** is a comprehensive PowerShell 7+ scanning engine designed to detect stealer-type malware on Windows systems. It classifies stealers by family, performs accurate analysis, contributes to AV/AM detection rules, and maintains an up-to-date signature and C2 database. The engine performs chained static, memory, and network behavioral analyses, collects telemetry, generates YARA / Sigma / JSON (NO-ST) rules, and produces detailed logs and reports.
 
 Below is a detailed README explaining why it’s important, how to use it, and why it’s valuable for researchers.
