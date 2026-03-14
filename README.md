@@ -78,7 +78,7 @@ Anti-Stealer provides tools for detecting and classifying stealer families (e.g.
 # Installation Instructions
 
 ## 1. Download the necessary files
-Download `install.ps1` and `kural.ttx` and make sure they are in the **same folder**.
+Download `install.ps1` and `kural.txt` and make sure they are in the **same folder**.
 
 ---
 
