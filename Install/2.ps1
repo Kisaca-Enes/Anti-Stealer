@@ -1,41 +1,22 @@
-# ---------- Ayarlar ----------
-$PythonPath = "C:\Users\$env:USERNAME\AppData\Local\Programs\Python\Python314"  # Python kurulu klasör
-$ScriptsPath = Join-Path $PythonPath "Scripts"
+# Python yolu bul
+$py = (Get-Command py -ErrorAction SilentlyContinue | ForEach-Object { $_.Source }) -or (Get-Command python -ErrorAction SilentlyContinue | ForEach-Object { $_.Source })
 
-# 1) App Execution Aliases kapatma
-$aliases = @("python.exe","python3.exe")
-foreach ($a in $aliases) {
-    $regPath = "HKCU:\Software\Microsoft\Windows\CurrentVersion\App Paths\$a"
-    if (Test-Path $regPath) {
-        Remove-ItemProperty -Path $regPath -Name "(default)" -ErrorAction SilentlyContinue
+if (-not $py) { Write-Host "Python bulunamadı!"; exit 1 }
+
+# pip yoksa ensurepip ile kur
+try { & $py -m pip --version > $null 2>&1 } catch { & $py -m ensurepip --upgrade }
+
+# pip'i güncelle
+& $py -m pip install --upgrade pip
+
+# Paketleri kur
+$packages = @("flask","pywebview")
+foreach ($pkg in $packages) {
+    try {
+        Write-Host "Kuruluyor: $pkg"
+        & $py -m pip install --upgrade $pkg
+        Write-Host "$pkg yüklendi."
+    } catch {
+        Write-Warning "$pkg kurulamadı: $_"
     }
-}
-# Alternatif GUI yolu: app execution aliases zaten devre dışı bırakılmış olmalı
-
-# 2) PATH kontrol ve ekleme
-$envPaths = [System.Environment]::GetEnvironmentVariable("Path","User").Split(";")
-$add = $false
-if ($PythonPath -notin $envPaths) { 
-    $add = $true
-    $envPaths += $PythonPath 
-}
-if ($ScriptsPath -notin $envPaths) { 
-    $add = $true
-    $envPaths += $ScriptsPath
-}
-if ($add) {
-    $newPath = ($envPaths -join ";")
-    [System.Environment]::SetEnvironmentVariable("Path",$newPath,"User")
-    Write-Host "[OK] PATH guncellendi. CMD veya PowerShell'i kapatıp yeniden acin." -ForegroundColor Green
-} else {
-    Write-Host "[INFO] PATH zaten guncel." -ForegroundColor Cyan
-}
-
-# 3) Test
-Write-Host "[INFO] python komutunu test ediliyor..."
-try {
-    $ver = & python --version
-    Write-Host "[OK] Python bulundu: $ver" -ForegroundColor Green
-} catch {
-    Write-Warn "[WARN] python komutu hala bulunamadi. CMD/PowerShell'i yeniden baslatin."
 }
