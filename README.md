@@ -75,21 +75,84 @@ Anti-Stealer provides tools for detecting and classifying stealer families (e.g.
 * **Academic researchers:** Behavioral analysis, ML dataset creation, pattern modeling.
 
 ---
+# Installation Instructions
 
-# 5. Quick Start
+## 1. Download the necessary files
+Download `install.ps1` and `kural.ttx` and make sure they are in the **same folder**.
 
-1. Ensure **PowerShell 7+** is installed.
-2. Run PowerShell as Administrator.
-3. Clone the repo or download the script.
-4. Run:
+---
 
-```powershell
-Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
-.\Anti-Stealer.ps1
-```
+## 2. Open PowerShell
+Run **PowerShell** as Administrator (recommended).
 
-5. Reports: `%APPDATA%\Anti-Stealer\FullScanReport.json`
-   Logs: `%APPDATA%\Anti-Stealer\Log\` per finding.
+---
+
+## 3. Bypass the execution policy for this session
+Set-ExecutionPolicy -Scope Process Bypass
+
+---
+
+## 4. Run the installation script
+Replace `C:\path\to\your\folder` with the folder path where `install.ps1` is located:
+
+C:\path\to\your\folder\install.ps1
+
+---
+
+## 5. Run `2.ps1` the same way
+
+C:\path\to\your\folder\2.ps1
+
+---
+
+## 6. Install Visual Studio C++ Build Tools
+If you encounter a build error (commonly referenced in GitHub issues), open the link below and install the **“C++ build tools”** option:
+
+https://visualstudio.microsoft.com/visual-cpp-build-tools/
+
+After the build tools finish installing, **close and reopen PowerShell**.
+
+---
+
+## 7. Install `pywebview`
+
+pip install pywebview
+
+After this, the build process should complete successfully.
+
+---
+
+## Optional: Use the GUI version (PowerShell 7)
+
+1. Open **PowerShell 7** as Administrator.
+2. Bypass execution policy:
+
+Set-ExecutionPolicy -Scope Process Bypass
+
+3. Run the GUI script:
+
+C:\path\to\your\folder\UI.ps1
+
+---
+
+## Windows Defender Warnings
+Windows Defender (or other antivirus tools) may flag the scripts as malware — this is frequently a **false positive** for local scripts and small installers.
+
+Recommended steps:
+- Temporarily allow the specific script or folder in Defender (add an exclusion or allow the detection).
+- Run the script(s) after you have allowed/whitelisted them.
+- If you prefer, run an antivirus scan **after** completing installation to verify no unwanted changes.
+
+---
+
+## Notes & Troubleshooting
+
+- Always replace `C:\path\to\your\folder` with the actual absolute path to the folder that contains the script files (for example `C:\Users\Enes\Downloads\myproject`).
+- If PowerShell refuses to run the script despite `Set-ExecutionPolicy -Scope Process Bypass`, ensure:
+  - You opened PowerShell **as Administrator**, and
+  - You used the correct path and file name.
+- If you see build errors when installing Python packages that require compilation, double-check that the **C++ build tools** are installed and that you restarted PowerShell after their installation.
+- If you prefer not to use the GUI, the same steps for `install.ps1` and `2.ps1` (above) will run the headless/CLI installation.
 
 ---
 
