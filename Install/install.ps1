@@ -34,10 +34,10 @@ $MainFiles = @(
 )
 
 ### ---------- YARDIMCI FONKSIYONLAR ----------
-function Write-Info($m){ Write-Host "[INFO] $m" -ForegroundColor Cyan }
-function Write-Ok($m){ Write-Host "[ OK ] $m" -ForegroundColor Green }
-function Write-Warn($m){ Write-Host "[WARN] $m" -ForegroundColor Yellow }
-function Write-Err($m){ Write-Host "[ERR ] $m" -ForegroundColor Red }
+function Write-Info([string]$m){ Write-Host "[INFO] $m" -ForegroundColor Cyan }
+function Write-Ok([string]$m){ Write-Host "[ OK ] $m" -ForegroundColor Green }
+function Write-Warn([string]$m){ Write-Host "[WARN] $m" -ForegroundColor Yellow }
+function Write-Err([string]$m){ Write-Host "[ERR ] $m" -ForegroundColor Red }
 
 function Convert-ToRawUrl {
     param([string]$InputUrl)
@@ -130,51 +130,162 @@ function Download-RulesFromTxt {
     Write-Info "Rules indirildi: Toplam $total, Basarili $ok"
 }
 
-function Find-PythonCommand {
-    # py launcher onceligi
+### ---------- PYTHON TESPIT, PATH, PIP & PAKET KURULUMU ----------
+
+function Try-RemoveAppPathStub {
+    param([string[]]$Aliases)
+    foreach ($a in $Aliases) {
+        $regPath = "HKCU:\Software\Microsoft\Windows\CurrentVersion\App Paths\$a"
+        try {
+            if (Test-Path $regPath) {
+                Write-Info "Bulundu (App Paths): $regPath — temizleniyor..."
+                try { Remove-ItemProperty -Path $regPath -Name "(default)" -ErrorAction SilentlyContinue } catch {}
+                try { if ((Get-Item $regPath).Property.Count -eq 0) { Remove-Item -Path $regPath -Force -ErrorAction SilentlyContinue } } catch {}
+                Write-Ok "App Path stub'u temizlendi (varsa): $a"
+            }
+        } catch {
+            Write-Warn "Reg temizleme atlandi: $($_.Exception.Message)"
+        }
+    }
+}
+
+function Prepend-ToUserPath {
+    param([string]$Dir1,[string]$Dir2)
+    $cur = [System.Environment]::GetEnvironmentVariable("Path","User")
+    if (-not $cur) { $cur = "" }
+    $parts = $cur -split ';' | Where-Object { $_ -ne "" }
+    $resolved = @()
+    foreach ($p in $parts) {
+        try { $resolved += (Resolve-Path -LiteralPath $p -ErrorAction SilentlyContinue).ProviderPath } catch {}
+    }
+    $dir1r = $null; $dir2r = $null
+    try { $dir1r = (Resolve-Path -LiteralPath $Dir1 -ErrorAction SilentlyContinue).ProviderPath } catch {}
+    if ($Dir2) { try { $dir2r = (Resolve-Path -LiteralPath $Dir2 -ErrorAction SilentlyContinue).ProviderPath } catch {} }
+
+    $newlist = @()
+    $changed = $false
+    if ($dir1r -and ($resolved -notcontains $dir1r)) { $newlist += $dir1r; $changed = $true }
+    if ($dir2r -and ($resolved -notcontains $dir2r)) { $newlist += $dir2r; $changed = $true }
+
+    foreach ($p in $resolved) {
+        if ($p -ne $dir1r -and $p -ne $dir2r) { $newlist += $p }
+    }
+
+    if ($changed) {
+        $newPath = ($newlist -join ';')
+        [System.Environment]::SetEnvironmentVariable("Path",$newPath,"User")
+        return $true
+    }
+    return $false
+}
+
+function Get-BestPythonExe {
+    # Öncelik: py launcher (py -0p) -> where python
+    $candidates = @()
+    if (Get-Command py -ErrorAction SilentlyContinue) {
+        try {
+            $out = & py -0p 2>&1
+            $lines = $out -split "`r?`n" | ForEach-Object { $_.Trim() } | Where-Object { $_ -ne "" }
+            foreach ($line in $lines) {
+                # satır örneği: "-3.14-64        C:\...\python.exe"
+                if ($line -match '([0-9]+\.[0-9]+(?:\.[0-9]+)?)\D+([A-Za-z]:\\.+python\.exe)') {
+                    try {
+                        $v = [version]$Matches[1]
+                        $p = $Matches[2]
+                        $candidates += [pscustomobject]@{ Version = $v; Path = $p }
+                    } catch {}
+                }
+            }
+        } catch { Write-Warn "py -0p çalıştırılamadı: $($_.Exception.Message)" }
+    } else {
+        Write-Info "py launcher bulunamadi."
+    }
+
+    # where python ile ek kontrol
     try {
-        Get-Command py -ErrorAction Stop | Out-Null
-        & py -3.12 -c "import sys" *> $null; if ($LASTEXITCODE -eq 0) { return "py -3.12" }
-        & py -3.11 -c "import sys" *> $null; if ($LASTEXITCODE -eq 0) { return "py -3.11" }
-        & py -3 -c "import sys" *> $null; if ($LASTEXITCODE -eq 0) { return "py -3" }
-    } catch {}
-    try {
-        Get-Command python -ErrorAction Stop | Out-Null
-        & python -c "import sys" *> $null; if ($LASTEXITCODE -eq 0) { return "python" }
-    } catch {}
+        $whereOut = (& where.exe python 2>$null)
+        if ($whereOut) {
+            $paths = $whereOut -split "`r?`n" | ForEach-Object { $_.Trim() } | Where-Object { $_ -ne "" }
+            foreach ($p in $paths) {
+                if (Test-Path $p) {
+                    try {
+                        $verOut = & "$p" --version 2>&1
+                        $verText = ($verOut -replace 'Python','').Trim()
+                        $v = [version]$verText
+                        $candidates += [pscustomobject]@{ Version = $v; Path = $p }
+                    } catch {}
+                }
+            }
+        }
+    } catch { Write-Warn "where.exe python hatasi: $($_.Exception.Message)" }
+
+    if ($candidates.Count -eq 0) { return $null }
+
+    # Öncelikli filtre: Python 3.14+ varsa onu tercih et
+    $minVer = [version]"3.14"
+    $valid = $candidates | Where-Object { $_.Version -ge $minVer }
+    if ($valid.Count -gt 0) {
+        $best = $valid | Sort-Object Version -Descending | Select-Object -First 1
+        return $best.Path
+    }
+
+    # Yoksa en yüksek 3.x sürümünü döndür
+    $fallback = $candidates | Where-Object { $_.Version.Major -eq 3 } | Sort-Object Version -Descending | Select-Object -First 1
+    if ($fallback) { return $fallback.Path }
+
     return $null
 }
 
-function Invoke-Python {
-    param([string]$PyCmd, [string[]]$Args)
-    $parts = $PyCmd -split '\s+'
-    $exe = $parts[0]; $pre = @(); if ($parts.Count -gt 1) { $pre = $parts[1..($parts.Count-1)] }
-    & $exe @pre @Args
-    return $LASTEXITCODE
-}
+function Ensure-Pip-And-Install {
+    param([string]$PythonExe, [string[]]$Packages)
 
-function Install-PythonPackages {
-    param([string]$PyCmd)
-    Write-Info "Paketler kuruluyor (flask, pywebview)..."
-    Invoke-Python -PyCmd $PyCmd -Args @("-m","pip","--version") | Out-Null
-    if ($LASTEXITCODE -ne 0) {
-        Write-Info "pip eksik, ensurepip calisiyor..."
-        Invoke-Python -PyCmd $PyCmd -Args @("-m","ensurepip","--upgrade") | Out-Null
+    Write-Info "pip kontrol ediliyor..."
+    $pipOk = $false
+    try { & $PythonExe -m pip --version > $null 2>&1; $pipOk = $true } catch { $pipOk = $false }
+
+    if (-not $pipOk) {
+        Write-Info "pip yok; ensurepip çalıştırılıyor..."
+        try {
+            & $PythonExe -m ensurepip --upgrade 2>&1 | ForEach-Object { Write-Host $_ }
+            & $PythonExe -m pip install --upgrade pip 2>&1 | ForEach-Object { Write-Host $_ }
+            $pipOk = $true
+            Write-Ok "pip sağlandı/güncellendi."
+        } catch {
+            Write-Warn "ensurepip veya pip update başarısız: $($_.Exception.Message)"
+            $pipOk = $false
+        }
     }
-    Invoke-Python -PyCmd $PyCmd -Args @("-m","pip","install","--upgrade","pip") | Out-Null
-    Invoke-Python -PyCmd $PyCmd -Args @("-m","pip","install","flask","pywebview") | Out-Null
-    Write-Ok "Python paketleri kuruldu."
+
+    if (-not $pipOk) { Write-Warn "pip mevcut değil; paket kurulumu atlanacak."; return $false }
+
+    $allOk = $true
+    foreach ($pkg in $Packages) {
+        Write-Info "Kuruluyor: $pkg"
+        try {
+            & $PythonExe -m pip install --upgrade $pkg 2>&1 | ForEach-Object { Write-Host $_ }
+            Write-Ok "$pkg yüklendi."
+        } catch {
+            Write-Warn "Global kurulum başarısız: $($_.Exception.Message) — --user ile denenecek"
+            try {
+                & $PythonExe -m pip install --user --upgrade $pkg 2>&1 | ForEach-Object { Write-Host $_ }
+                Write-Ok "$pkg --user ile kuruldu."
+            } catch {
+                Write-Err "$pkg kurulamadı: $($_.Exception.Message)"
+                $allOk = $false
+            }
+        }
+    }
+    return $allOk
 }
 
+### ---------- Diğer mevcut fonksiyonlar (Is-Administrator, Ensure-PowerShell7, Create-Launcher, Create-DesktopShortcut) ----------
 function Is-Administrator {
     $current = [Security.Principal.WindowsIdentity]::GetCurrent()
     $principal = New-Object Security.Principal.WindowsPrincipal($current)
     return $principal.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)
 }
 
-### ---------- PowerShell 7 (pwsh) kontrol ve yukleme ----------
 function Ensure-PowerShell7 {
-    # Eger zaten pwsh var ve su an pwsh ile calisiyor isek true
     try {
         Get-Command pwsh -ErrorAction Stop | Out-Null
         Write-Info "pwsh (PowerShell 7) bulundu."
@@ -183,30 +294,19 @@ function Ensure-PowerShell7 {
         Write-Warn "pwsh (PowerShell 7) bulunamadi. Indirip kurulsun mu?"
         $ans = Read-Host "Devam edip PowerShell 7 yuklemek istiyor musunuz? (E/H)"
         if ($ans -notmatch '^(e|E|y|Y)$') { Write-Warn "pwsh yuklemesi atlandi."; return $false }
-
-        # Fetch latest release from GitHub API
         try {
             Write-Info "PowerShell GitHub surumleri kontrol ediliyor..."
             $apiUrl = "https://api.github.com/repos/PowerShell/PowerShell/releases/latest"
             $hdr = @{ 'User-Agent' = 'NullStealer-Installer' }
             $rel = Invoke-RestMethod -Uri $apiUrl -Headers $hdr -ErrorAction Stop
-
-            # Prefer win-x64.msi
             $asset = $rel.assets | Where-Object { $_.name -match 'win-x64.*\.msi$' } | Select-Object -First 1
-            if (-not $asset) {
-                # fallback any win-x64
-                $asset = $rel.assets | Where-Object { $_.name -match 'win-x64' } | Select-Object -First 1
-            }
+            if (-not $asset) { $asset = $rel.assets | Where-Object { $_.name -match 'win-x64' } | Select-Object -First 1 }
             if (-not $asset) { throw "Uygun PowerShell 7 varligi bulunamadi (win-x64 msi)." }
-
             $downloadUrl = $asset.browser_download_url
             $msiPath = Join-Path $env:TEMP $asset.name
-
             Write-Info "PowerShell MSI indiriliyor: $($asset.name)"
             Invoke-WebRequest -Uri $downloadUrl -OutFile $msiPath -UseBasicParsing -Headers $hdr -ErrorAction Stop
             Write-Info "Indirme tamamlandi: $msiPath"
-
-            # Kurulum icin admin gerekebilir
             if (-not (Is-Administrator)) {
                 Write-Info "PowerShell kurulumu icin yonetici haklari gerekiyor. Yukseltme istegi gonderiliyor..."
                 $args = "-NoProfile -ExecutionPolicy Bypass -Command `"Start-Process msiexec.exe -ArgumentList '/i `"$msiPath`" /qn /norestart' -Verb RunAs -Wait`""
@@ -215,10 +315,7 @@ function Ensure-PowerShell7 {
                 Write-Info "msiexec ile kuruluyor..."
                 Start-Process -FilePath "msiexec.exe" -ArgumentList "/i `"$msiPath`" /qn /norestart" -Wait -NoNewWindow
             }
-
             Start-Sleep -Seconds 3
-
-            # Kontrol
             try { Get-Command pwsh -ErrorAction Stop | Out-Null; Write-Ok "pwsh kuruldu."; return $true } catch { Write-Warn "pwsh kuruldu ama PATH'de gorunmuyor/hatali olabilir."; return $false }
         } catch {
             Write-Err "PowerShell 7 yuklemesi basarisiz: $($_.Exception.Message)"
@@ -227,7 +324,6 @@ function Ensure-PowerShell7 {
     }
 }
 
-### ---------- Launcher & Shortcut ----------
 function Create-Launcher {
     $launcherPath = Join-Path $AppDir "Launch_NullStealer.cmd"
     $content = @"
@@ -237,6 +333,7 @@ cd /d "$AppDir"
 
 where py >nul 2>&1
 if %errorlevel%==0 (
+    py -3.14 -c "import sys" >nul 2>&1 && goto RUN314
     py -3.12 -c "import sys" >nul 2>&1 && goto RUN312
     py -3.11 -c "import sys" >nul 2>&1 && goto RUN311
     py -3 -c "import sys" >nul 2>&1 && goto RUN3
@@ -245,24 +342,28 @@ if %errorlevel%==0 (
 where python >nul 2>&1
 if %errorlevel%==0 goto RUNPY
 
-echo Python bulunamadi. Lutfen Python 3.11 veya 3.12 kur.
+echo Python bulunamadi. Lutfen Python 3.14 veya ustunu kurun.
 pause
 exit /b 1
 
+:RUN314
+py -3.14 "%AppDir%\UI.py"
+goto END
+
 :RUN312
-py -3.12 "$AppDir\UI.py"
+py -3.12 "%AppDir%\UI.py"
 goto END
 
 :RUN311
-py -3.11 "$AppDir\UI.py"
+py -3.11 "%AppDir%\UI.py"
 goto END
 
 :RUN3
-py -3 "$AppDir\UI.py"
+py -3 "%AppDir%\UI.py"
 goto END
 
 :RUNPY
-python "$AppDir\UI.py"
+python "%AppDir%\UI.py"
 
 :END
 endlocal
@@ -306,7 +407,6 @@ if (-not $runningUnderPwsh) {
     if (-not $pwshPresent) {
         $installed = Ensure-PowerShell7
         if ($installed) {
-            # Re-launch script under pwsh
             $scriptPath = $MyInvocation.MyCommand.Path
             Write-Info "Script pwsh ile yeniden baslatiliyor..."
             Start-Process -FilePath "pwsh" -ArgumentList "-NoProfile -ExecutionPolicy Bypass -File `"$scriptPath`"" -Verb RunAs
@@ -339,23 +439,49 @@ if (Test-Path $KuralTxt) {
     Write-Warn "kural.txt bulunamadi: $KuralTxt. Rules atlandi."
 }
 
-# 5) Python kontrolu ve bekleme dongusu
-Write-Info "Python kontrol ediliyor..."
-$py = Find-PythonCommand
-while ($null -eq $py) {
-    Write-Warn "Python bulunamadi."
+# 5) PYTHON kontrolu ve bekleme dongusu (3.14+ tercih)
+Write-Info "Python 3.14+ kontrol ediliyor..."
+# İlk stub temizleme denemesi
+Try-RemoveAppPathStub -Aliases @("python.exe","python3.exe")
+
+$pyExe = Get-BestPythonExe
+while (-not $pyExe) {
+    Write-Warn "Python 3.14+ bulunamadi."
     Write-Host ""
-    Write-Host "Lutfen Python 3.11 veya 3.12 indirin ve kurun."
+    Write-Host "Lütfen Python 3.14 veya daha yeni bir sürümü indirin ve kurun."
     Write-Host "Python indirme sayfasi aciliyor..."
     Start-Process "https://www.python.org/downloads/"
     Read-Host "Python kurduktan sonra devam etmek icin Enter'a basiniz"
     Write-Info "Python tekrar kontrol ediliyor..."
-    $py = Find-PythonCommand
+    # Tekrar deneyelim (kullanıcı python kurup PATH eklediğini varsayıyoruz)
+    $pyExe = Get-BestPythonExe
 }
-Write-Ok "Python bulundu: $py"
+
+Write-Ok "Python bulundu: $pyExe"
+
+# 5b) PATH'e python ve scripts klasörlerini öne ekle
+try {
+    $pythonDir = Split-Path -Parent $pyExe
+    $scriptsDir = Join-Path $pythonDir "Scripts"
+    $updated = Prepend-ToUserPath -Dir1 $pythonDir -Dir2 $scriptsDir
+    if ($updated) { Write-Ok "Kullanıcı PATH'i güncellendi (Python yolları öne alındı)." }
+    else { Write-Info "Kullanıcı PATH zaten uygun." }
+} catch {
+    Write-Warn "PATH güncellemesi sırasında hata: $($_.Exception.Message)"
+}
 
 # 6) Python paketleri kur
-Install-PythonPackages -PyCmd $py
+try {
+    $packages = @("flask","pywebview")
+    $ok = Ensure-Pip-And-Install -PythonExe $pyExe -Packages $packages
+    if ($ok) {
+        Write-Ok "Python paketleri kurulumu tamamlandi."
+    } else {
+        Write-Warn "Bazı paketler kurulamadı; manuel kontrol gerekebilir."
+    }
+} catch {
+    Write-Warn "Paket kurulumu sırasında hata: $($_.Exception.Message)"
+}
 
 # 7) Launcher & shortcut
 Create-Launcher
