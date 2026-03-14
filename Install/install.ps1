@@ -1,29 +1,28 @@
 #Requires -Version 5.1
 <#
-    NullStealer Anti-Stealer Setup (PowerShell Only)
-    - Ana dosyalari indirir
-    - kural.txt icindeki YARA linklerini okuyup rules\ klasorune indirir
-    - Python kontrol eder
-    - Gerekli pip paketlerini kurar
-    - Launcher (.cmd) olusturur
-    - Masaustu kisayolu (.lnk) olusturur
+  Setup-NullStealer.ps1
+  Tek dosya PowerShell kurucusu.
+  - PowerShell 7 yoksa -> otomatik indirip MSI ile kurmaya çalışır (admin gerekli)
+  - Proje klasorunu olusturur
+  - Ana dosyalari indirir
+  - kural.txt icindeki raw github linklerini okuyup rules\ klasorune .yar indirir
+  - Python kontrolu yapar; yoksa kullaniciyi yonlendirir ve kurulumu tamamlayana kadar bekler
+  - Python bulunduysa pip -> flask, pywebview kurar
+  - Launch_NullStealer.cmd ve Desktop .lnk olusturur
 #>
 
-$ErrorActionPreference = 'Continue'
+$ErrorActionPreference = 'Stop'
 
-# ============================================================
-# AYARLAR
-# ============================================================
+### ---------- AYARLAR ----------
 $AppName   = "NullStealer Anti-Stealer"
 $AppDir    = Join-Path $env:USERPROFILE "Desktop\NullStealer-AntiStealer"
 $RulesDir  = Join-Path $AppDir "rules"
 $ScriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
 $KuralTxt  = Join-Path $ScriptDir "kural.txt"
 
-# Raw base URL
+# Repo base (raw)
 $BaseRaw = "https://raw.githubusercontent.com/Kisaca-Enes/Anti-Stealer/refs/heads/main/NullStealer(Anti-Stealer)"
 
-# Ana dosyalar
 $MainFiles = @(
     "FullScan.ps1",
     "QuickScan.ps1",
@@ -34,308 +33,203 @@ $MainFiles = @(
     "yara64.exe"
 )
 
-# ============================================================
-# YARDIMCI FONKSIYONLAR
-# ============================================================
-
-function Write-Info($msg) {
-    Write-Host "[INFO] $msg" -ForegroundColor Cyan
-}
-
-function Write-Ok($msg) {
-    Write-Host "[OK]   $msg" -ForegroundColor Green
-}
-
-function Write-Warn($msg) {
-    Write-Host "[WARN] $msg" -ForegroundColor Yellow
-}
-
-function Write-Err($msg) {
-    Write-Host "[ERR]  $msg" -ForegroundColor Red
-}
+### ---------- YARDIMCI FONKSIYONLAR ----------
+function Write-Info($m){ Write-Host "[INFO] $m" -ForegroundColor Cyan }
+function Write-Ok($m){ Write-Host "[ OK ] $m" -ForegroundColor Green }
+function Write-Warn($m){ Write-Host "[WARN] $m" -ForegroundColor Yellow }
+function Write-Err($m){ Write-Host "[ERR ] $m" -ForegroundColor Red }
 
 function Convert-ToRawUrl {
-    param(
-        [Parameter(Mandatory = $true)]
-        [string]$InputUrl
-    )
-
-    if ([string]::IsNullOrWhiteSpace($InputUrl)) {
-        return $null
-    }
-
+    param([string]$InputUrl)
+    if ([string]::IsNullOrWhiteSpace($InputUrl)) { return $null }
     $u = $InputUrl.Trim()
-
-    # Zaten raw ise
-    if ($u -match '^https?://raw\.githubusercontent\.com/') {
-        return $u
-    }
-
-    # github.com/.../blob/... -> raw
+    if ($u -match '^https?://raw\.githubusercontent\.com/') { return $u }
     if ($u -match '^https?://github\.com/([^/]+)/([^/]+)/blob/([^/]+)/(.+)$') {
-        $owner  = $Matches[1]
-        $repo   = $Matches[2]
-        $branch = $Matches[3]
-        $path   = $Matches[4]
-        return "https://raw.githubusercontent.com/$owner/$repo/$branch/$path"
+        return "https://raw.githubusercontent.com/$($Matches[1])/$($Matches[2])/$($Matches[3])/$($Matches[4])"
     }
-
-    # github.com/.../raw/... -> raw
     if ($u -match '^https?://github\.com/([^/]+)/([^/]+)/raw/([^/]+)/(.+)$') {
-        $owner  = $Matches[1]
-        $repo   = $Matches[2]
-        $branch = $Matches[3]
-        $path   = $Matches[4]
-        return "https://raw.githubusercontent.com/$owner/$repo/$branch/$path"
+        return "https://raw.githubusercontent.com/$($Matches[1])/$($Matches[2])/$($Matches[3])/$($Matches[4])"
     }
-
     return $u
 }
 
 function Ensure-Directory {
-    param(
-        [Parameter(Mandatory = $true)]
-        [string]$Path
-    )
-
+    param([string]$Path)
     try {
-        if (-not (Test-Path $Path)) {
-            New-Item -ItemType Directory -Path $Path -Force | Out-Null
-        }
-
-        if (Test-Path $Path) {
-            return $true
-        }
-
-        return $false
-    }
-    catch {
+        if (-not (Test-Path $Path)) { New-Item -ItemType Directory -Path $Path -Force | Out-Null }
+        return (Test-Path $Path)
+    } catch {
         Write-Err "Klasor olusturulamadi: $Path"
-        Write-Err $_.Exception.Message
         return $false
     }
 }
 
 function Download-File {
-    param(
-        [Parameter(Mandatory = $true)]
-        [string]$SourceUrl,
-
-        [Parameter(Mandatory = $true)]
-        [string]$Destination
-    )
-
+    param([string]$Url, [string]$Destination)
     try {
-        $rawUrl = Convert-ToRawUrl $SourceUrl
-
+        $raw = Convert-ToRawUrl $Url
+        if (-not $raw) { throw "Gecersiz URL: $Url" }
         $parent = Split-Path -Parent $Destination
-        if (-not (Test-Path $parent)) {
-            New-Item -ItemType Directory -Path $parent -Force | Out-Null
-        }
-
-        Write-Host "      -> $rawUrl"
-
-        # TLS iyilestirme
-        try {
-            [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
-        } catch {}
-
-        Invoke-WebRequest -Uri $rawUrl -OutFile $Destination -UseBasicParsing
-
-        if (Test-Path $Destination) {
-            return $true
-        }
-        else {
-            Write-Err "Dosya olusmadi: $Destination"
-            return $false
-        }
-    }
-    catch {
-        Write-Err "Indirme basarisiz: $SourceUrl"
+        if (-not (Test-Path $parent)) { New-Item -ItemType Directory -Path $parent -Force | Out-Null }
+        Write-Host "  -> $raw"
+        try { [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12 } catch {}
+        Invoke-WebRequest -Uri $raw -OutFile $Destination -UseBasicParsing -ErrorAction Stop
+        return $true
+    } catch {
+        Write-Err "Indirme hatasi: $Url"
         Write-Err $_.Exception.Message
         return $false
     }
 }
 
 function Get-SafeRuleName {
-    param(
-        [Parameter(Mandatory = $true)]
-        [string]$Url
-    )
-
+    param([string]$Url)
     try {
         $raw = Convert-ToRawUrl $Url
         $uri = [System.Uri]$raw
         $name = [System.IO.Path]::GetFileName($uri.AbsolutePath)
-
-        if ([string]::IsNullOrWhiteSpace($name)) {
-            $name = "rule_$([guid]::NewGuid().ToString()).yar"
-        }
-
+        if ([string]::IsNullOrWhiteSpace($name)) { $name = "rule_$([guid]::NewGuid().ToString()).yar" }
         return $name
-    }
-    catch {
+    } catch {
         return "rule_$([guid]::NewGuid().ToString()).yar"
     }
 }
 
 function Download-MainFiles {
     Write-Info "Ana dosyalar indiriliyor..."
-
-    foreach ($file in $MainFiles) {
-        $url  = "$BaseRaw/$file"
-        $dest = Join-Path $AppDir $file
-
-        Write-Host "   - $file" -ForegroundColor White
-        $ok = Download-File -SourceUrl $url -Destination $dest
-
-        if ($ok) {
-            Write-Ok "$file indirildi"
-        }
-        else {
-            Write-Warn "$file indirilemedi"
-        }
+    foreach ($f in $MainFiles) {
+        $u = "$BaseRaw/$f"
+        $d = Join-Path $AppDir $f
+        Write-Host " - $f"
+        if (Download-File -Url $u -Destination $d) { Write-Ok "$f" } else { Write-Warn "$f indirilemedi" }
     }
 }
 
 function Download-RulesFromTxt {
-    param(
-        [Parameter(Mandatory = $true)]
-        [string]$TxtPath,
-
-        [Parameter(Mandatory = $true)]
-        [string]$TargetRulesDir
-    )
-
-    if (-not (Test-Path $TxtPath)) {
-        Write-Warn "kural.txt bulunamadi: $TxtPath"
-        return
-    }
-
-    if (-not (Ensure-Directory $TargetRulesDir)) {
-        Write-Err "rules klasoru olusturulamadi: $TargetRulesDir"
-        return
-    }
-
-    Write-Info "kural.txt icindeki YARA kurallari indiriliyor..."
-
+    param([string]$TxtPath, [string]$Target)
+    if (-not (Test-Path $TxtPath)) { Write-Warn "kural.txt bulunamadi: $TxtPath"; return }
+    if (-not (Ensure-Directory $Target)) { Write-Err "rules klasoru olusturulamadi"; return }
     $lines = Get-Content -Path $TxtPath -Encoding UTF8
-    $total = 0
-    $okCount = 0
-
+    $total=0; $ok=0
+    Write-Info "kural.txt icindeki linkler isleniyor..."
     foreach ($line in $lines) {
         $l = $line.Trim()
-
-        if ([string]::IsNullOrWhiteSpace($l)) { continue }
-        if ($l.StartsWith('#')) { continue }
-        if ($l.StartsWith(';')) { continue }
-
+        if ([string]::IsNullOrWhiteSpace($l) -or $l.StartsWith('#') -or $l.StartsWith(';')) { continue }
         $raw = Convert-ToRawUrl $l
-        $fileName = Get-SafeRuleName $raw
-
-        if ($fileName -notmatch '\.(yar|yara)$') {
-            Write-Warn "Atlandi (YARA degil): $raw"
-            continue
-        }
-
-        $dest = Join-Path $TargetRulesDir $fileName
-
-        $total++
-        Write-Host "   - $fileName" -ForegroundColor White
-
-        $ok = Download-File -SourceUrl $raw -Destination $dest
-        if ($ok) {
-            $okCount++
-            Write-Ok "$fileName indirildi"
-        }
-        else {
-            Write-Warn "$fileName indirilemedi"
+        try {
+            $fn = Get-SafeRuleName $raw
+            if ($fn -notmatch '\.(yar|yara)$') { Write-Warn "Atlandi (yar degil): $raw"; continue }
+            $dest = Join-Path $Target $fn
+            $total++
+            Write-Host " - $fn"
+            if (Download-File -Url $raw -Destination $dest) { $ok++; Write-Ok $fn } else { Write-Warn "$fn hatali" }
+        } catch {
+            Write-Warn "URL islenemedi: $l"
         }
     }
-
-    Write-Host ""
-    Write-Info "Toplam rule: $total | Basarili: $okCount"
+    Write-Info "Rules indirildi: Toplam $total, Basarili $ok"
 }
 
 function Find-PythonCommand {
-    # py launcher varsa 3.12 > 3.11 > 3
+    # py launcher onceligi
     try {
-        $null = Get-Command py -ErrorAction Stop
-
-        & py -3.12 -c "import sys; print(sys.version)" *> $null
-        if ($LASTEXITCODE -eq 0) { return "py -3.12" }
-
-        & py -3.11 -c "import sys; print(sys.version)" *> $null
-        if ($LASTEXITCODE -eq 0) { return "py -3.11" }
-
-        & py -3 -c "import sys; print(sys.version)" *> $null
-        if ($LASTEXITCODE -eq 0) { return "py -3" }
-    }
-    catch {}
-
-    # python.exe varsa
+        Get-Command py -ErrorAction Stop | Out-Null
+        & py -3.12 -c "import sys" *> $null; if ($LASTEXITCODE -eq 0) { return "py -3.12" }
+        & py -3.11 -c "import sys" *> $null; if ($LASTEXITCODE -eq 0) { return "py -3.11" }
+        & py -3 -c "import sys" *> $null; if ($LASTEXITCODE -eq 0) { return "py -3" }
+    } catch {}
     try {
-        $null = Get-Command python -ErrorAction Stop
-        & python -c "import sys; print(sys.version)" *> $null
-        if ($LASTEXITCODE -eq 0) { return "python" }
-    }
-    catch {}
-
+        Get-Command python -ErrorAction Stop | Out-Null
+        & python -c "import sys" *> $null; if ($LASTEXITCODE -eq 0) { return "python" }
+    } catch {}
     return $null
 }
 
-function Invoke-PythonCommand {
-    param(
-        [Parameter(Mandatory = $true)]
-        [string]$PyCmd,
-
-        [Parameter(Mandatory = $true)]
-        [string[]]$Arguments
-    )
-
-    # "py -3.11" gibi string'i guvenli parse et
+function Invoke-Python {
+    param([string]$PyCmd, [string[]]$Args)
     $parts = $PyCmd -split '\s+'
-    $exe = $parts[0]
-    $preArgs = @()
-
-    if ($parts.Count -gt 1) {
-        $preArgs = $parts[1..($parts.Count - 1)]
-    }
-
-    & $exe @preArgs @Arguments
+    $exe = $parts[0]; $pre = @(); if ($parts.Count -gt 1) { $pre = $parts[1..($parts.Count-1)] }
+    & $exe @pre @Args
     return $LASTEXITCODE
 }
 
 function Install-PythonPackages {
-    param(
-        [Parameter(Mandatory = $true)]
-        [string]$PyCmd
-    )
-
-    Write-Info "Python paketleri kuruluyor..."
-
-    # pip var mi?
-    Invoke-PythonCommand -PyCmd $PyCmd -Arguments @("-m", "pip", "--version") | Out-Null
+    param([string]$PyCmd)
+    Write-Info "Paketler kuruluyor (flask, pywebview)..."
+    Invoke-Python -PyCmd $PyCmd -Args @("-m","pip","--version") | Out-Null
     if ($LASTEXITCODE -ne 0) {
-        Write-Info "pip hazirlaniyor..."
-        Invoke-PythonCommand -PyCmd $PyCmd -Arguments @("-m", "ensurepip", "--upgrade") | Out-Null
+        Write-Info "pip eksik, ensurepip calisiyor..."
+        Invoke-Python -PyCmd $PyCmd -Args @("-m","ensurepip","--upgrade") | Out-Null
     }
-
-    Write-Info "pip guncelleniyor..."
-    Invoke-PythonCommand -PyCmd $PyCmd -Arguments @("-m", "pip", "install", "--upgrade", "pip") | Out-Null
-
-    Write-Info "flask kuruluyor..."
-    Invoke-PythonCommand -PyCmd $PyCmd -Arguments @("-m", "pip", "install", "flask") | Out-Null
-
-    Write-Info "pywebview kuruluyor..."
-    Invoke-PythonCommand -PyCmd $PyCmd -Arguments @("-m", "pip", "install", "pywebview") | Out-Null
-
-    Write-Ok "Python paket kurulumu tamamlandi"
+    Invoke-Python -PyCmd $PyCmd -Args @("-m","pip","install","--upgrade","pip") | Out-Null
+    Invoke-Python -PyCmd $PyCmd -Args @("-m","pip","install","flask","pywebview") | Out-Null
+    Write-Ok "Python paketleri kuruldu."
 }
 
+function Is-Administrator {
+    $current = [Security.Principal.WindowsIdentity]::GetCurrent()
+    $principal = New-Object Security.Principal.WindowsPrincipal($current)
+    return $principal.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)
+}
+
+### ---------- PowerShell 7 (pwsh) kontrol ve yukleme ----------
+function Ensure-PowerShell7 {
+    # Eger zaten pwsh var ve su an pwsh ile calisiyor isek true
+    try {
+        Get-Command pwsh -ErrorAction Stop | Out-Null
+        Write-Info "pwsh (PowerShell 7) bulundu."
+        return $true
+    } catch {
+        Write-Warn "pwsh (PowerShell 7) bulunamadi. Indirip kurulsun mu?"
+        $ans = Read-Host "Devam edip PowerShell 7 yuklemek istiyor musunuz? (E/H)"
+        if ($ans -notmatch '^(e|E|y|Y)$') { Write-Warn "pwsh yuklemesi atlandi."; return $false }
+
+        # Fetch latest release from GitHub API
+        try {
+            Write-Info "PowerShell GitHub surumleri kontrol ediliyor..."
+            $apiUrl = "https://api.github.com/repos/PowerShell/PowerShell/releases/latest"
+            $hdr = @{ 'User-Agent' = 'NullStealer-Installer' }
+            $rel = Invoke-RestMethod -Uri $apiUrl -Headers $hdr -ErrorAction Stop
+
+            # Prefer win-x64.msi
+            $asset = $rel.assets | Where-Object { $_.name -match 'win-x64.*\.msi$' } | Select-Object -First 1
+            if (-not $asset) {
+                # fallback any win-x64
+                $asset = $rel.assets | Where-Object { $_.name -match 'win-x64' } | Select-Object -First 1
+            }
+            if (-not $asset) { throw "Uygun PowerShell 7 varligi bulunamadi (win-x64 msi)." }
+
+            $downloadUrl = $asset.browser_download_url
+            $msiPath = Join-Path $env:TEMP $asset.name
+
+            Write-Info "PowerShell MSI indiriliyor: $($asset.name)"
+            Invoke-WebRequest -Uri $downloadUrl -OutFile $msiPath -UseBasicParsing -Headers $hdr -ErrorAction Stop
+            Write-Info "Indirme tamamlandi: $msiPath"
+
+            # Kurulum icin admin gerekebilir
+            if (-not (Is-Administrator)) {
+                Write-Info "PowerShell kurulumu icin yonetici haklari gerekiyor. Yukseltme istegi gonderiliyor..."
+                $args = "-NoProfile -ExecutionPolicy Bypass -Command `"Start-Process msiexec.exe -ArgumentList '/i `"$msiPath`" /qn /norestart' -Verb RunAs -Wait`""
+                Start-Process -FilePath "powershell" -ArgumentList $args -Wait
+            } else {
+                Write-Info "msiexec ile kuruluyor..."
+                Start-Process -FilePath "msiexec.exe" -ArgumentList "/i `"$msiPath`" /qn /norestart" -Wait -NoNewWindow
+            }
+
+            Start-Sleep -Seconds 3
+
+            # Kontrol
+            try { Get-Command pwsh -ErrorAction Stop | Out-Null; Write-Ok "pwsh kuruldu."; return $true } catch { Write-Warn "pwsh kuruldu ama PATH'de gorunmuyor/hatali olabilir."; return $false }
+        } catch {
+            Write-Err "PowerShell 7 yuklemesi basarisiz: $($_.Exception.Message)"
+            return $false
+        }
+    }
+}
+
+### ---------- Launcher & Shortcut ----------
 function Create-Launcher {
     $launcherPath = Join-Path $AppDir "Launch_NullStealer.cmd"
-
     $content = @"
 @echo off
 setlocal
@@ -373,135 +267,98 @@ python "$AppDir\UI.py"
 :END
 endlocal
 "@
-
-    try {
-        Set-Content -Path $launcherPath -Value $content -Encoding ASCII
-        if (Test-Path $launcherPath) {
-            Write-Ok "Launcher olusturuldu: $launcherPath"
-        }
-        else {
-            Write-Warn "Launcher olusturulamadi"
-        }
-    }
-    catch {
-        Write-Err "Launcher olusturma hatasi"
-        Write-Err $_.Exception.Message
-    }
+    Set-Content -Path $launcherPath -Value $content -Encoding ASCII
+    Write-Ok "Launcher olusturuldu: $launcherPath"
 }
 
 function Create-DesktopShortcut {
     $desktop = [Environment]::GetFolderPath("Desktop")
-    $shortcutPath = Join-Path $desktop "$AppName.lnk"
-    $targetPath = Join-Path $AppDir "Launch_NullStealer.cmd"
-
-    if (-not (Test-Path $targetPath)) {
-        Write-Warn "Launcher bulunamadi, kisayol olusturulamadi: $targetPath"
-        return
-    }
-
-    try {
-        $ws = New-Object -ComObject WScript.Shell
-        $sc = $ws.CreateShortcut($shortcutPath)
-        $sc.TargetPath = $targetPath
-        $sc.WorkingDirectory = $AppDir
-        $sc.IconLocation = "$env:SystemRoot\System32\shell32.dll,220"
-        $sc.Description = "NullStealer Anti-Stealer Baslatici"
-        $sc.Save()
-
-        if (Test-Path $shortcutPath) {
-            Write-Ok "Masaustu kisayolu olusturuldu: $shortcutPath"
-        }
-        else {
-            Write-Warn "Masaustu kisayolu olusturulamadi"
-        }
-    }
-    catch {
-        Write-Err "Kisayol olusturma hatasi"
-        Write-Err $_.Exception.Message
-    }
+    $link = Join-Path $desktop "$AppName.lnk"
+    $target = Join-Path $AppDir "Launch_NullStealer.cmd"
+    if (-not (Test-Path $target)) { Write-Warn "Launcher bulunamadi: $target"; return }
+    $ws = New-Object -ComObject WScript.Shell
+    $sc = $ws.CreateShortcut($link)
+    $sc.TargetPath = $target
+    $sc.WorkingDirectory = $AppDir
+    $sc.IconLocation = "$env:SystemRoot\System32\shell32.dll,220"
+    $sc.Description = "$AppName Baslatici"
+    $sc.Save()
+    Write-Ok "Desktop kisayolu olusturuldu: $link"
 }
 
-function Start-AppPrompt {
-    $launcher = Join-Path $AppDir "Launch_NullStealer.cmd"
-
-    if (-not (Test-Path $launcher)) {
-        return
-    }
-
-    $answer = Read-Host "Simdi baslatmak ister misin? (E/H)"
-    if ($answer -match '^(e|E|y|Y)$') {
-        Start-Process -FilePath $launcher -WorkingDirectory $AppDir
-    }
-}
-
-# ============================================================
-# BASLANGIC
-# ============================================================
-
+### ---------- BASLANGIC AKISI ----------
 Write-Host ""
 Write-Host "============================================================" -ForegroundColor DarkCyan
 Write-Host "  $AppName Kurulum Basladi" -ForegroundColor DarkCyan
 Write-Host "============================================================" -ForegroundColor DarkCyan
 Write-Host ""
-
-Write-Host "Kurulum klasoru: $AppDir"
-Write-Host "Rules klasoru  : $RulesDir"
-Write-Host "kural.txt yolu : $KuralTxt"
+Write-Info "Script dizini: $ScriptDir"
+Write-Info "Proje klasoru: $AppDir"
+Write-Info "Rules klasoru: $RulesDir"
+Write-Info "kural.txt yolu: $KuralTxt"
 Write-Host ""
 
-# Klasorleri olustur
-if (-not (Ensure-Directory $AppDir)) {
-    Write-Err "Kurulum klasoru hazirlanamadi."
-    Read-Host "Cikis icin Enter"
-    exit 1
+# 1) Ensure running under pwsh if possible - if pwsh missing, offer install and relaunch
+$runningUnderPwsh = ($PSVersionTable.PSVersion.Major -ge 6)
+if (-not $runningUnderPwsh) {
+    Write-Warn "Bu oturum Windows PowerShell (5.x) veya benzeri. PowerShell 7 (pwsh) daha iyi calisir."
+    $pwshPresent = Get-Command pwsh -ErrorAction SilentlyContinue
+    if (-not $pwshPresent) {
+        $installed = Ensure-PowerShell7
+        if ($installed) {
+            # Re-launch script under pwsh
+            $scriptPath = $MyInvocation.MyCommand.Path
+            Write-Info "Script pwsh ile yeniden baslatiliyor..."
+            Start-Process -FilePath "pwsh" -ArgumentList "-NoProfile -ExecutionPolicy Bypass -File `"$scriptPath`"" -Verb RunAs
+            Write-Host "Eski oturum kapanacak. Yeni pwsh oturumunda script devam edecek."
+            exit 0
+        } else {
+            Write-Warn "pwsh yuklenemedi veya atlandi. Script Windows PowerShell ile devam edecek."
+        }
+    } else {
+        Write-Info "pwsh bulundu, yeniden baslatiliyor..."
+        $scriptPath = $MyInvocation.MyCommand.Path
+        Start-Process -FilePath "pwsh" -ArgumentList "-NoProfile -ExecutionPolicy Bypass -File `"$scriptPath`"" -Verb RunAs
+        exit 0
+    }
 }
 
-if (-not (Ensure-Directory $RulesDir)) {
-    Write-Err "rules klasoru hazirlanamadi."
-    Read-Host "Cikis icin Enter"
-    exit 1
-}
+# 2) Klasorleri olustur
+if (-not (Ensure-Directory $AppDir)) { Write-Err "Proje klasoru olusturulamadi"; Read-Host "Cikis icin Enter"; exit 1 }
+if (-not (Ensure-Directory $RulesDir)) { Write-Err "Rules klasoru olusturulamadi"; Read-Host "Cikis icin Enter"; exit 1 }
+Write-Ok "Klasorler hazir."
 
-Write-Ok "Klasorler hazir"
-Write-Host ""
-
-# 1) Ana dosyalar
+# 3) Ana dosyalar indir
 Download-MainFiles
-Write-Host ""
 
-# 2) Rules
+# 4) Rules indir (kural.txt)
 if (Test-Path $KuralTxt) {
-    Write-Ok "kural.txt bulundu"
-    Download-RulesFromTxt -TxtPath $KuralTxt -TargetRulesDir $RulesDir
+    Write-Ok "kural.txt bulundu. Rules indiriliyor..."
+    Download-RulesFromTxt -TxtPath $KuralTxt -Target $RulesDir
+} else {
+    Write-Warn "kural.txt bulunamadi: $KuralTxt. Rules atlandi."
 }
-else {
-    Write-Warn "kural.txt bulunamadi, rules indirme atlandi"
-}
-Write-Host ""
 
-# 3) Python
+# 5) Python kontrolu ve bekleme dongusu
 Write-Info "Python kontrol ediliyor..."
-$PyCmd = Find-PythonCommand
-
-if ($null -eq $PyCmd) {
+$py = Find-PythonCommand
+while ($null -eq $py) {
     Write-Warn "Python bulunamadi."
-    Write-Host "Lutfen Python 3.11 veya 3.12 kur:"
-    Write-Host "https://www.python.org/downloads/"
-    Write-Host "Kurarken 'Add Python to PATH' secenegini isaretle."
-}
-else {
-    Write-Ok "Python bulundu: $PyCmd"
     Write-Host ""
-
-    # 4) Paketler
-    Install-PythonPackages -PyCmd $PyCmd
+    Write-Host "Lutfen Python 3.11 veya 3.12 indirin ve kurun."
+    Write-Host "Python indirme sayfasi aciliyor..."
+    Start-Process "https://www.python.org/downloads/"
+    Read-Host "Python kurduktan sonra devam etmek icin Enter'a basiniz"
+    Write-Info "Python tekrar kontrol ediliyor..."
+    $py = Find-PythonCommand
 }
-Write-Host ""
+Write-Ok "Python bulundu: $py"
 
-# 5) Launcher
+# 6) Python paketleri kur
+Install-PythonPackages -PyCmd $py
+
+# 7) Launcher & shortcut
 Create-Launcher
-
-# 6) Shortcut
 Create-DesktopShortcut
 
 Write-Host ""
@@ -510,12 +367,15 @@ Write-Host "  Kurulum Tamamlandi" -ForegroundColor Green
 Write-Host "============================================================" -ForegroundColor Green
 Write-Host ""
 Write-Host "Proje klasoru: $AppDir"
-Write-Host "Kural klasoru: $RulesDir"
+Write-Host "Rules klasoru: $RulesDir"
 Write-Host ""
-Write-Host "Masaustundeki '$AppName' kisayolunu kullanabilirsin."
+Write-Host "Masausteki kisayol ile uygulamayi baslatabilirsiniz."
 Write-Host ""
 
-Start-AppPrompt
+$run = Read-Host "Simdi baslatmak ister misiniz? (E/H)"
+if ($run -match '^(e|E|y|Y)$') {
+    $launcher = Join-Path $AppDir "Launch_NullStealer.cmd"
+    if (Test-Path $launcher) { Start-Process -FilePath $launcher -WorkingDirectory $AppDir }
+}
 
-Write-Host ""
 Read-Host "Cikis icin Enter"
