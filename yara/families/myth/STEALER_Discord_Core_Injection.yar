@@ -41,8 +41,8 @@ rule MythGrabber_v140_Discord_Injection_Module
         // ────────────────────────────────────────────────
         // Interval ve fetch hook kısımları
         // ────────────────────────────────────────────────
-        $interval = "setInterval" ascii fullword
-        $fetch_hook = "window.fetch = async" ascii
+        $interval       = "setInterval" ascii fullword
+        $fetch_hook     = "window.fetch = async" ascii
         $users_me_patch = "/users/@me" ascii
         $method_patch   = "PATCH" ascii
 
@@ -70,7 +70,7 @@ rule MythGrabber_v140_Discord_Injection_Module
         $pass_input    = "input[name=\"password\"]" ascii
 
         // ────────────────────────────────────────────────
-        // Diğer yardımcı string'ler
+        // Diğer yardımcı string'ler (referenced)
         // ────────────────────────────────────────────────
         $tauri_login   = "__TAURI__.login" ascii
         $originalLogin = "originalLogin" ascii
@@ -78,45 +78,54 @@ rule MythGrabber_v140_Discord_Injection_Module
 
     condition:
 
-        // En yüksek doğruluk (kritik imza kombinasyonu)
         (
-            $myth_comment and 
-            1 of ($webhook_var, $webhook_place) and 
-            2 of ($embed*)
-        )
-        or
+            // En yüksek doğruluk (kritik imza kombinasyonu)
+            (
+                $myth_comment and 
+                1 of ($webhook_var, $webhook_place) and 
+                2 of ($embed*)
+            )
+            or
 
-        // Güçlü injection + token çalma paternleri
-        (
-            2 of ($webpack*) and 
-            $last_token and 
-            1 of ($interval, $fetch_hook) and 
-            1 of ($embed*)
-        )
-        or
+            // Güçlü injection + token çalma paternleri
+            (
+                2 of ($webpack*) and 
+                $last_token and 
+                1 of ($interval, $fetch_hook) and 
+                1 of ($embed*)
+            )
+            or
 
-        // Discord core dosyasına özgü yol + injection fonksiyonları
-        (
-            2 of ($core_path*, $app_prefix) and
-            1 of ($find_core, $inject_func, $remove_func) and
-            ($already_inj or $myth_comment)
-        )
-        or
+            // Discord core dosyasına özgü yol + injection fonksiyonları
+            (
+                2 of ($core_path*, $app_prefix) and
+                1 of ($find_core, $inject_func, $remove_func) and
+                ($already_inj or $myth_comment)
+            )
+            or
 
-        // Form credential + embed + fetch hook üçlüsü
-        (
-            all of ($form_submit, $email_input, $pass_input) and
-            1 of ($embed*) and
-            $fetch_hook
-        )
-        or
+            // Form credential + embed + fetch hook üçlüsü
+            (
+                all of ($form_submit, $email_input, $pass_input) and
+                1 of ($embed*) and
+                $fetch_hook
+            )
+            or
 
-        // Çok geniş ama hala anlamlı kombinasyon (obfuscated varyantlar için)
-        (
-            3 of ($embed*, $color_*, $webpack*, $fetch_hook) and
-            2 of ($core_path*, $core_index, $app_prefix, $myth_comment)
-        )
+            // Fetch PATCH hook (users/@me + PATCH kontrolü)
+            (
+                $fetch_hook and
+                $users_me_patch and
+                $method_patch and
+                1 of ($embed*)
+            )
+            or
 
-        // Dosya boyutu kısıtlaması (tipik injection script'leri küçük-orta boy)
+            // Geniş kombinasyon: embed + color + webpack + fetch + tauri + originalLogin/Fetch
+            (
+                4 of ($embed*, $color_*, $webpack*, $fetch_hook, $users_me_patch, $tauri_login, $originalLogin, $originalFetch) and
+                2 of ($core_path*, $core_index, $app_prefix, $myth_comment)
+            )
+        )
         and filesize < 64KB
 }
