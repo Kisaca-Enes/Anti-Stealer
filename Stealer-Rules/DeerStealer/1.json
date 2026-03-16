@@ -1,0 +1,39 @@
+{
+  "family": "hijackloader_deerstealer_chain",
+  "threadname": "",
+  "commandlines": [
+    "msiexec.exe /I C:\\Users\\Admin\\AppData\\Local\\Temp\\installer.msi",
+    "C:\\Windows\\system32\\msiexec.exe /V",
+    "C:\\Windows\\system32\\srtasks.exe ExecuteScopeRestorePoint /WaitForRestorePoint:2",
+    "\"C:\\Users\\Admin\\AppData\\Local\\Newsroom\\Engin-Config32.exe\"",
+    "C:\\ProgramData\\sysconnector_ent\\Engin-Config32.exe",
+    "C:\\ProgramData\\PortaMesh.exe",
+    "\"C:\\Users\\Admin\\AppData\\Roaming\\sysconnector_ent\\XPFix.exe\" \"C:\\Users\\Admin\\AppData\\Roaming\\sysconnector_ent\\XPFix.exe\" /u"
+  ],
+  "writtenfiles": [
+    "C:\\Users\\Admin\\AppData\\Local\\Newsroom\\Engin-Config32.exe",
+    "C:\\ProgramData\\sysconnector_ent\\Engin-Config32.exe",
+    "C:\\ProgramData\\PortaMesh.exe",
+    "C:\\Users\\Admin\\AppData\\Roaming\\sysconnector_ent\\XPFix.exe",
+    "C:\\Windows\\SysWOW64\\rasapi32.dll"
+  ],
+  "registry": [
+    "HKLM\\HARDWARE\\DEVICEMAP\\Scsi"
+  ],
+  "apicalls": [
+    "msiexec.exe",
+    "srtasks.exe",
+    "vssvc.exe",
+    "SetThreadContext",
+    "WriteProcessMemory",
+    "MapViewOfSection",
+    "AdjustTokenPrivileges"
+  ],
+  "network": [
+    {
+      "host": "sarrazinljubljanskogaeld.com",
+      "port": 53,
+      "packagecontent": ""
+    }
+  ]
+}
