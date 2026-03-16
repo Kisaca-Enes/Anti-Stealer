@@ -1,0 +1,34 @@
+{
+  "family": "Micro_stealer",
+  "threadname": "Micro",
+  "commandlines": [
+    "WMIC /Node:localhost /Namespace:\\\\root\\CIMV2 Path Win32_ComputerSystemProduct Get UUID /Format:List",
+    "tasklist.exe",
+    "schtasks /create /tn \"App_Admin\" /tr \"\\\"C:\\Users\\Admin\\AppData\\Local\\up\\jre\\bin\\microsoft.exe\\\" -jar \\\"C:\\Users\\Admin\\AppData\\Local\\service.jar\\\"\" /sc ONLOGON /delay 0000:05 /rl HIGHEST /f",
+    "taskkill /F /IM chrome.exe",
+    "taskkill /F /IM msedge.exe",
+    "taskkill /F /IM brave.exe",
+    "taskkill /F /IM firefox.exe",
+    "taskkill /F /IM opera.exe",
+    "taskkill /F /IM chromium.exe",
+    "taskkill /F /IM tor.exe",
+    "taskkill /F /IM librewolf.exe"
+  ],
+  "writtenfiles": [
+    "C:\\Users\\Admin\\AppData\\Local\\up\\jre\\bin\\microsoft.exe"
+  ],
+  "registry": [],
+  "apicalls": [
+    "tasklist.exe",
+    "WMIC",
+    "schtasks.exe",
+    "taskkill.exe"
+  ],
+  "network": [
+    {
+      "host": "ayhanedition.site",
+      "port": 53,
+      "packagecontent": ""
+    }
+  ]
+}
