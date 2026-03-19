@@ -2,38 +2,37 @@ rule ERA_Stealer_Core_NodeJS
 {
     meta:
         author = "No-Stealer Project"
-        description = "Era Stealer NodeJS core logic (Chromium + Discord token stealer)"
+        description = "Detects Era Stealer NodeJS core logic (Chromium + Discord token stealer)"
         date = "2026-01-12"
         confidence = "high"
-        malware_family = "EraStealer"
+        malware_family = "ERA Stealer"
+        scope = "memory,disk"
 
     strings:
         /* Chromium DPAPI key extraction */
-        $local_state = "Local State" ascii
-        $os_crypt = "os_crypt" ascii
-        $encrypted_key = "encrypted_key" ascii
-        $dpapi_ps = "ProtectedData]::Unprotect" ascii nocase
+        $chromium1 = "Local State" ascii
+        $chromium2 = "os_crypt" ascii
+        $chromium3 = "encrypted_key" ascii
+        $chromium4 = "Local Storage\\\\leveldb" ascii
+
+        /* DPAPI / filesystem access */
+        $ctx1 = "ProtectedData]::Unprotect" ascii nocase
+        $ctx2 = "fs.readFileSync" ascii
 
         /* Discord token patterns */
-        $discord_mfa = /mfa\.[\w-]{80,90}/
-        $discord_token = /[\w-]{24}\.[\w-]{6}\.[\w-]{25,110}/
-        $discord_enc = "dQw4w9WgXcQ:" ascii
+        $discord1 = /mfa\.[A-Za-z0-9_-]{80,90}/
+        $discord2 = /[A-Za-z0-9_-]{24}\.[A-Za-z0-9_-]{6}\.[A-Za-z0-9_-]{25,110}/
+        $discord3 = "dQw4w9WgXcQ:" ascii
 
         /* Crypto indicators */
-        $aes_gcm = "aes-256-gcm" ascii
-        $create_decipher = "createDecipheriv" ascii
-
-        /* NodeJS filesystem usage */
-        $fs_read = "fs.readFileSync" ascii
-        $leveldb = "Local Storage\\\\leveldb" ascii
+        $crypto1 = "aes-256-gcm" ascii
+        $crypto2 = "createDecipheriv" ascii
 
     condition:
-        uint16(0) == 0x5A4D or
         (
-            3 of ($local_state, $os_crypt, $encrypted_key) and
-            1 of ($dpapi_ps) and
-            1 of ($discord_mfa, $discord_token, $discord_enc) and
-            1 of ($aes_gcm, $create_decipher) and
-            $leveldb
+            3 of ($chromium*) and
+            1 of ($ctx*) and
+            1 of ($discord*) and
+            1 of ($crypto*)
         )
 }
