@@ -41,7 +41,7 @@ rule ERA_Stealer_Family_Profile
             3 of ($chromium*) and
             2 of ($crypto*) and
             1 of ($discord_token*) and
-            $discord_api1
+            ($discord_api1 or $discord_api2)
         )
         or
         (
