@@ -13,5 +13,6 @@ rule ERA_Stealer_Discord_Backup_Codes
 
     condition:
         $backup_func and
-        $backup_pattern
+        $backup_pattern and
+        ($send_codes or $home_dir)
 }
