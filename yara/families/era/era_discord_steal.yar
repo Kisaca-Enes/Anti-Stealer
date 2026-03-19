@@ -24,7 +24,8 @@ rule ERA_Stealer_HQ_Discord_Targeting
 
     condition:
         (
-            $hq_friends or $hq_guilds
+            ($hq_friends and $relationships) or
+            ($hq_guilds and $guilds_counts)
         ) and
-        2 of ($rare_badges, $public_flags, $boost_lvl, $boost_level)
+        2 of ($rare_badges, $public_flags, $boost_lvl, $boost_level, $badge_map)
 }
