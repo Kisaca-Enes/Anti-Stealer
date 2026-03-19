@@ -13,5 +13,6 @@ rule ERA_Stealer_Discord_Billing_Enumeration
 
     condition:
         $billing_func and
-        $billing_api
+        $billing_api and
+        ($paypal or $card)
 }
