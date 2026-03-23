@@ -100,22 +100,31 @@ rule TR_HadesStealer_FakeLaunchers_KEstane_KittiesCraft_2026
             // Fake launcher / installer themed sample
             //
             (
-                uint16(0) == 0x5A4D or
-                1 of ($ui7, $ipc1, $ipc2)
-            )
-            and
-            (
-                1 of ($brand*) or
-                2 of ($lure*)
-            )
-            and
-            (
-                1 of ($nsis*) or
-                2 of ($ipc*, $ui*)
-            )
-            and
-            (
-                1 of ($c2_1, $c2_2, $c2_3, $c2_4, $c2_5, $c2_6)
+                (
+                    uint16(0) == 0x5A4D or
+                    1 of ($ui7, $ipc1, $ipc2)
+                )
+                and
+                (
+                    1 of ($brand*) or
+                    2 of ($lure*)
+                )
+                and
+                (
+                    1 of ($nsis*) or
+                    2 of ($ipc*, $ui*)
+                )
+                and
+                (
+                    2 of ($c2_1, $c2_2, $c2_3, $c2_4, $c2_5, $c2_6)
+                    or
+                    ($c2_1 and 1 of ($c2_4, $c2_5, $c2_6))
+                )
+                and
+                (
+                    1 of ($tr*) or
+                    1 of ($brand*)
+                )
             )
         )
         or
@@ -125,38 +134,32 @@ rule TR_HadesStealer_FakeLaunchers_KEstane_KittiesCraft_2026
             // Strong Hades C2 + exfil behavior (packed/unpacked payloads)
             //
             (
-                2 of ($c2_1, $c2_2, $c2_3, $c2_4, $c2_5, $c2_6)
-                or
-                ($c2_1 and 1 of ($c2_4, $c2_5, $c2_6))
-            )
-            and
-            (
-                2 of ($ps*) or
-                $c2_bytes
-            )
-            and
-            (
-                1 of ($json*) or
-                1 of ($brand*)
+                (
+                    2 of ($c2_1, $c2_2, $c2_3, $c2_4, $c2_5, $c2_6)
+                    or
+                    ($c2_1 and 1 of ($c2_4, $c2_5, $c2_6))
+                )
+                and
+                (
+                    2 of ($ps*) or
+                    $c2_bytes
+                )
+                and
+                (
+                    1 of ($json*) or
+                    1 of ($brand*)
+                )
             )
         )
         or
         (
             //
             // BRANCH 3:
-            // Small script-like / stage payload logic without size dependency
+            // Script-like / stage payload logic
             //
             (
-                uint8(0) == 0x23 or
-                uint16(0) == 0x2323 or
-                1 of ($ps1, $ps4, $c2_2)
-            )
-            and
-            (
                 1 of ($c2_1, $c2_2, $c2_3)
-            )
-            and
-            (
+                and
                 2 of ($ps*)
             )
         )
